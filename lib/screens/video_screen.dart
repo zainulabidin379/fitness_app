@@ -16,24 +16,26 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: kBlack,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(),
-          SizedBox(
-            height: 55,
-            child: Image.asset("assets/images/logo.png"),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: size.height * 0.115),
-            child: CustomButton(
-              title: "Skip",
-              onTap: () => Get.to(() => const WelcomeScreen()),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBlack,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(),
+            SizedBox(
+              height: 55,
+              child: Image.asset("assets/images/logo.png"),
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.only(bottom: size.height * 0.115),
+              child: CustomButton(
+                title: "Skip",
+                onTap: () => Get.to(() => const WelcomeScreen()),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
