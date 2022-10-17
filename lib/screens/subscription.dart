@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/coupon_code_screen.dart';
 import 'package:fitness_app/screens/payment.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -174,7 +175,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                CustomButton(title: "Redeem Code", onTap: () {}),
+                CustomButton(
+                  title: "Redeem Code",
+                  onTap: () => Get.to(() => const CouponCodeScreen()),
+                ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
