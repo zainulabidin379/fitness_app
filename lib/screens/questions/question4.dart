@@ -4,18 +4,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vertical_weight_slider/vertical_weight_slider.dart';
 
-import 'question3.dart';
-
-class Question2Screen extends StatefulWidget {
-  const Question2Screen({super.key});
+class Question4Screen extends StatefulWidget {
+  const Question4Screen({super.key});
 
   @override
-  State<Question2Screen> createState() => _Question2ScreenState();
+  State<Question4Screen> createState() => _Question4ScreenState();
 }
 
-class _Question2ScreenState extends State<Question2Screen> {
+class _Question4ScreenState extends State<Question4Screen> {
   late WeightSliderController _controller;
-  var weight = 30.0.obs;
+  var weight = 175.0.obs;
   @override
   void initState() {
     super.initState();
@@ -50,7 +48,7 @@ class _Question2ScreenState extends State<Question2Screen> {
               height: 20,
             ),
             Text(
-              "Your Age",
+              "Your Height",
               style:
                   kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
             ),
@@ -58,18 +56,29 @@ class _Question2ScreenState extends State<Question2Screen> {
               height: 10,
             ),
             Text(
-              "It will help us create a plan for you",
+              "Your height can be changed later",
               textAlign: TextAlign.center,
               style: kBodyText.copyWith(fontSize: 10),
             ),
             const SizedBox(
               height: 40,
             ),
-            Obx(() => Text(
-                  weight.value.toStringAsFixed(0),
+            Obx(
+              () => RichText(
+                text: TextSpan(
+                  text: weight.value.toStringAsFixed(0),
                   style: GoogleFonts.montserrat(
                       fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
-                )),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '  cm',
+                      style:
+                          GoogleFonts.montserrat(fontSize: 17, color: kWhite),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             VerticalWeightSlider(
               controller: _controller,
               isVertical: false,
@@ -89,7 +98,8 @@ class _Question2ScreenState extends State<Question2Screen> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () => Get.to(() => const Question3Screen()),
+                // onTap: () =>
+                //     Get.to(() => const SubscriptionScreen()),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 30, right: 30),
                   height: 50,
