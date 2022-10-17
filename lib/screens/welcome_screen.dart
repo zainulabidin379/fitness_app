@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
 import 'package:fitness_app/screens/onboarding.dart';
 import 'package:fitness_app/screens/subscription.dart';
 import 'package:fitness_app/utils/constants.dart';
@@ -43,7 +44,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   style: kButtonText.copyWith(color: kGrey),
                 ),
               ),
-              CustomButton(title: "Login", onTap: () {}),
+              CustomButton(
+                  title: "Login",
+                  onTap: () => Get.to(() => const SignInScreen())),
             ],
           ),
         ),

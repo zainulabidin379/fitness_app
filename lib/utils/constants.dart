@@ -9,4 +9,5 @@ Color kBlack = Colors.black;
 Color kGreen = const Color(0xFFD0FD3E);
 Color kTrans = Colors.transparent;
 Color kGrey = const Color(0xFF202537);
+Color kLightGrey = const Color(0xFFD2D6DB);
 Color kDark = const Color(0xFF2C2C2E);
