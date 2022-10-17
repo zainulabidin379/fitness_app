@@ -30,7 +30,7 @@ class OnboardingPageWidget extends StatelessWidget {
               height: size.height * 0.55,
             ),
             SizedBox(
-              height: size.height * 0.44,
+              height: size.height * 0.42,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -125,7 +125,7 @@ class OnboardingPageWidget extends StatelessWidget {
           ],
         ),
         Positioned(
-          top: 45,
+          top: 20,
           left: 17,
           child: GestureDetector(
             onTap: () => Get.back(),

@@ -282,6 +282,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  vertical_weight_slider:
+    dependency: "direct main"
+    description:
+      name: vertical_weight_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.0"
   win32:
     dependency: transitive
     description:
