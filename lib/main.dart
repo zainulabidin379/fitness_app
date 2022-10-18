@@ -1,4 +1,5 @@
 import 'package:fitness_app/screens/video_screen.dart';
+import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scrollbarTheme: ScrollbarThemeData(
+          thumbVisibility: MaterialStateProperty.all(true),
+          trackVisibility: MaterialStateProperty.all(true),
+          thickness: MaterialStateProperty.all(3),
+          thumbColor: MaterialStateProperty.all(kWhite),
+          trackColor: MaterialStateProperty.all(kWhite.withOpacity(0.5)),
+          radius: const Radius.circular(10),
+        ),
         appBarTheme: AppBarTheme(
           toolbarTextStyle:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)

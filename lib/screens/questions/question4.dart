@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/questions/question8.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,9 +15,21 @@ class Question4Screen extends StatefulWidget {
 class _Question4ScreenState extends State<Question4Screen> {
   late WeightSliderController _controller;
   var weight = 175.0.obs;
+  var weightInFeet = 0.0.obs;
+  var weightInInches = 0.0.obs;
+
+  void calculateHeight() {
+    weightInFeet.value = weight.value / 30.48;
+    double decimalValue = weightInFeet.value - weightInFeet.value.toInt();
+    weightInInches.value = decimalValue * 12;
+    print(weightInFeet);
+    print(weightInInches);
+  }
+
   @override
   void initState() {
     super.initState();
+    calculateHeight();
     _controller = WeightSliderController(
         initialWeight: weight.value, minWeight: 1, interval: 1);
   }
@@ -71,7 +84,7 @@ class _Question4ScreenState extends State<Question4Screen> {
                       fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
                   children: <TextSpan>[
                     TextSpan(
-                      text: '  cm',
+                      text: ' cm',
                       style:
                           GoogleFonts.montserrat(fontSize: 17, color: kWhite),
                     ),
@@ -82,24 +95,53 @@ class _Question4ScreenState extends State<Question4Screen> {
             VerticalWeightSlider(
               controller: _controller,
               isVertical: false,
+              height: 150,
               decoration: const PointerDecoration(
                 width: 130.0,
                 height: 3.0,
                 largeColor: Color(0xFF898989),
-                mediumColor: Color(0xFFC5C5C5),
-                smallColor: Color(0xFFF0F0F0),
+                mediumColor: Color(0xFF898989),
+                smallColor: Color(0xFF898989),
                 gap: 30.0,
               ),
               onChanged: (double value) {
                 weight.value = value;
+                calculateHeight();
               },
+            ),
+            Obx(
+              () => RichText(
+                text: TextSpan(
+                  text: weightInFeet.value.floor().toString(),
+                  style: GoogleFonts.montserrat(
+                      fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: ' ft ',
+                      style:
+                          GoogleFonts.montserrat(fontSize: 17, color: kWhite),
+                    ),
+                    TextSpan(
+                      text: weightInInches.value.toStringAsFixed(0),
+                      style: GoogleFonts.montserrat(
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          color: kWhite),
+                    ),
+                    TextSpan(
+                      text: ' in',
+                      style:
+                          GoogleFonts.montserrat(fontSize: 17, color: kWhite),
+                    ),
+                  ],
+                ),
+              ),
             ),
             const Spacer(),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                // onTap: () =>
-                //     Get.to(() => const SubscriptionScreen()),
+                onTap: () => Get.to(() => const Question8Screen()),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 30, right: 30),
                   height: 50,

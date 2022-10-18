@@ -72,7 +72,7 @@ class _Question3ScreenState extends State<Question3Screen> {
                       fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
                   children: <TextSpan>[
                     TextSpan(
-                      text: '  kg',
+                      text: ' kg',
                       style:
                           GoogleFonts.montserrat(fontSize: 17, color: kWhite),
                     ),
@@ -83,12 +83,13 @@ class _Question3ScreenState extends State<Question3Screen> {
             VerticalWeightSlider(
               controller: _controller,
               isVertical: false,
+              height: 150,
               decoration: const PointerDecoration(
                 width: 130.0,
                 height: 3.0,
                 largeColor: Color(0xFF898989),
-                mediumColor: Color(0xFFC5C5C5),
-                smallColor: Color(0xFFF0F0F0),
+                mediumColor: Color(0xFF898989),
+                smallColor: Color(0xFF898989),
                 gap: 30.0,
               ),
               onChanged: (double value) {
