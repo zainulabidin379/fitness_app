@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vertical_weight_slider/vertical_weight_slider.dart';
 
+import 'question5.dart';
+
 class Question4Screen extends StatefulWidget {
   const Question4Screen({super.key});
 
@@ -141,7 +143,7 @@ class _Question4ScreenState extends State<Question4Screen> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () => Get.to(() => const Question8Screen()),
+                onTap: () => Get.to(() => const Question5Screen()),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 30, right: 30),
                   height: 50,
