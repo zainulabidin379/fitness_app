@@ -3,20 +3,18 @@ import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ActivityLevelScreen extends StatefulWidget {
-  const ActivityLevelScreen({super.key});
+class CurrentTrainingScreen extends StatefulWidget {
+  const CurrentTrainingScreen({super.key});
 
   @override
-  State<ActivityLevelScreen> createState() => _ActivityLevelScreenState();
+  State<CurrentTrainingScreen> createState() => _CurrentTrainingScreenState();
 }
 
-class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
+class _CurrentTrainingScreenState extends State<CurrentTrainingScreen> {
   final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel('Very Active', false),
-    SimpleModel('Fairly Active', false),
-    SimpleModel('A little Active', false),
-    SimpleModel('Inactive', false),
-    SimpleModel('Very Inactive', false),
+    SimpleModel('Home', false),
+    SimpleModel('Park', false),
+    SimpleModel('Gym', false),
   ];
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
               ),
               Center(
                 child: Text(
-                  "Activity Level",
+                  "Where do you currently train?",
                   style: kBodyText.copyWith(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
