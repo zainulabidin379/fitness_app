@@ -1,5 +1,6 @@
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SavedItemsScreen extends StatefulWidget {
@@ -16,25 +17,46 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
+        appBar: AppBar(
+          backgroundColor: kBlack,
+          title: SizedBox(
+            height: 55,
+            child: Image.asset("assets/images/logo.png"),
+          ),
+          centerTitle: true,
+          leading: Center(
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(left: 10),
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kWhite,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
-                height: 40,
-              ),
-              Center(
-                child: SizedBox(
-                  height: 55,
-                  child: Image.asset("assets/images/logo.png"),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
+                height: 20,
               ),
               categoryCard(size, "Exercise Videos", "exercise"),
               categoryCard(size, "Set Workout", "workout"),
               categoryCard(size, "Full Meals", "fullMeals"),
               categoryCard(size, "Ingredients", "ingredients"),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
