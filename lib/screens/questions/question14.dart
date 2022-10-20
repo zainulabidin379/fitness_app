@@ -1,8 +1,7 @@
+import 'package:fitness_app/screens/bottom_nav.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'question13.dart';
 
 class Question14Screen extends StatefulWidget {
   const Question14Screen({super.key});
@@ -39,11 +38,11 @@ class _Question14ScreenState extends State<Question14Screen> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () => Get.to(() => const Question13Screen()),
+                onTap: () => Get.to(() => const BottomNav()),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 30, right: 30),
                   height: 50,
-                  width: 10,
+                  width: 140,
                   decoration: BoxDecoration(
                       color: kWhite, borderRadius: BorderRadius.circular(48)),
                   child: Row(
