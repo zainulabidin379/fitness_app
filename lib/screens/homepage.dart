@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container categoryCard(Size size, String title, String image) {
+  Widget categoryCard(Size size, String title, String image) {
     return Container(
       height: size.height * 0.2,
       width: size.width,

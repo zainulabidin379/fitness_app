@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _BottomNavState extends State<BottomNav> {
                   ? const HomePage()
                   : currentTab == 3
                       ? const HomePage()
-                      : const HomePage(),
+                      : const ExploreScreen(),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         color: kBlack,

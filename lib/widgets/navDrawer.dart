@@ -1,3 +1,6 @@
+import 'package:fitness_app/screens/checkIn/check_in_screen.dart';
+import 'package:fitness_app/screens/saved_items.dart';
+import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -139,15 +142,17 @@ class _NavDrawerState extends State<NavDrawer> {
                   const SizedBox(
                     height: 20,
                   ),
-                  profileItem(() {}, "Check In"),
+                  profileItem(() => Get.to(() => CheckInScreen()), "Check In"),
                   profileItem(() {}, "Personalized Workout Plans"),
                   profileItem(() {}, "Personalized Nutrition Plans"),
-                  profileItem(() {}, "Shopping List"),
+                  profileItem(() => Get.to(() => ShopingListOverViewScreen()),
+                      "Shopping List"),
                   profileItem(() {}, "Food Diary"),
                   profileItem(() {}, "Fitness Diary"),
                   profileItem(() {}, "Lifestyle Diary"),
                   profileItem(() {}, "Picture Diary"),
-                  profileItem(() {}, "Saved Items"),
+                  profileItem(() => Get.to(() => const SavedItemsScreen()),
+                      "Saved Items"),
                 ],
               ),
             ),

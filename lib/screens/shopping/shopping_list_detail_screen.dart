@@ -18,9 +18,9 @@ class ShoppingListDetailScreen extends StatelessWidget {
         backgroundColor: kBlack,
         title: Text(
           nSelectedListTitle,
-          style: kBodyText.copyWith(fontSize: 20),
+          style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        //centerTitle: true,
+        centerTitle: true,
         leading: Center(
           child: GestureDetector(
             onTap: () => Get.back(),
