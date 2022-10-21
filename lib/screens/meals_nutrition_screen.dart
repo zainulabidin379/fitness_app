@@ -1,9 +1,10 @@
+import 'package:fitness_app/screens/meals/meals_screen.dart';
 import 'package:fitness_app/screens/nutrition/nutrition_screen.dart';
 import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../utils/constants.dart';
 
 class MealsNutritionScreen extends StatelessWidget {
   const MealsNutritionScreen({super.key});
@@ -61,7 +62,7 @@ class MealsNutritionScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () => Get.to(() => const MealsScreen()),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +81,7 @@ class MealsNutritionScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 100,
+                height: 50,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),

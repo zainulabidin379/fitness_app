@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
-import 'package:fitness_app/screens/nutrition/meals_nutrition_screen.dart';
+import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/workoutVideos/order_of_workouts.dart';
 import 'package:flutter/material.dart';
 
