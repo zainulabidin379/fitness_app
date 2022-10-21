@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
+import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
@@ -37,7 +38,7 @@ class _BottomNavState extends State<BottomNav> {
               : currentTab == 2
                   ? const HomePage()
                   : currentTab == 3
-                      ? const HomePage()
+                      ? const MealsNutritionScreen()
                       : const ExploreScreen(),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,

@@ -1,13 +1,13 @@
-import 'package:fitness_app/screens/nutrition/nutrition_detail_screen.dart';
-import 'package:fitness_app/screens/nutrition/nutrition_filter_screen.dart';
+import 'package:fitness_app/screens/meals/meal_detail_screen.dart';
+import 'package:fitness_app/screens/meals/meal_filter_screen.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'personalised_nutrition_confirmation_screen.dart';
+import '../nutrition/personalised_nutrition_confirmation_screen.dart';
 
-class NutritionScreen extends StatelessWidget {
-  const NutritionScreen({super.key});
+class MealsScreen extends StatelessWidget {
+  const MealsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,10 @@ class NutritionScreen extends StatelessWidget {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () => Get.to(() => const NutritionFilterScreen()),
+                onTap: () => Get.to(() => const MealFilterScreen()),
                 child: Center(
                   child: Text(
-                    "Nutrition",
+                    "Meals",
                     style: kBodyText.copyWith(
                         fontWeight: FontWeight.bold, fontSize: 24),
                   ),
@@ -93,7 +93,7 @@ class NutritionScreen extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(left: 20, top: 10, right: 20),
                     child: GestureDetector(
-                      onTap: () => Get.to(() => const NutritionDetailScreen()),
+                      onTap: () => Get.to(() => const MealDetailScreen()),
                       child: Row(
                         children: [
                           const CustomContainer(
@@ -101,7 +101,7 @@ class NutritionScreen extends StatelessWidget {
                           ),
                           SizedBox(width: size.width * 0.01),
                           Text(
-                            'Name of ingredients',
+                            'Name of Meal',
                             style: kBodyText.copyWith(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           )
