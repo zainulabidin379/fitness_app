@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
+import 'package:fitness_app/screens/workoutVideos/order_of_workouts.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
@@ -33,7 +34,7 @@ class _BottomNavState extends State<BottomNav> {
       body: currentTab == 0
           ? const HomePage()
           : currentTab == 1
-              ? const HomePage()
+              ? const OrderOfWorkouts()
               : currentTab == 2
                   ? const HomePage()
                   : currentTab == 3
