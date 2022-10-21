@@ -41,6 +41,19 @@ class MealsScreen extends StatelessWidget {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => Get.to(() => const MealFilterScreen()),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.filter_alt,
+                  color: kWhite,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -48,14 +61,11 @@ class MealsScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              GestureDetector(
-                onTap: () => Get.to(() => const MealFilterScreen()),
-                child: Center(
-                  child: Text(
-                    "Meals",
-                    style: kBodyText.copyWith(
-                        fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
+              Center(
+                child: Text(
+                  "Meals",
+                  style: kBodyText.copyWith(
+                      fontWeight: FontWeight.bold, fontSize: 24),
                 ),
               ),
               Padding(

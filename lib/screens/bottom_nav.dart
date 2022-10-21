@@ -2,7 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
 import 'package:fitness_app/screens/meals_nutrition_screen.dart';
-import 'package:fitness_app/screens/workoutVideos/order_of_workouts.dart';
+import 'package:fitness_app/screens/setWorkouts/set_workouts.dart';
+import 'package:fitness_app/screens/workoutVideos/workout_videos.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
@@ -36,9 +37,9 @@ class _BottomNavState extends State<BottomNav> {
         body: currentTab == 0
             ? const HomePage()
             : currentTab == 1
-                ? const OrderOfWorkouts()
+                ? const WorkoutVideos()
                 : currentTab == 2
-                    ? const HomePage()
+                    ? const SetWorkouts()
                     : currentTab == 3
                         ? const MealsNutritionScreen()
                         : const ExploreScreen(),
@@ -51,8 +52,8 @@ class _BottomNavState extends State<BottomNav> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 menuItem('Home', "assets/images/home.png", 0),
-                menuItem('Exercise Videos', "assets/images/videos.png", 1),
-                menuItem('Set Programs', "assets/images/sets.png", 2),
+                menuItem('Workout Videos', "assets/images/videos.png", 1),
+                menuItem('Set Workouts', "assets/images/sets.png", 2),
                 menuItem('Meals Nutrition', "assets/images/meals.png", 3),
                 menuItem('Explore/Feed', "assets/images/search.png", 4),
               ],

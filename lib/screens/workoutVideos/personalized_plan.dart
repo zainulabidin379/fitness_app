@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../utils/constants.dart';
 
-class PersonalisedNutritionConfirmationScreen extends StatelessWidget {
-  const PersonalisedNutritionConfirmationScreen({super.key});
+class PersonalisedFitnessPlan extends StatelessWidget {
+  const PersonalisedFitnessPlan({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class PersonalisedNutritionConfirmationScreen extends StatelessWidget {
             child: Center(
               child: Text(
                 textAlign: TextAlign.center,
-                'An email has been sent to the Survival Team who will be in touch about your personalised nutrition plan within 48 hours!',
+                'An email has been sent to the Survival Team who will be in touch about your personalised fitness plan within 48 hours!',
                 style: kBodyText.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
