@@ -12,6 +12,7 @@ class CheckInFormScreen extends StatefulWidget {
 }
 
 class _CheckInFormScreenState extends State<CheckInFormScreen> {
+  final ScrollController scrollController = ScrollController();
   final List<SimpleModel> _items = <SimpleModel>[
     SimpleModel('1.   Completed on?', '30.06.1992'),
     SimpleModel('2.   Weeks into check-ins?', '4'),
@@ -73,19 +74,37 @@ class _CheckInFormScreenState extends State<CheckInFormScreen> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: kBlack,
+      appBar: AppBar(
+        backgroundColor: kBlack,
+        title: SizedBox(
+          height: 55,
+          child: Image.asset("assets/images/logo.png"),
+        ),
+        centerTitle: true,
+        leading: Center(
+          child: GestureDetector(
+            onTap: () => Get.back(),
+            child: Container(
+              padding: const EdgeInsets.only(right: 4),
+              margin: const EdgeInsets.only(left: 10),
+              height: 32,
+              width: 32,
+              decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: kWhite,
+                  size: 18,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: SizedBox(
-                height: 55,
-                child: Image.asset("assets/images/logo.png"),
-              ),
-            ),
             const SizedBox(
               height: 50,
             ),
@@ -103,9 +122,11 @@ class _CheckInFormScreenState extends State<CheckInFormScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               height: 400,
               child: Scrollbar(
+                controller: scrollController,
                 thumbVisibility: true,
                 trackVisibility: true,
                 child: ListView(
+                  controller: scrollController,
                   children: _items
                       .map(
                         (SimpleModel item) => Padding(
@@ -154,6 +175,9 @@ class _CheckInFormScreenState extends State<CheckInFormScreen> {
                       .toList(),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             CustomButton(
               title: 'Check In',

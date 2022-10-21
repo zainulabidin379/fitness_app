@@ -40,9 +40,9 @@ class ShopingListOverViewScreen extends StatelessWidget {
         backgroundColor: kBlack,
         title: Text(
           "Shopping List",
-          style: kBodyText.copyWith(fontSize: 20),
+          style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        //centerTitle: true,
+        centerTitle: true,
         leading: Center(
           child: GestureDetector(
             onTap: () => Get.back(),
@@ -71,35 +71,35 @@ class ShopingListOverViewScreen extends StatelessWidget {
               child: SizedBox(
                 height: 700,
                 child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: _items
-                        .map(
-                          (SimpleModel item) => InkWell(
-                            onTap: () => Get.to(() => ShoppingListDetailScreen(
-                                  nSelectedListTitle: item.title,
-                                )),
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              height: 70,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  color: kWhite,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 26,
-                                  top: 23,
-                                ),
-                                child: Text(
-                                  item.title,
-                                  style: kButtonText.copyWith(fontSize: 20),
-                                ),
+                  padding: EdgeInsets.zero,
+                  children: _items
+                      .map(
+                        (SimpleModel item) => InkWell(
+                          onTap: () => Get.to(() => ShoppingListDetailScreen(
+                                nSelectedListTitle: item.title,
+                              )),
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            height: 70,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                                color: kWhite,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 26,
+                                top: 23,
+                              ),
+                              child: Text(
+                                item.title,
+                                style: kButtonText.copyWith(fontSize: 20),
                               ),
                             ),
                           ),
-                        )
-                        .toList(),
                         ),
+                      )
+                      .toList(),
+                ),
               ),
             ),
           ],

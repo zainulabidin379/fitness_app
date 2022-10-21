@@ -1,4 +1,4 @@
-import 'package:fitness_app/screens/video_screen.dart';
+import 'package:fitness_app/screens/bottom_nav.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
                   .headline6,
         ),
       ),
-      home: const VideoScreen(),
+      //home: const VideoScreen(),
+      home: const BottomNav(),
     );
   }
 }
