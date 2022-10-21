@@ -1,4 +1,5 @@
 import 'package:fitness_app/screens/checkIn/check_in_screen.dart';
+import 'package:fitness_app/screens/diary/food_diary_screen.dart';
 import 'package:fitness_app/screens/saved_items.dart';
 import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +148,8 @@ class _NavDrawerState extends State<NavDrawer> {
                   profileItem(() {}, "Personalized Nutrition Plans"),
                   profileItem(() => Get.to(() => ShopingListOverViewScreen()),
                       "Shopping List"),
-                  profileItem(() {}, "Food Diary"),
+                  profileItem(
+                      () => Get.to(() => FoodDiaryScreen()), "Food Diary"),
                   profileItem(() {}, "Fitness Diary"),
                   profileItem(() {}, "Lifestyle Diary"),
                   profileItem(() {}, "Picture Diary"),
