@@ -85,28 +85,24 @@ class MealsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 400,
-                child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (context, index) => Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, top: 10, right: 20),
-                    child: GestureDetector(
-                      onTap: () => Get.to(() => const MealDetailScreen()),
-                      child: Row(
-                        children: [
-                          const CustomContainer(
-                            imageString: "assets/images/ingredientsBG1.png",
-                          ),
-                          SizedBox(width: size.width * 0.01),
-                          Text(
-                            'Name of Meal',
-                            style: kBodyText.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          )
-                        ],
-                      ),
+              ...List.generate(
+                6,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
+                  child: GestureDetector(
+                    onTap: () => Get.to(() => const MealDetailScreen()),
+                    child: Row(
+                      children: [
+                        const CustomContainer(
+                          imageString: "assets/images/ingredientsBG1.png",
+                        ),
+                        SizedBox(width: size.width * 0.01),
+                        Text(
+                          'Name of Meal',
+                          style: kBodyText.copyWith(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -115,7 +111,7 @@ class MealsScreen extends StatelessWidget {
                 height: 15,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Center(
                   child: GestureDetector(
                     onTap: () => Get.to(
