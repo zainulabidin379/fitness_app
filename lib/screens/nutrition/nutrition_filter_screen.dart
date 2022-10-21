@@ -12,6 +12,33 @@ class NutritionFilterScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
+        appBar: AppBar(
+          backgroundColor: kBlack,
+          title: SizedBox(
+            height: 55,
+            child: Image.asset("assets/images/logo.png"),
+          ),
+          centerTitle: true,
+          leading: Center(
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(left: 10),
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kWhite,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [

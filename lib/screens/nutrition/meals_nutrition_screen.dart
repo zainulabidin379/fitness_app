@@ -20,7 +20,7 @@ class MealsNutritionScreen extends StatelessWidget {
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
                   child: SizedBox(
                     height: 55,
                     child: Image.asset("assets/images/logo.png"),
@@ -42,11 +42,13 @@ class MealsNutritionScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => Get.to(() => const NutritionScreen()),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CustomContainer(
                         imageString: "assets/images/ingredientsBG1.png",
                       ),
-                      SizedBox(width: size.width * 0.15),
+                      SizedBox(width: size.width * 0.1),
                       Text(
                         'Nutrition',
                         style: kBodyText.copyWith(
@@ -61,11 +63,13 @@ class MealsNutritionScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {},
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CustomContainer(
                         imageString: "assets/images/ingredientsBG2.png",
                       ),
-                      SizedBox(width: size.width * 0.15),
+                      SizedBox(width: size.width * 0.1),
                       Text(
                         'Meals',
                         style: kBodyText.copyWith(
@@ -79,7 +83,7 @@ class MealsNutritionScreen extends StatelessWidget {
                 height: 100,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Center(
                   child: GestureDetector(
                     onTap: () => Get.to(

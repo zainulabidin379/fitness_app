@@ -14,7 +14,7 @@ class ExploreScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               Center(
                 child: SizedBox(

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
+import 'package:fitness_app/screens/nutrition/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/workoutVideos/order_of_workouts.dart';
 import 'package:flutter/material.dart';
 
@@ -28,32 +29,34 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      key: _scaffoldKey,
-      body: currentTab == 0
-          ? const HomePage()
-          : currentTab == 1
-              ? const OrderOfWorkouts()
-              : currentTab == 2
-                  ? const HomePage()
-                  : currentTab == 3
-                      ? const HomePage()
-                      : const ExploreScreen(),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10,
-        color: kBlack,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              menuItem('Home', "assets/images/home.png", 0),
-              menuItem('Exercise Videos', "assets/images/videos.png", 1),
-              menuItem('Set Programs', "assets/images/sets.png", 2),
-              menuItem('Meals Nutrition', "assets/images/meals.png", 3),
-              menuItem('Explore/Feed', "assets/images/search.png", 4),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        key: _scaffoldKey,
+        body: currentTab == 0
+            ? const HomePage()
+            : currentTab == 1
+                ? const OrderOfWorkouts()
+                : currentTab == 2
+                    ? const HomePage()
+                    : currentTab == 3
+                        ? const MealsNutritionScreen()
+                        : const ExploreScreen(),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 10,
+          color: kBlack,
+          child: SizedBox(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                menuItem('Home', "assets/images/home.png", 0),
+                menuItem('Exercise Videos', "assets/images/videos.png", 1),
+                menuItem('Set Programs', "assets/images/sets.png", 2),
+                menuItem('Meals Nutrition', "assets/images/meals.png", 3),
+                menuItem('Explore/Feed', "assets/images/search.png", 4),
+              ],
+            ),
           ),
         ),
       ),

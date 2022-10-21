@@ -1,5 +1,7 @@
+import 'package:fitness_app/screens/bottom_nav.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/navDrawer.dart';
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                     child: Image.asset("assets/images/logo.png"),
                   ),
                   const SizedBox(
-                    width: 40,
+                    width: 55,
                   ),
                 ],
               ),
@@ -62,9 +64,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              categoryCard(size, "Exercise Videos", "videosImage"),
-              categoryCard(size, "Set Workout", "setsImage"),
-              categoryCard(size, "Nutrition", "nutritionImage"),
+              categoryCard(size, "Exercise Videos", "videosImage", () {}),
+              categoryCard(size, "Set Workout", "setsImage", () {}),
+              categoryCard(
+                  size,
+                  "Nutrition",
+                  "nutritionImage",
+                  () => Get.to(() => const BottomNav(
+                        currentTab: 3,
+                      ))),
             ],
           ),
         ),
@@ -72,27 +80,30 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget categoryCard(Size size, String title, String image) {
-    return Container(
-      height: size.height * 0.2,
-      width: size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          image: DecorationImage(
-              image: AssetImage("assets/images/$image.jpg"),
-              fit: BoxFit.cover)),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          child: Text(
-            title,
-            style: GoogleFonts.montserrat(
-                textStyle: Theme.of(context).textTheme.headline1,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: kWhite),
+  Widget categoryCard(Size size, String title, String image, Function() onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: size.height * 0.2,
+        width: size.width,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            image: DecorationImage(
+                image: AssetImage("assets/images/$image.jpg"),
+                fit: BoxFit.cover)),
+        child: Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            child: Text(
+              title,
+              style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.headline1,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: kWhite),
+            ),
           ),
         ),
       ),
