@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../utils/constants.dart';
 import '../shopping/shopping_list_detail_screen.dart';
 
-class FoodDiaryScreen extends StatelessWidget {
-  FoodDiaryScreen({super.key});
+class FitnessDiaryScreen extends StatelessWidget {
+  FitnessDiaryScreen({super.key});
   final List<SimpleModel> _items = <SimpleModel>[
     SimpleModel('Breakfast', 'Oats, Banana, berries,almond milk'),
     SimpleModel('Lunch', 'mixed salad, sweet potatoes,plant-based meatballs'),
@@ -22,9 +22,9 @@ class FoodDiaryScreen extends StatelessWidget {
       backgroundColor: kBlack,
       appBar: AppBar(
         backgroundColor: kBlack,
-        title: Text(
-          "Food Diary",
-          style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        title: SizedBox(
+          height: 55,
+          child: Image.asset("assets/images/logo.png"),
         ),
         centerTitle: true,
         leading: Center(
@@ -49,7 +49,21 @@ class FoodDiaryScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                "Fitness Diary\n2022",
+                style: kBodyText.copyWith(
+                  fontSize: 32,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20),
               child: SizedBox(
@@ -93,9 +107,61 @@ class FoodDiaryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // const SizedBox(
-            //   height: 100,
-            // ),
+            SizedBox(
+              height: size.height * 0.6,
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, bottom: 20, top: 10),
+                      child: Text(
+                        "Today",
+                        style: kBodyText.copyWith(
+                          fontSize: 24,
+                          // fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20, top: 10, bottom: 10),
+                      child: Container(
+                        // margin: const EdgeInsets.symmetric(vertical: 5),
+                        height: size.height * 0.35,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            color: kWhite,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 26,
+                            top: 23,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '1. 5 km Run\n2. Own WOD at Everlast:\n.   6 rounds for time of 40m.\n.    KB walking lunges (12kg).\n.    40m handstand walking.',
+                                //textAlign: TextAlign.start,
+                                style: kButtonText.copyWith(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
             Container(
               decoration: BoxDecoration(
                   color: kLightGrey,
