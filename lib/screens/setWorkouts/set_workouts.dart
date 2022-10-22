@@ -1,4 +1,5 @@
 import 'package:fitness_app/screens/setWorkouts/filters.dart';
+import 'package:fitness_app/screens/setWorkouts/order_of_workouts.dart';
 import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -84,8 +85,7 @@ class SetWorkouts extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 5),
                         child: GestureDetector(
-                          // onTap: () =>
-                          //     Get.to(() => const NutritionDetailScreen()),
+                          onTap: () => Get.to(() => const OrderOfWorkouts()),
                           child: Row(
                             children: [
                               const CustomContainer(
@@ -93,7 +93,7 @@ class SetWorkouts extends StatelessWidget {
                               ),
                               const SizedBox(width: 10),
                               Text(
-                                'Name of video',
+                                'Name of Workout',
                                 style: kBodyText.copyWith(
                                     color: kLightGrey,
                                     fontWeight: FontWeight.bold,

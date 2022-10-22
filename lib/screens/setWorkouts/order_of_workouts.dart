@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/setWorkouts/working.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -197,7 +198,9 @@ class OrderOfWorkouts extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              CustomButton(title: "Start", onTap: () {})
+              CustomButton(
+                  title: "Start",
+                  onTap: () => Get.to(() => const WorkingScreen()))
             ],
           ),
         ),

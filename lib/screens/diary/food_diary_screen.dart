@@ -49,9 +49,27 @@ class FoodDiaryScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(
-              height: 100,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  dayCard(size, "Monday", "7"),
+                  dayCard(size, "Tuesday", "8"),
+                  dayCard(size, "Wednesday", "9"),
+                  dayCard(size, "Thursday", "10"),
+                  dayCard(size, "Friday", "11"),
+                  dayCard(size, "Saturday", "12"),
+                  dayCard(size, "Sunday", "13"),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                ],
+              ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -126,6 +144,29 @@ class FoodDiaryScreen extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  Widget dayCard(Size size, String day, String date) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+      height: size.width * 0.22,
+      width: size.width * 0.22,
+      decoration:
+          BoxDecoration(color: kWhite, borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            day,
+            style: kBodyText.copyWith(fontSize: 14, color: kBlack),
+          ),
+          Text(
+            date,
+            style: kBodyText.copyWith(fontSize: 32, color: kBlack),
+          ),
+        ],
+      ),
+    );
   }
 }
 

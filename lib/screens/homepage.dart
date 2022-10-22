@@ -64,8 +64,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              categoryCard(size, "Exercise Videos", "videosImage", () {}),
-              categoryCard(size, "Set Workout", "setsImage", () {}),
+              categoryCard(
+                  size,
+                  "Exercise Videos",
+                  "videosImage",
+                  () => Get.to(() => const BottomNav(
+                        currentTab: 1,
+                      ))),
+              categoryCard(
+                  size,
+                  "Set Workout",
+                  "setsImage",
+                  () => Get.to(() => const BottomNav(
+                        currentTab: 2,
+                      ))),
               categoryCard(
                   size,
                   "Nutrition",
