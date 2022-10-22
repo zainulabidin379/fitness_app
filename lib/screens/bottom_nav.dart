@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 
 class BottomNav extends StatefulWidget {
-  final int? currentTab;
-  const BottomNav({Key? key, this.currentTab}) : super(key: key);
+  final int currentTab;
+  const BottomNav({Key? key, required this.currentTab}) : super(key: key);
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -24,7 +24,7 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   void initState() {
-    currentTab = widget.currentTab ?? 0;
+    currentTab = widget.currentTab;
     super.initState();
   }
 
@@ -32,7 +32,6 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
         body: currentTab == 0
             ? const HomePage()

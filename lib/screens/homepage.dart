@@ -64,27 +64,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              categoryCard(
-                  size,
-                  "Exercise Videos",
-                  "videosImage",
-                  () => Get.to(() => const BottomNav(
-                        currentTab: 1,
-                      ))),
-              categoryCard(
-                  size,
-                  "Set Workout",
-                  "setsImage",
-                  () => Get.to(() => const BottomNav(
-                        currentTab: 2,
-                      ))),
-              categoryCard(
-                  size,
-                  "Nutrition",
-                  "nutritionImage",
-                  () => Get.to(() => const BottomNav(
-                        currentTab: 3,
-                      ))),
+              categoryCard(size, "Exercise Videos", "videosImage", 1),
+              categoryCard(size, "Set Workout", "setsImage", 2),
+              categoryCard(size, "Nutrition", "nutritionImage", 3),
             ],
           ),
         ),
@@ -92,9 +74,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget categoryCard(Size size, String title, String image, Function() onTap) {
+  Widget categoryCard(Size size, String title, String image, int tab) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        print(tab);
+        Get.to(() => BottomNav(
+              currentTab: tab,
+            ));
+      },
       child: Container(
         height: size.height * 0.2,
         width: size.width,

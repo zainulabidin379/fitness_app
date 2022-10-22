@@ -98,7 +98,8 @@ class _NavDrawerState extends State<NavDrawer> {
                               border: Border.all(color: kDark, width: 3),
                               image: const DecorationImage(
                                   image: AssetImage(
-                                      "assets/images/videosImage.jpg"))),
+                                      "assets/images/videosImage.jpg"),
+                                  fit: BoxFit.cover)),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -157,7 +158,7 @@ class _NavDrawerState extends State<NavDrawer> {
                       "Fitness Diary"),
                   profileItem(() => Get.to(() => const LifeStyleDiaryScreen()),
                       "Lifestyle Diary"),
-                  profileItem(() => Get.to(() =>  PictureDiaryScreen()),
+                  profileItem(() => Get.to(() => const PictureDiaryScreen()),
                       "Picture Diary"),
                   profileItem(() => Get.to(() => const SavedItemsScreen()),
                       "Saved Items"),
