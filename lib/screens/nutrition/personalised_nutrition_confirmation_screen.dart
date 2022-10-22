@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../utils/constants.dart';
 
-class PersonalisedNutritionConfirmationScreen extends StatelessWidget {
-  const PersonalisedNutritionConfirmationScreen({super.key});
+class PersonalizedNutritionConfirmationScreen extends StatelessWidget {
+  const PersonalizedNutritionConfirmationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

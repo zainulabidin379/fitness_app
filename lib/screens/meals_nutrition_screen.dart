@@ -92,7 +92,7 @@ class MealsNutritionScreen extends StatelessWidget {
               child: Center(
                 child: GestureDetector(
                   onTap: () => Get.to(
-                      () => const PersonalisedNutritionConfirmationScreen()),
+                      () => const PersonalizedNutritionConfirmationScreen()),
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 20),
                     height: 55,

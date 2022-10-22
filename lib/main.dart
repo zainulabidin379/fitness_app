@@ -38,9 +38,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: const VideoScreen(),
-      home: const BottomNav(
-        currentTab: 0,
-      ),
+      home: const BottomNav(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:fitness_app/screens/bottom_nav.dart';
+import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final BottomNavController _navController = Get.put(BottomNavController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,10 +78,7 @@ class _HomePageState extends State<HomePage> {
   Widget categoryCard(Size size, String title, String image, int tab) {
     return GestureDetector(
       onTap: () {
-        print(tab);
-        Get.to(() => BottomNav(
-              currentTab: tab,
-            ));
+        _navController.navigateTo(tab);
       },
       child: Container(
         height: size.height * 0.2,

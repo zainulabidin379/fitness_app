@@ -110,7 +110,7 @@ class SetWorkouts extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Center(
                   child: GestureDetector(
-                    onTap: () => Get.to(() => const PersonalisedFitnessPlan()),
+                    onTap: () => Get.to(() => const PersonalizedFitnessPlan()),
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       height: 55,

@@ -1,16 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
 import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/setWorkouts/set_workouts.dart';
 import 'package:fitness_app/screens/workoutVideos/workout_videos.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utils/constants.dart';
 
 class BottomNav extends StatefulWidget {
-  final int currentTab;
-  const BottomNav({Key? key, required this.currentTab}) : super(key: key);
+  const BottomNav({Key? key}) : super(key: key);
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -18,28 +19,23 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final BottomNavController _navController = Get.put(BottomNavController());
 
-  int? currentTab;
   bool loading = true;
-
-  @override
-  void initState() {
-    currentTab = widget.currentTab;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+        child: Obx(
+      () => Scaffold(
         key: _scaffoldKey,
-        body: currentTab == 0
+        body: _navController.currentTab.value == 0
             ? const HomePage()
-            : currentTab == 1
+            : _navController.currentTab.value == 1
                 ? const WorkoutVideos()
-                : currentTab == 2
+                : _navController.currentTab.value == 2
                     ? const SetWorkouts()
-                    : currentTab == 3
+                    : _navController.currentTab.value == 3
                         ? const MealsNutritionScreen()
                         : const ExploreScreen(),
         bottomNavigationBar: BottomAppBar(
@@ -60,7 +56,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget menuItem(String name, String icon, int value) {
@@ -70,9 +66,7 @@ class _BottomNavState extends State<BottomNav> {
       minWidth: 20,
       padding: EdgeInsets.zero,
       onPressed: () {
-        setState(() {
-          currentTab = value;
-        });
+        _navController.navigateTo(value);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +74,7 @@ class _BottomNavState extends State<BottomNav> {
           Image.asset(
             icon,
             height: 20,
-            color: currentTab == value ? kRed : kWhite,
+            color: _navController.currentTab.value == value ? kRed : kWhite,
           ),
           const SizedBox(
             height: 5,
@@ -93,7 +87,7 @@ class _BottomNavState extends State<BottomNav> {
             style: kBodyText.copyWith(
               fontSize: 9,
               fontWeight: FontWeight.bold,
-              color: currentTab == value ? kRed : kWhite,
+              color: _navController.currentTab.value == value ? kRed : kWhite,
             ),
           ),
         ],

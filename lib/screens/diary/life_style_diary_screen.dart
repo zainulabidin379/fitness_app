@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../utils/constants.dart';
 
 class LifeStyleDiaryScreen extends StatelessWidget {
   const LifeStyleDiaryScreen({super.key});
- 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -43,8 +44,50 @@ class LifeStyleDiaryScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 200,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: TableCalendar(
+                focusedDay: DateTime.now(),
+                firstDay: DateTime.utc(2010, 01, 01),
+                lastDay: DateTime.utc(2050, 12, 30),
+                rowHeight: 40,
+                headerStyle: HeaderStyle(
+                    leftChevronIcon: Icon(Icons.chevron_left, color: kWhite),
+                    rightChevronIcon: Icon(Icons.chevron_right, color: kWhite),
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle:
+                        TextStyle(color: kWhite, fontWeight: FontWeight.bold)),
+                calendarFormat: CalendarFormat.month,
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: TextStyle(
+                      color: kWhite, fontSize: 13, fontWeight: FontWeight.bold),
+                  weekendStyle: TextStyle(
+                      color: kWhite, fontSize: 13, fontWeight: FontWeight.bold),
+                ),
+                calendarStyle: CalendarStyle(
+                    outsideDaysVisible: false,
+                    defaultTextStyle: TextStyle(
+                        color: kWhite,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                    holidayTextStyle: TextStyle(
+                        color: kWhite,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                    todayTextStyle: TextStyle(
+                        color: kWhite,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                    weekendTextStyle: TextStyle(
+                        color: kWhite,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                    todayDecoration: BoxDecoration(
+                      color: kBlue,
+                      shape: BoxShape.circle,
+                    )),
+              ),
             ),
             SizedBox(
               height: size.height * 0.6,

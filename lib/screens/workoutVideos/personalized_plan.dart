@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../utils/constants.dart';
 
-class PersonalisedFitnessPlan extends StatelessWidget {
-  const PersonalisedFitnessPlan({super.key});
+class PersonalizedFitnessPlan extends StatelessWidget {
+  const PersonalizedFitnessPlan({super.key});
 
   @override
   Widget build(BuildContext context) {
