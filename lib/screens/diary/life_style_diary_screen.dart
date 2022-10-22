@@ -4,15 +4,8 @@ import 'package:get/get.dart';
 import '../../utils/constants.dart';
 
 class LifeStyleDiaryScreen extends StatelessWidget {
-  LifeStyleDiaryScreen({super.key});
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel('Breakfast', 'Oats, Banana, berries,almond milk'),
-    SimpleModel('Lunch', 'mixed salad, sweet potatoes,plant-based meatballs'),
-    SimpleModel('Dinner', 'Pasta, mixed beans,aspatagus'),
-    SimpleModel('In-between meals', 'nothing'),
-    SimpleModel('Liquids', '4 litres water,2 litres herbal'),
-  ];
-
+  const LifeStyleDiaryScreen({super.key});
+ 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
