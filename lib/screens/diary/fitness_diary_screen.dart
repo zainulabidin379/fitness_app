@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../utils/constants.dart';
 import '../shopping/shopping_list_detail_screen.dart';
 
-class FoodDiaryScreen extends StatelessWidget {
-  FoodDiaryScreen({super.key});
+class FitnessDiaryScreen extends StatelessWidget {
+  FitnessDiaryScreen({super.key});
   final List<SimpleModel> _items = <SimpleModel>[
     SimpleModel('Breakfast', 'Oats, Banana, berries,almond milk'),
     SimpleModel('Lunch', 'mixed salad, sweet potatoes,plant-based meatballs'),
@@ -22,9 +22,9 @@ class FoodDiaryScreen extends StatelessWidget {
       backgroundColor: kBlack,
       appBar: AppBar(
         backgroundColor: kBlack,
-        title: Text(
-          "Food Diary",
-          style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        title: SizedBox(
+          height: 55,
+          child: Image.asset("assets/images/logo.png"),
         ),
         centerTitle: true,
         leading: Center(
@@ -49,31 +49,119 @@ class FoodDiaryScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  dayCard(size, "Monday", "7"),
-                  dayCard(size, "Tuesday", "8"),
-                  dayCard(size, "Wednesday", "9"),
-                  dayCard(size, "Thursday", "10"),
-                  dayCard(size, "Friday", "11"),
-                  dayCard(size, "Saturday", "12"),
-                  dayCard(size, "Sunday", "13"),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                "Fitness Diary\n2022",
+                style: kBodyText.copyWith(
+                  fontSize: 32,
+                  // fontWeight: FontWeight.bold
+                ),
               ),
             ),
-            // const SizedBox(
-            //   height: 100,
-            // ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+              child: SizedBox(
+                // color: Colors.red,
+                height: size.height * 0.1,
+                width: size.width * 1,
+                child: ListView.builder(
+                  //itemExtent: 100,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Container(
+                      height: size.height * 0.1,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                          color: kGrey, borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Monday",
+                            style: kBodyText.copyWith(
+                              fontSize: 15,
+                              // fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          Text(
+                            "7",
+                            style: kBodyText.copyWith(
+                              fontSize: 32,
+                              // fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.6,
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, bottom: 20, top: 10),
+                      child: Text(
+                        "Today",
+                        style: kBodyText.copyWith(
+                          fontSize: 24,
+                          // fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20, top: 10, bottom: 10),
+                      child: Container(
+                        // margin: const EdgeInsets.symmetric(vertical: 5),
+                        height: size.height * 0.35,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            color: kWhite,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 26,
+                            top: 23,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '1. 5 km Run\n2. Own WOD at Everlast:\n.   6 rounds for time of 40m.\n.    KB walking lunges (12kg).\n.    40m handstand walking.',
+                                //textAlign: TextAlign.start,
+                                style: kButtonText.copyWith(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
             Container(
               decoration: BoxDecoration(
                   color: kLightGrey,
@@ -147,29 +235,6 @@ class FoodDiaryScreen extends StatelessWidget {
         ),
       ),
     ));
-  }
-
-  Widget dayCard(Size size, String day, String date) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
-      height: size.width * 0.22,
-      width: size.width * 0.22,
-      decoration:
-          BoxDecoration(color: kWhite, borderRadius: BorderRadius.circular(15)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            day,
-            style: kBodyText.copyWith(fontSize: 14, color: kBlack),
-          ),
-          Text(
-            date,
-            style: kBodyText.copyWith(fontSize: 32, color: kBlack),
-          ),
-        ],
-      ),
-    );
   }
 }
 
