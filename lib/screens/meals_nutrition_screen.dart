@@ -1,3 +1,4 @@
+import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/meals/meals_screen.dart';
 import 'package:fitness_app/screens/nutrition/nutrition_screen.dart';
 import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmation_screen.dart';
@@ -7,8 +8,9 @@ import 'package:get/get.dart';
 import '../constants/constants.dart';
 
 class MealsNutritionScreen extends StatelessWidget {
-  const MealsNutritionScreen({super.key});
+  MealsNutritionScreen({super.key});
 
+  final BottomNavController _navController = Get.put(BottomNavController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,9 +26,14 @@ class MealsNutritionScreen extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: SizedBox(
-                      height: 55,
-                      child: Image.asset("assets/images/logo.png"),
+                    child: GestureDetector(
+                      onTap: () {
+                        _navController.navigateTo(0);
+                      },
+                      child: SizedBox(
+                        height: 55,
+                        child: Image.asset("assets/images/logo.png"),
+                      ),
                     ),
                   ),
                 ),

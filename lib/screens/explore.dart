@@ -1,9 +1,11 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ExploreScreen extends StatelessWidget {
-  const ExploreScreen({super.key});
-
+  ExploreScreen({super.key});
+  final BottomNavController _navController = Get.put(BottomNavController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,10 +18,15 @@ class ExploreScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Center(
-                child: SizedBox(
-                  height: 55,
-                  child: Image.asset("assets/images/logo.png"),
+              GestureDetector(
+                onTap: () {
+                  _navController.navigateTo(0);
+                },
+                child: Center(
+                  child: SizedBox(
+                    height: 55,
+                    child: Image.asset("assets/images/logo.png"),
+                  ),
                 ),
               ),
               const SizedBox(

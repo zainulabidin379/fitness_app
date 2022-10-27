@@ -32,9 +32,7 @@ class WrapperScreen extends StatelessWidget {
                     snapshot.data['questionsAnswered'] == false) {
                   return const Question1Screen();
                 } else {
-                  return const BottomNav(
-                    currentTab: 0,
-                  );
+                  return const BottomNav();
                 }
               } else {
                 return Center(

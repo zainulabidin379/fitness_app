@@ -1,3 +1,4 @@
+import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/workoutVideos/filters.dart';
 import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:fitness_app/screens/workoutVideos/video_detail.dart';
@@ -7,7 +8,9 @@ import 'package:get/get.dart';
 import '../../constants/constants.dart';
 
 class WorkoutVideos extends StatelessWidget {
-  const WorkoutVideos({super.key});
+  WorkoutVideos({super.key});
+
+  final BottomNavController _navController = Get.put(BottomNavController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +29,14 @@ class WorkoutVideos extends StatelessWidget {
                     const SizedBox(
                       width: 45,
                     ),
-                    SizedBox(
-                      height: 55,
-                      child: Image.asset("assets/images/logo.png"),
+                    GestureDetector(
+                      onTap: () {
+                        _navController.navigateTo(0);
+                      },
+                      child: SizedBox(
+                        height: 55,
+                        child: Image.asset("assets/images/logo.png"),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () => Get.to(() => const WorkoutVideosFilter()),

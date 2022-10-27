@@ -40,12 +40,12 @@ class _BottomNavState extends State<BottomNav> {
         body: _navController.currentTab.value == 0
             ? const HomePage()
             : _navController.currentTab.value == 1
-                ? const WorkoutVideos()
+                ?  WorkoutVideos()
                 : _navController.currentTab.value == 2
-                    ? const SetWorkouts()
+                    ?  SetWorkouts()
                     : _navController.currentTab.value == 3
-                        ? const MealsNutritionScreen()
-                        : const ExploreScreen(),
+                        ?  MealsNutritionScreen()
+                        :  ExploreScreen(),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
           color: kBlack,
