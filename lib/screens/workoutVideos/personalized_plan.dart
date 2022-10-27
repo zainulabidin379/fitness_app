@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class PersonalisedFitnessPlan extends StatelessWidget {
   const PersonalisedFitnessPlan({super.key});

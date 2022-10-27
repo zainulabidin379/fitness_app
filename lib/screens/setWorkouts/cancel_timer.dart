@@ -1,5 +1,5 @@
 import 'package:fitness_app/screens/setWorkouts/finish_workout.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,7 +93,7 @@ class CancelTimerScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               textAlign: TextAlign.left,
-                              'Finish Workout',
+                              'Finish Exercise',
                               style: kBodyText.copyWith(
                                   color: kWhite,
                                   fontSize: 17,

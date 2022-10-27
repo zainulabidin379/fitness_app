@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class MealFilterScreen extends StatelessWidget {
   const MealFilterScreen({super.key});
@@ -107,10 +107,7 @@ class MealFilterScreen extends StatelessWidget {
                     size: size,
                     filterTitle: 'Rice Meals',
                   ),
-                  CustomContainer(
-                    size: size,
-                    filterTitle: 'Rice Meals',
-                  ),
+                  const Flexible(child: SizedBox())
                 ],
               ),
               const SizedBox(
@@ -167,7 +164,7 @@ class CustomContainer extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 10),
           height: 55,
           decoration: BoxDecoration(
-              color: kWhite, borderRadius: BorderRadius.circular(12)),
+              color: kLightGrey, borderRadius: BorderRadius.circular(12)),
           child: Center(
               child: Text(
             filterTitle,

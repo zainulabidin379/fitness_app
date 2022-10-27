@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class LifeStyleDiaryScreen extends StatelessWidget {
   const LifeStyleDiaryScreen({super.key});

@@ -3,7 +3,7 @@ import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class OrderOfWorkouts extends StatelessWidget {
   const OrderOfWorkouts({super.key});

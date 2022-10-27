@@ -2,7 +2,7 @@ import 'package:fitness_app/screens/setWorkouts/complete_workout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class WorkingScreen extends StatelessWidget {
   const WorkingScreen({super.key});
@@ -181,12 +181,23 @@ class WorkingScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 5.0, bottom: 10),
-                      child: Text(
-                        'Next Up',
-                        style: kBodyText.copyWith(
-                            color: kBlack,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Next Up',
+                            style: kBodyText.copyWith(
+                                color: kBlack,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                          Text(
+                            '  ( 3 Exercises Left )',
+                            style: kBodyText.copyWith(
+                                color: kBlack,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                        ],
                       ),
                     ),
                     Row(
@@ -268,7 +279,7 @@ class WorkingScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               textAlign: TextAlign.left,
-                              'Complete Workout',
+                              'Complete Exercise',
                               style: kBodyText.copyWith(
                                   fontSize: 17, fontWeight: FontWeight.bold),
                             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 import 'shopping_list_detail_screen.dart';
 
 class ShopingListOverViewScreen extends StatelessWidget {

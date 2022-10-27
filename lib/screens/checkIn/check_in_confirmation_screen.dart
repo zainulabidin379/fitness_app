@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class CheckInConfirmation extends StatelessWidget {
   const CheckInConfirmation({super.key});

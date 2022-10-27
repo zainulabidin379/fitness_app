@@ -1,6 +1,6 @@
 import 'package:fitness_app/screens/nutrition/nutrition_detail_screen.dart';
 import 'package:fitness_app/screens/nutrition/nutrition_filter_screen.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -111,11 +111,13 @@ class NutritionScreen extends StatelessWidget {
                                       "assets/images/ingredientsBG1.png",
                                 ),
                                 const SizedBox(width: 10),
-                                Text(
-                                  'Name of ingredients',
-                                  style: kBodyText.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                Flexible(
+                                  child: Text(
+                                    'Name of ingredients',
+                                    style: kBodyText.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
                                 )
                               ],
                             ),

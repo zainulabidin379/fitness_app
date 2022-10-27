@@ -1,5 +1,5 @@
 import 'package:fitness_app/screens/questions/question10.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class WorkoutVideosFilter extends StatelessWidget {
   const WorkoutVideosFilter({super.key});
@@ -251,7 +251,7 @@ class CustomContainer extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         height: 55,
         decoration: BoxDecoration(
-            color: kWhite, borderRadius: BorderRadius.circular(12)),
+            color: kLightGrey, borderRadius: BorderRadius.circular(12)),
         child: Center(
             child: Text(
           filterTitle,

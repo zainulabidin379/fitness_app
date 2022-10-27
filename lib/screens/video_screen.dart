@@ -1,6 +1,7 @@
 import 'package:fitness_app/screens/welcome_screen.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import '../widgets/custom_button.dart';
@@ -13,6 +14,12 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

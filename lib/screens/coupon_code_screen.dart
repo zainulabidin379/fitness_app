@@ -1,14 +1,27 @@
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:the_validator/the_validator.dart';
 
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import 'payment.dart';
 
-class CouponCodeScreen extends StatelessWidget {
+class CouponCodeScreen extends StatefulWidget {
   const CouponCodeScreen({super.key});
 
+  @override
+  State<CouponCodeScreen> createState() => _CouponCodeScreenState();
+}
+
+class _CouponCodeScreenState extends State<CouponCodeScreen> {
+final   TextEditingController couponController = TextEditingController();
+
+  @override
+  void dispose() {
+    couponController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,8 +43,12 @@ class CouponCodeScreen extends StatelessWidget {
                 height: 40,
               ),
 
-              const CustomTextField(
+              CustomTextField(
+                inputAction: TextInputAction.done,
+                inputType: TextInputType.emailAddress,
+                controller: couponController,
                 nHintText: 'Email*',
+                validator: FieldValidator.required(),
               ),
 
               const SizedBox(

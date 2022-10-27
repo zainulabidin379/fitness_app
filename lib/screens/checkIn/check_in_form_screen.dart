@@ -1,5 +1,5 @@
 import 'package:fitness_app/screens/checkIn/check_in_confirmation_screen.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,22 +19,22 @@ class _CheckInFormScreenState extends State<CheckInFormScreen> {
     SimpleModel('3.   Weight at last check-in?', '63kg'),
     SimpleModel('4.   Current weight?', '59kg'),
     SimpleModel(
-        '5.   Achieved cardio for the whole week?Explain why if something you set out to do wasn\'t achieved. ',
+        '5.   Achieved cardio for the whole week? Explain why if something you set out to do wasn\'t achieved. ',
         'All targets achieved, refer to training diary.'),
     SimpleModel(
-        '6.   Explain why if something you set out to do wasn\'t achieved.Explain why if something you set out to do wasn\'t achieved.',
+        '6.   Achieved workouts for the whole week? Explain why if something you set out to do wasn\'t achieved.',
         '2 workouts were missed, mixture of tired and laziness, refer to training diary to see which days were missed.'),
     SimpleModel(
         '7.   Achieved stretches for the whole week? Explain why if something you set out to do wasn\'t achieved.',
         'All stretches achieved and logged into fitness diary.'),
     SimpleModel(
-        '8.   How is your strength and performance throughout your workouts and cardio sessions?',
-        'So good, happy with my scores and results.'),
-    SimpleModel(
-        '9.   How have your energy levels been inside and outside of the gym?',
+        '8.   How have your energy levels been inside and outside of the gym?',
         'My energy has been good even when | missed the two days, | was still fine just tired from working hard.'),
     SimpleModel(
-        '10.   Did yo hit your water intake for each day? Explain why if not.',
+        '9.   How is your strength and performance throughout your workouts and cardio sessions?',
+        'So good, happy with my scores and results.'),
+    SimpleModel(
+        '10.   Did you hit your water intake for each day? Explain why if not.',
         'Yes,every day.'),
     SimpleModel(
         '11.   Did you hit your sleep target for each day? Explain why if not.',

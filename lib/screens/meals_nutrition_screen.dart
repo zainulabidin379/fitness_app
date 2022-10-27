@@ -4,7 +4,7 @@ import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmatio
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/constants.dart';
+import '../constants/constants.dart';
 
 class MealsNutritionScreen extends StatelessWidget {
   const MealsNutritionScreen({super.key});

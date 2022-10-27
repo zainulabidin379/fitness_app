@@ -5,8 +5,9 @@ import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/setWorkouts/set_workouts.dart';
 import 'package:fitness_app/screens/workoutVideos/workout_videos.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import '../utils/constants.dart';
+import '../constants/constants.dart';
 
 class BottomNav extends StatefulWidget {
   final int currentTab;
@@ -24,7 +25,9 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   void initState() {
+    FlutterNativeSplash.remove();
     currentTab = widget.currentTab;
+
     super.initState();
   }
 
@@ -51,7 +54,7 @@ class _BottomNavState extends State<BottomNav> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 menuItem('Home', "assets/images/home.png", 0),
-                menuItem('Workout Videos', "assets/images/videos.png", 1),
+                menuItem('Exercise Videos', "assets/images/videos.png", 1),
                 menuItem('Set Workouts', "assets/images/sets.png", 2),
                 menuItem('Meals Nutrition', "assets/images/meals.png", 3),
                 menuItem('Explore/Feed', "assets/images/search.png", 4),

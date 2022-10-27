@@ -1,6 +1,7 @@
+import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/screens/questions/question2.dart';
-import 'package:fitness_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 class Question1Screen extends StatefulWidget {
@@ -11,6 +12,13 @@ class Question1Screen extends StatefulWidget {
 }
 
 class _Question1ScreenState extends State<Question1Screen> {
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

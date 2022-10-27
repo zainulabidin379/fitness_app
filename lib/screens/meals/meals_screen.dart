@@ -1,6 +1,6 @@
 import 'package:fitness_app/screens/meals/meal_detail_screen.dart';
 import 'package:fitness_app/screens/meals/meal_filter_screen.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

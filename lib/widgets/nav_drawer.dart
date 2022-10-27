@@ -8,7 +8,7 @@ import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/constants.dart';
+import '../constants/constants.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -24,41 +24,12 @@ class _NavDrawerState extends State<NavDrawer> {
   String name = "";
   String email = "";
 
-  // @override
-  // void initState() {
-  //   if (FirebaseAuth.instance.currentUser == null) {
-  //     setState(() {
-  //       loading = false;
-  //       loggedIn = false;
-  //     });
-  //   } else {
-  //     getUser();
-  //   }
-  //   super.initState();
-  // }
-
-  // Future getUser() async {
-  //   await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(_auth.getCurrentUser())
-  //       .get()
-  //       .then((value) {
-  //     setState(() {
-  //       subscription = value['premium'];
-  //       name = value['name'];
-  //       email = value['email'];
-  //       loading = false;
-  //       loggedIn = true;
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Drawer(
       backgroundColor: kBlack,
-      width: size.width * 0.82,
+      width: size.width * 0.85,
       child: Column(
         children: [
           Align(
@@ -97,10 +68,46 @@ class _NavDrawerState extends State<NavDrawer> {
                               shape: BoxShape.circle,
                               border: Border.all(color: kDark, width: 3),
                               image: const DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/videosImage.jpg"),
+                                  image:
+                                      AssetImage("assets/images/workout.jpg"),
                                   fit: BoxFit.cover)),
                         ),
+                        // StreamBuilder<dynamic>(
+                        //     stream: firestore
+                        //         .collection("users")
+                        //         .doc(AuthController.authInstance
+                        //             .getCurrentUser())
+                        //         .snapshots(),
+                        //     builder: (context, snapshot) {
+                        //       if (snapshot.hasData) {
+                        //         return Container(
+                        //           height: 90,
+                        //           width: 90,
+                        //           decoration: BoxDecoration(
+                        //               shape: BoxShape.circle,
+                        //               border:
+                        //                   Border.all(color: kDark, width: 3),
+                        //               image: DecorationImage(
+                        //                   image: NetworkImage(
+                        //                       snapshot.data["image"]),
+                        //                   fit: BoxFit.cover)),
+                        //         );
+                        //       } else {
+                        //         return Container(
+                        //           height: 90,
+                        //           width: 90,
+                        //           decoration: BoxDecoration(
+                        //             shape: BoxShape.circle,
+                        //             border: Border.all(color: kDark, width: 3),
+                        //           ),
+                        //           child: Center(
+                        //               child: SpinKitSpinningLines(
+                        //             color: kRed,
+                        //           )),
+                        //         );
+                        //       }
+                        //     }),
+
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           height: 90,
@@ -124,7 +131,25 @@ class _NavDrawerState extends State<NavDrawer> {
                               "2 Months ago",
                               style: kBodyText.copyWith(
                                   fontWeight: FontWeight.bold),
-                            ),
+                            )
+                            // StreamBuilder<dynamic>(
+                            //     stream: firestore
+                            //         .collection("users")
+                            //         .doc(AuthController.authInstance
+                            //             .getCurrentUser())
+                            //         .snapshots(),
+                            //     builder: (context, snapshot) {
+                            //       return Text(
+                            //         snapshot.hasData
+                            //             ? DateTimeFormat.relative(
+                            //                 snapshot.data["timestamp"].toDate(),
+                            //                 ifNow: 'Now',
+                            //                 appendIfAfter: 'ago')
+                            //             : "......",
+                            //         style: kBodyText.copyWith(
+                            //             fontWeight: FontWeight.bold),
+                            //       );
+                            //     }),
                           ],
                         )
                       ],
@@ -137,13 +162,47 @@ class _NavDrawerState extends State<NavDrawer> {
                         horizontal: 20,
                       ),
                       child: Text(
-                        "Name Goes Here",
-                        textAlign: TextAlign.center,
+                        "Your name",
                         style: kBodyText.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 22),
                       ),
                     ),
                   ),
+                  // Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: 20,
+                  //     ),
+                  //     child: StreamBuilder<dynamic>(
+                  //         stream: firestore
+                  //             .collection("users")
+                  //             .doc(AuthController.authInstance.getCurrentUser())
+                  //             .snapshots(),
+                  //         builder: (context, snapshot) {
+                  //           if (snapshot.hasData) {
+                  //             return Text(
+                  //               snapshot.data["name"],
+                  //               style: kBodyText.copyWith(
+                  //                   fontWeight: FontWeight.bold, fontSize: 22),
+                  //             );
+                  //           } else {
+                  //             return Row(
+                  //               mainAxisAlignment: MainAxisAlignment.start,
+                  //               children: [
+                  //                 Padding(
+                  //                   padding: const EdgeInsets.only(left: 26),
+                  //                   child: SpinKitSpinningLines(
+                  //                     color: kRed,
+                  //                     size: 30,
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             );
+                  //           }
+                  //         }),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -162,6 +221,12 @@ class _NavDrawerState extends State<NavDrawer> {
                       "Picture Diary"),
                   profileItem(() => Get.to(() => const SavedItemsScreen()),
                       "Saved Items"),
+                  profileItem(() {}, "Logout"),
+                  const SizedBox(
+                    height: 10,
+                  )
+                  // profileItem(
+                  //     () => AuthController.authInstance.signOut(), "Logout"),
                 ],
               ),
             ),

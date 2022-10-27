@@ -1,4 +1,4 @@
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,7 +72,7 @@ class FinishWorkout extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Anouther Workout\nComplete',
+                            'Another Workout\nComplete',
                             textAlign: TextAlign.center,
                             style: kBodyText.copyWith(
                                 color: kBlack,

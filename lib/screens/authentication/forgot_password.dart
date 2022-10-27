@@ -1,12 +1,25 @@
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:the_validator/the_validator.dart';
 
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+final   TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,8 +53,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                 height: 40,
               ),
 
-              const CustomTextField(
+               CustomTextField(
+                inputAction: TextInputAction.done,
+                inputType: TextInputType.emailAddress,
+                controller: emailController,
                 nHintText: 'Email*',
+                validator: FieldValidator.email(),
               ),
 
               const SizedBox(

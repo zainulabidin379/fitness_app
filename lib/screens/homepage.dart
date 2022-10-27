@@ -1,10 +1,10 @@
 import 'package:fitness_app/screens/bottom_nav.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/navDrawer.dart';
+import '../widgets/nav_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -58,12 +58,46 @@ class _HomePageState extends State<HomePage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Text(
-                    "Hello <Name>",
+                    "Hello Your Name",
                     style: kBodyText.copyWith(
                         fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                 ),
               ),
+              // Align(
+              //   alignment: Alignment.topLeft,
+              //   child: Padding(
+              //     padding:
+              //         const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              //     child: StreamBuilder<dynamic>(
+              //         stream: firestore
+              //             .collection("users")
+              //             .doc(AuthController.authInstance.getCurrentUser())
+              //             .snapshots(),
+              //         builder: (context, snapshot) {
+              //           if (snapshot.hasData) {
+              //             return Text(
+              //               "Hello ${snapshot.data["name"]}",
+              //               style: kBodyText.copyWith(
+              //                   fontWeight: FontWeight.bold, fontSize: 25),
+              //             );
+              //           } else {
+              //             return Row(
+              //               mainAxisAlignment: MainAxisAlignment.start,
+              //               children: [
+              //                 Padding(
+              //                   padding: const EdgeInsets.only(left: 30),
+              //                   child: SpinKitSpinningLines(
+              //                     color: kRed,
+              //                     size: 30,
+              //                   ),
+              //                 ),
+              //               ],
+              //             );
+              //           }
+              //         }),
+              //   ),
+              // ),
               categoryCard(size, "Exercise Videos", "videosImage", 1),
               categoryCard(size, "Set Workout", "setsImage", 2),
               categoryCard(size, "Nutrition", "nutritionImage", 3),

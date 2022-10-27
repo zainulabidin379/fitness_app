@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class SetWorkoutsFilter extends StatelessWidget {
   const SetWorkoutsFilter({super.key});
@@ -147,6 +147,21 @@ class SetWorkoutsFilter extends StatelessWidget {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      CustomContainer(
+                        size: size,
+                        filterTitle: 'YOGA',
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Flexible(child: SizedBox())
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 50,
                 ),
@@ -196,7 +211,7 @@ class CustomContainer extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         height: 55,
         decoration: BoxDecoration(
-            color: kWhite, borderRadius: BorderRadius.circular(12)),
+            color: kLightGrey, borderRadius: BorderRadius.circular(12)),
         child: Center(
             child: Text(
           filterTitle,

@@ -1,5 +1,5 @@
 import 'package:fitness_app/screens/setWorkouts/timer.dart';
-import 'package:fitness_app/utils/constants.dart';
+import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -197,7 +197,7 @@ class CompleteWorkout extends StatelessWidget {
                       child: Center(
                         child: Text(
                           textAlign: TextAlign.left,
-                          'Complete Workout',
+                          'Complete Exercise',
                           style: kBodyText.copyWith(
                               color: kBlack,
                               fontSize: 17,

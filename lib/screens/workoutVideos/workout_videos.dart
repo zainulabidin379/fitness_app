@@ -4,7 +4,7 @@ import 'package:fitness_app/screens/workoutVideos/video_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../constants/constants.dart';
 
 class WorkoutVideos extends StatelessWidget {
   const WorkoutVideos({super.key});
@@ -18,13 +18,30 @@ class WorkoutVideos extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SizedBox(
-                    height: 55,
-                    child: Image.asset("assets/images/logo.png"),
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      width: 45,
+                    ),
+                    SizedBox(
+                      height: 55,
+                      child: Image.asset("assets/images/logo.png"),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(() => const WorkoutVideosFilter()),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Icon(
+                          Icons.filter_alt,
+                          color: kWhite,
+                          size: 25,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Padding(
@@ -57,22 +74,6 @@ class WorkoutVideos extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => Get.to(() => const WorkoutVideosFilter()),
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            color: kWhite,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Icon(
-                          Icons.filter_alt,
-                          color: kBlack,
-                          size: 30,
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
