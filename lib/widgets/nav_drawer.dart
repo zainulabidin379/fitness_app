@@ -3,8 +3,10 @@ import 'package:fitness_app/screens/diary/fitness_diary_screen.dart';
 import 'package:fitness_app/screens/diary/food_diary_screen.dart';
 import 'package:fitness_app/screens/diary/life_style_diary_screen.dart';
 import 'package:fitness_app/screens/diary/picture_diary_screen.dart';
+import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmation_screen.dart';
 import 'package:fitness_app/screens/saved_items.dart';
 import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart';
+import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -207,8 +209,13 @@ class _NavDrawerState extends State<NavDrawer> {
                     height: 20,
                   ),
                   profileItem(() => Get.to(() => CheckInScreen()), "Check In"),
-                  profileItem(() {}, "Personalized Workout Plans"),
-                  profileItem(() {}, "Personalized Nutrition Plans"),
+                  profileItem(
+                      () => Get.to(() => const PersonalizedFitnessPlan()),
+                      "Personalized Workout Plans"),
+                  profileItem(
+                      () => Get.to(() =>
+                          const PersonalizedNutritionConfirmationScreen()),
+                      "Personalized Nutrition Plans"),
                   profileItem(() => Get.to(() => ShopingListOverViewScreen()),
                       "Shopping List"),
                   profileItem(

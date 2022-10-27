@@ -38,7 +38,7 @@ class _Question14ScreenState extends State<Question14Screen> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () => Get.to(() => const BottomNav(currentTab: 0,)),
+                onTap: () => Get.to(() => const BottomNav()),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 30, right: 30),
                   height: 50,

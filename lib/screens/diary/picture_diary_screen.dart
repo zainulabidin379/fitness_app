@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../constants/constants.dart';
 
@@ -70,85 +71,81 @@ class PictureDiaryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Container(
-                //color: Colors.red,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        // padding: const EdgeInsets.only(right: 4),
-                        // margin: const EdgeInsets.only(left: 10),
-                        height: 32,
-                        width: 32,
-                        decoration:
-                            BoxDecoration(color: kDark, shape: BoxShape.circle),
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new,
-                            color: kWhite,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 32,
-                        width: 32,
-                        decoration:
-                            BoxDecoration(color: kDark, shape: BoxShape.circle),
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_forward_ios_sharp,
-                            color: kWhite,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, right: 20),
+            //   child: Container(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         GestureDetector(
+            //           onTap: () {},
+            //           child: Container(
+            //             height: 32,
+            //             width: 32,
+            //             decoration:
+            //                 BoxDecoration(color: kDark, shape: BoxShape.circle),
+            //             child: Center(
+            //               child: Icon(
+            //                 Icons.arrow_back_ios_new,
+            //                 color: kWhite,
+            //                 size: 18,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //         GestureDetector(
+            //           onTap: () {},
+            //           child: Container(
+            //             height: 32,
+            //             width: 32,
+            //             decoration:
+            //                 BoxDecoration(color: kDark, shape: BoxShape.circle),
+            //             child: Center(
+            //               child: Icon(
+            //                 Icons.arrow_forward_ios_sharp,
+            //                 color: kWhite,
+            //                 size: 18,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+
             const SizedBox(
               height: 5,
             ),
-            Container(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: size.width * 0.4,
+            Row(
+              children: [
+                SizedBox(
+                  width: size.width * 0.4,
+                ),
+                Container(
+                  height: size.height * 0.05,
+                  width: size.width * 0.1,
+                  decoration: BoxDecoration(
+                      color: kWhite, borderRadius: BorderRadius.circular(12)),
+                  child: Icon(
+                    Icons.add,
+                    color: kBlack,
                   ),
-                  Container(
-                    height: size.height * 0.05,
-                    width: size.width * 0.1,
-                    decoration: BoxDecoration(
-                        color: kWhite, borderRadius: BorderRadius.circular(12)),
-                    child: Icon(
-                      Icons.add,
-                      color: kBlack,
-                    ),
+                ),
+                SizedBox(
+                  width: size.width * 0.02,
+                ),
+                Container(
+                  height: size.height * 0.05,
+                  width: size.width * 0.1,
+                  decoration: BoxDecoration(
+                      color: kWhite, borderRadius: BorderRadius.circular(12)),
+                  child: Icon(
+                    Icons.remove,
+                    color: kBlack,
                   ),
-                  SizedBox(
-                    width: size.width * 0.02,
-                  ),
-                  Container(
-                    height: size.height * 0.05,
-                    width: size.width * 0.1,
-                    decoration: BoxDecoration(
-                        color: kWhite, borderRadius: BorderRadius.circular(12)),
-                    child: Icon(
-                      Icons.remove,
-                      color: kBlack,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 20,
@@ -160,8 +157,62 @@ class PictureDiaryScreen extends StatelessWidget {
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15))),
                 height: size.height * 0.42,
-                width: size.width * 1,
-                child: const Center(child: Text('Calendar'))),
+                width: size.width,
+                child: Center(
+                  child: Container(
+                    width: 300,
+                    height: 260,
+                    decoration: BoxDecoration(
+                        color: kWhite, borderRadius: BorderRadius.circular(15)),
+                    child: TableCalendar(
+                      focusedDay: DateTime.now(),
+                      firstDay: DateTime.utc(2010, 01, 01),
+                      lastDay: DateTime.utc(2050, 12, 30),
+                      rowHeight: 28,
+                      headerStyle: HeaderStyle(
+                          leftChevronIcon:
+                              Icon(Icons.chevron_left, color: kBlack),
+                          rightChevronIcon:
+                              Icon(Icons.chevron_right, color: kBlack),
+                          formatButtonVisible: false,
+                          titleCentered: true,
+                          titleTextStyle: TextStyle(
+                              color: kBlack, fontWeight: FontWeight.bold)),
+                      calendarFormat: CalendarFormat.month,
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(
+                          color: kBlack,
+                          fontSize: 13,
+                        ),
+                        weekendStyle: TextStyle(
+                          color: kBlack,
+                          fontSize: 13,
+                        ),
+                      ),
+                      calendarStyle: CalendarStyle(
+                          outsideDaysVisible: false,
+                          defaultTextStyle: TextStyle(
+                              color: kBlack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold),
+                          holidayTextStyle: TextStyle(
+                              color: kBlack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold),
+                          todayTextStyle: TextStyle(
+                              color: kBlack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold),
+                          weekendTextStyle: TextStyle(
+                              color: kBlack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold),
+                          todayDecoration: BoxDecoration(
+                            color: kTrans,
+                          )),
+                    ),
+                  ),
+                )),
           ],
         ),
       ),
