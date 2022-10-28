@@ -52,9 +52,9 @@ class _Question12ScreenState extends State<Question12Screen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -72,9 +72,9 @@ class _Question12ScreenState extends State<Question12Screen> {
                 textAlign: TextAlign.center,
                 style: kBodyText.copyWith(fontSize: 10),
               ),
-              const SizedBox(
-                height: 40,
-              ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
               Obx(
                 () => RichText(
                   text: TextSpan(
