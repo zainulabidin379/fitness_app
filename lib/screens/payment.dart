@@ -1,11 +1,18 @@
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/screens/questions/question1.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  final String subscription;
+  final double amount;
+  const PaymentScreen(
+      {super.key, required this.subscription, required this.amount});
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -51,162 +58,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                child: Text(
-                  "Payment Method",
-                  style: kBodyText.copyWith(
-                      fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      //onTap: onTap,
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 15, right: 15, left: 20),
-                        width: 65,
-                        height: 120,
-                        decoration: BoxDecoration(
-                            color: kDark,
-                            borderRadius: BorderRadius.circular(11)),
-                        child: Icon(
-                          Icons.add,
-                          color: kWhite,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      //onTap: onTap,
-                      child: Container(
-                          margin: const EdgeInsets.only(bottom: 15, right: 15),
-                          padding: const EdgeInsets.all(15),
-                          width: 140,
-                          height: 120,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage("assets/images/visaBG.jpg"),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(11)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Image.asset(
-                                  "assets/images/visa.png",
-                                  color: kWhite,
-                                  height: 25,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: List.generate(
-                                        4,
-                                        (index) => Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 2),
-                                              child: Icon(
-                                                Icons.circle,
-                                                color: kWhite,
-                                                size: 8,
-                                              ),
-                                            )),
-                                  ),
-                                  Text(
-                                    "1234",
-                                    style: kBodyText.copyWith(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    width: 18,
-                                    height: 18,
-                                    decoration: BoxDecoration(
-                                        color: kWhite.withOpacity(0.8),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.check,
-                                        color: kGreen,
-                                        size: 16,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          )),
-                    ),
-                    GestureDetector(
-                      //onTap: onTap,
-                      child: Container(
-                          margin: const EdgeInsets.only(bottom: 15, right: 15),
-                          padding: const EdgeInsets.all(15),
-                          width: 140,
-                          height: 120,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/mastercardBG.jpg"),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(11)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Image.asset(
-                                  "assets/images/mastercard.png",
-                                  color: kWhite,
-                                  height: 25,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: List.generate(
-                                        4,
-                                        (index) => Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 2),
-                                              child: Icon(
-                                                Icons.circle,
-                                                color: kWhite,
-                                                size: 8,
-                                              ),
-                                            )),
-                                  ),
-                                  Text(
-                                    "6789",
-                                    style: kBodyText.copyWith(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    width: 18,
-                                    height: 18,
-                                    decoration: BoxDecoration(
-                                        color: kWhite.withOpacity(0.8),
-                                        borderRadius: BorderRadius.circular(5)),
-                                  )
-                                ],
-                              )
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.only(top: 15, left: 20, bottom: 5),
                 child: Text(
                   "Order Details",
@@ -229,37 +80,50 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   style: kBodyText.copyWith(fontSize: 11),
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 20, right: 10),
-                    height: 40,
-                    width: 40,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/img5.jpg"),
-                            fit: BoxFit.cover)),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Emily Kevin",
-                        style: kBodyText.copyWith(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        "High Intensity Training",
-                        style: kBodyText.copyWith(fontSize: 11, color: kGreen),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+              StreamBuilder<dynamic>(
+                  stream: firestore.collection("trainer").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 20, right: 10),
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        snapshot.data.docs[0]["image"]),
+                                    fit: BoxFit.cover)),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.data.docs[0]["name"],
+                                style: kBodyText.copyWith(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                snapshot.data.docs[0]["tagline"],
+                                style: kBodyText.copyWith(
+                                    fontSize: 11, color: kGreen),
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    } else {
+                      return Center(
+                          child: SpinKitSpinningLines(
+                        color: kRed,
+                      ));
+                    }
+                  }),
               //Divider
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -282,7 +146,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       height: 3,
                     ),
                     Text(
-                      "20 October 2021 - Wednesday",
+                      DateFormat('dd MMMM yyyy - EEEE').format(DateTime.now()),
                       style: kBodyText.copyWith(
                           fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -303,7 +167,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       height: 3,
                     ),
                     Text(
-                      "09:30 AM",
+                      DateFormat('hh:mm a').format(DateTime.now()),
                       style: kBodyText.copyWith(
                           fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -325,11 +189,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Estimated Cost",
+                      (widget.subscription == "trial")
+                          ? "Cost after 7 day trial"
+                          : "Estimated Cost",
                       style: kBodyText.copyWith(fontSize: 11),
                     ),
                     Text(
-                      "\u{00A3} 75.99",
+                      "\u{00A3} ${widget.amount}",
                       style: kBodyText.copyWith(
                           fontWeight: FontWeight.bold, fontSize: 15),
                     ),
