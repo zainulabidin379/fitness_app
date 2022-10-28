@@ -21,7 +21,7 @@ class _Question13ScreenState extends State<Question13Screen> {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
+                padding: const EdgeInsets.only(top: 20),
                 child: SizedBox(
                   height: 55,
                   child: Image.asset("assets/images/logo.png"),
@@ -45,7 +45,7 @@ class _Question13ScreenState extends State<Question13Screen> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 25),
-              height: size.height * 0.4,
+              height: size.height * 0.45,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
