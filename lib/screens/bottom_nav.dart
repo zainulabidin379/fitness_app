@@ -40,12 +40,12 @@ class _BottomNavState extends State<BottomNav> {
         body: _navController.currentTab.value == 0
             ? const HomePage()
             : _navController.currentTab.value == 1
-                ?  WorkoutVideos()
+                ? WorkoutVideos()
                 : _navController.currentTab.value == 2
-                    ?  SetWorkouts()
+                    ? SetWorkouts()
                     : _navController.currentTab.value == 3
-                        ?  MealsNutritionScreen()
-                        :  ExploreScreen(),
+                        ? MealsNutritionScreen()
+                        : ExploreScreen(),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
           color: kBlack,
@@ -94,7 +94,6 @@ class _BottomNavState extends State<BottomNav> {
             maxFontSize: 9,
             style: kBodyText.copyWith(
               fontSize: 9,
-              fontWeight: FontWeight.bold,
               color: _navController.currentTab.value == value ? kRed : kWhite,
             ),
           ),

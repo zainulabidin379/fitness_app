@@ -1,4 +1,5 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/questions_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +13,9 @@ class Question11Screen extends StatefulWidget {
 }
 
 class _Question11ScreenState extends State<Question11Screen> {
+  final QuestionsController questionsController =
+      Get.put(QuestionsController());
   late FixedExtentScrollController _controller;
-
-  var selected = 0.obs;
 
   @override
   void initState() {
@@ -23,6 +24,12 @@ class _Question11ScreenState extends State<Question11Screen> {
     _controller = FixedExtentScrollController();
   }
 
+  final List<String> _items = [
+    "Vegan",
+    "Vegetarian",
+    "Pescatarian",
+    "Standard",
+  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,8 +47,8 @@ class _Question11ScreenState extends State<Question11Screen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: size.height * 0.03,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -60,8 +67,8 @@ class _Question11ScreenState extends State<Question11Screen> {
               textAlign: TextAlign.center,
               style: kBodyText.copyWith(fontSize: 10),
             ),
-            const SizedBox(
-              height: 50,
+            SizedBox(
+              height: size.height * 0.05,
             ),
             Obx(() => Container(
                   margin:
@@ -77,51 +84,28 @@ class _Question11ScreenState extends State<Question11Screen> {
                       perspective: 0.001,
                       diameterRatio: 1.5,
                       onSelectedItemChanged: (value) {
-                        selected.value = value;
+                        questionsController.question11.value = _items[value];
                       },
                       physics: const FixedExtentScrollPhysics(),
-                      children: [
-                        Text(
-                          "Vegan",
+                      children: List.generate(
+                        _items.length,
+                        (index) => Text(
+                          _items[index],
                           textAlign: TextAlign.center,
-                          style: (selected.value == 0)
+                          style: (questionsController.question11.value ==
+                                  _items[index])
                               ? kBodyText.copyWith(
                                   fontWeight: FontWeight.bold, fontSize: 20)
                               : kBodyText.copyWith(
-                                  color: kWhite.withOpacity(0.5), fontSize: 20),
+                                  color: kLightGrey, fontSize: 20),
                         ),
-                        Text(
-                          "Vegetarian",
-                          textAlign: TextAlign.center,
-                          style: (selected.value == 1)
-                              ? kBodyText.copyWith(
-                                  fontWeight: FontWeight.bold, fontSize: 20)
-                              : kBodyText.copyWith(
-                                  color: kWhite.withOpacity(0.5), fontSize: 20),
-                        ),
-                        Text(
-                          "Pescatarian",
-                          textAlign: TextAlign.center,
-                          style: (selected.value == 2)
-                              ? kBodyText.copyWith(
-                                  fontWeight: FontWeight.bold, fontSize: 20)
-                              : kBodyText.copyWith(
-                                  color: kWhite.withOpacity(0.5), fontSize: 20),
-                        ),
-                        Text(
-                          "Standard",
-                          textAlign: TextAlign.center,
-                          style: (selected.value == 3)
-                              ? kBodyText.copyWith(
-                                  fontWeight: FontWeight.bold, fontSize: 20)
-                              : kBodyText.copyWith(
-                                  color: kWhite.withOpacity(0.5), fontSize: 20),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 )),
-            const Spacer(),
+            SizedBox(
+              height: size.height * 0.15,
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
