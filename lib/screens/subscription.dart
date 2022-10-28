@@ -233,7 +233,25 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => Get.to(() => const PaymentScreen()),
+                        onTap: () {
+                          if (selectedSubscription.value != '') {
+                            Get.to(() => PaymentScreen(
+                                  subscription: selectedSubscription.value,
+                                  amount: subscriptionAmount.value,
+                                ));
+                          } else {
+                            Get.rawSnackbar(
+                              messageText: Text(
+                                "Plese choose a subscription to continue",
+                                style: kBodyText.copyWith(color: kBlack),
+                              ),
+                              backgroundColor: kWhite,
+                              snackPosition: SnackPosition.TOP,
+                              borderRadius: 10,
+                              margin: const EdgeInsets.all(10),
+                            );
+                          }
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(
                               bottom: 10, right: 10, top: 15),

@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             result,
                             style: kBodyText.copyWith(color: kBlack),
                           ),
-                          backgroundColor: kLightGrey,
+                          backgroundColor: kWhite,
                           snackPosition: SnackPosition.TOP,
                           borderRadius: 10,
                           margin: const EdgeInsets.all(10),
