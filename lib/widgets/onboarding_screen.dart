@@ -30,7 +30,7 @@ class OnboardingPageWidget extends StatelessWidget {
                 height: size.height * 0.55,
               ),
               SizedBox(
-                height: size.height * 0.42,
+                height: size.height * 0.4,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -61,8 +61,8 @@ class OnboardingPageWidget extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          height: size.height * 0.03,
-                          margin: const EdgeInsets.only(top: 10, bottom: 10),
+                          height: size.height * 0.02,
+                          margin: const EdgeInsets.only(bottom: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
@@ -74,8 +74,8 @@ class OnboardingPageWidget extends StatelessWidget {
                                       width: 8,
                                       decoration: BoxDecoration(
                                           color: (index + 1 == pageNo)
-                                              ? kGrey
-                                              : kWhite,
+                                              ? kWhite
+                                              : kLightGrey,
                                           shape: BoxShape.circle),
                                     )),
                           ),
@@ -89,7 +89,7 @@ class OnboardingPageWidget extends StatelessWidget {
                                   child: Container(
                                     margin: EdgeInsets.only(
                                         bottom: size.height * 0.01, right: 20),
-                                    height: size.height * 0.08,
+                                    height: 50,
                                     width: 192,
                                     decoration: BoxDecoration(
                                         color: kWhite,
@@ -116,9 +116,7 @@ class OnboardingPageWidget extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            : SizedBox(
-                                height: size.height * 0,
-                              ),
+                            : const SizedBox(),
                       ],
                     ),
                   ],
