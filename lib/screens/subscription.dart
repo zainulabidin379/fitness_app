@@ -86,7 +86,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               Text(
                                 "7 DAYS TRIAL",
                                 style: kBodyText.copyWith(
-                                    color: kBlack,
+                                    color:
+                                        (selectedSubscription.value == 'trial')
+                                            ? kBlack
+                                            : kWhite,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20),
                               ),
@@ -95,7 +98,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 style: kBodyText.copyWith(
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold,
-                                    color: kBlack),
+                                    color:
+                                        (selectedSubscription.value == 'trial')
+                                            ? kBlack
+                                            : kWhite),
                               ),
                             ],
                           ),
@@ -124,14 +130,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               Text(
                                 "MONTHLY",
                                 style: kBodyText.copyWith(
-                                    color: kBlack,
+                                    color: (selectedSubscription.value ==
+                                            'monthly')
+                                        ? kBlack
+                                        : kWhite,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20),
                               ),
                               Text(
                                 "\u{00A3} 9.99",
                                 style: kBodyText.copyWith(
-                                    color: kBlack,
+                                    color: (selectedSubscription.value ==
+                                            'monthly')
+                                        ? kBlack
+                                        : kWhite,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18),
                               ),
@@ -162,7 +174,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               Text(
                                 "3 MONTHLY",
                                 style: kBodyText.copyWith(
-                                    color: kBlack,
+                                    color: (selectedSubscription.value ==
+                                            '3monthly')
+                                        ? kBlack
+                                        : kWhite,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20),
                               ),
@@ -172,7 +187,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   Text(
                                     "\u{00A3} 24.99",
                                     style: kBodyText.copyWith(
-                                        color: kBlack,
+                                        color: (selectedSubscription.value ==
+                                                '3monthly')
+                                            ? kBlack
+                                            : kWhite,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18),
                                   ),
@@ -182,7 +200,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   Text(
                                     "Save \u{00A3} 4.98",
                                     style: kBodyText.copyWith(
-                                        color: kBlack,
+                                        color: (selectedSubscription.value ==
+                                                '3monthly')
+                                            ? kBlack
+                                            : kWhite,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
