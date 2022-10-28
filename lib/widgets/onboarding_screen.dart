@@ -18,132 +18,136 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Image.asset(
-              "assets/images/$image.jpg",
-              fit: BoxFit.cover,
-              width: size.width,
-              height: size.height * 0.55,
-            ),
-            SizedBox(
-              height: size.height * 0.42,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const SizedBox(height: 30),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          title,
-                          textAlign: TextAlign.center,
-                          style:
-                              kButtonText.copyWith(fontSize: 22, color: kWhite),
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Image.asset(
+                "assets/images/$image.jpg",
+                fit: BoxFit.cover,
+                width: size.width,
+                height: size.height * 0.55,
+              ),
+              SizedBox(
+                height: size.height * 0.42,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        SizedBox(height: size.height * 0.03),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: kButtonText.copyWith(
+                                fontSize: 22, color: kWhite),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 20),
-                        child: Text(
-                          description,
-                          textAlign: TextAlign.center,
-                          style: kBodyText.copyWith(fontSize: 16),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: size.height * 0.02),
+                          child: Text(
+                            description,
+                            textAlign: TextAlign.center,
+                            style: kBodyText.copyWith(fontSize: 16),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        height: 30,
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                              5,
-                              (index) => Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    height: 8,
-                                    width: 8,
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: size.height * 0.03,
+                          margin: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                5,
+                                (index) => Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 3),
+                                      height: 8,
+                                      width: 8,
+                                      decoration: BoxDecoration(
+                                          color: (index + 1 == pageNo)
+                                              ? kGrey
+                                              : kWhite,
+                                          shape: BoxShape.circle),
+                                    )),
+                          ),
+                        ),
+                        (pageNo == 5)
+                            ? Align(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      Get.to(() => const SubscriptionScreen()),
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                        bottom: size.height * 0.01, right: 20),
+                                    height: size.height * 0.08,
+                                    width: 192,
                                     decoration: BoxDecoration(
-                                        color: (index + 1 == pageNo)
-                                            ? kGrey
-                                            : kWhite,
-                                        shape: BoxShape.circle),
-                                  )),
-                        ),
-                      ),
-                      (pageNo == 5)
-                          ? Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                onTap: () =>
-                                    Get.to(() => const SubscriptionScreen()),
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      bottom: 10, right: 20),
-                                  height: 50,
-                                  width: 192,
-                                  decoration: BoxDecoration(
-                                      color: kWhite,
-                                      borderRadius: BorderRadius.circular(48)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Subscription",
-                                        style: kButtonText,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Icon(
-                                        Icons.navigate_next,
-                                        color: kBlack,
-                                        size: 25,
-                                      )
-                                    ],
+                                        color: kWhite,
+                                        borderRadius:
+                                            BorderRadius.circular(48)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Subscription",
+                                          style: kButtonText,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Icon(
+                                          Icons.navigate_next,
+                                          color: kBlack,
+                                          size: 25,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
+                              )
+                            : SizedBox(
+                                height: size.height * 0,
                               ),
-                            )
-                          : const SizedBox(
-                              height: 60,
-                            ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        Positioned(
-          top: 20,
-          left: 17,
-          child: GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              padding: const EdgeInsets.only(right: 4),
-              height: 32,
-              width: 32,
-              decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
-              child: Center(
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: kWhite,
-                  size: 18,
+            ],
+          ),
+          Positioned(
+            top: 20,
+            left: 17,
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 4),
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kWhite,
+                    size: 18,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

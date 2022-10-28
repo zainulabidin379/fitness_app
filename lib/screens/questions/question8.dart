@@ -39,103 +39,108 @@ class _Question8ScreenState extends State<Question8Screen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
-        body: Column(
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: SizedBox(
-                  height: 55,
-                  child: Image.asset("assets/images/logo.png"),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child: SizedBox(
+                    height: 55,
+                    child: Image.asset("assets/images/logo.png"),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            Text(
-              "How long have you\nbeen training?",
-              textAlign: TextAlign.center,
-              style:
-                  kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "This helps us create your personalized plan",
-              textAlign: TextAlign.center,
-              style: kBodyText.copyWith(fontSize: 10),
-            ),
-            SizedBox(
-              height: size.height * 0.05,
-            ),
-            Obx(
-              () => RichText(
-                text: TextSpan(
-                  text: questionsController.question8.value.toStringAsFixed(0),
-                  style: GoogleFonts.montserrat(
-                      fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: ' months',
-                      style:
-                          GoogleFonts.montserrat(fontSize: 17, color: kWhite),
-                    ),
-                  ],
-                ),
+              SizedBox(
+                height: size.height * 0.03,
               ),
-            ),
-            VerticalWeightSlider(
-              controller: _controller,
-              isVertical: false,
-              height: 150,
-              decoration: const PointerDecoration(
-                width: 130.0,
-                height: 3.0,
-                largeColor: Color(0xFF898989),
-                mediumColor: Color(0xFF898989),
-                smallColor: Color(0xFF898989),
-                gap: 30.0,
+              Text(
+                "How long have you\nbeen training?",
+                textAlign: TextAlign.center,
+                style: kBodyText.copyWith(
+                    fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              onChanged: (double value) {
-                questionsController.question8.value = value;
-              },
-            ),
-            SizedBox(
-              height: size.height * 0.15,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () => Get.to(() => const Question9Screen()),
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 30, right: 30),
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      color: kWhite, borderRadius: BorderRadius.circular(48)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Next",
-                        style: kButtonText,
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "This helps us create your personalized plan",
+                textAlign: TextAlign.center,
+                style: kBodyText.copyWith(fontSize: 10),
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              Obx(
+                () => RichText(
+                  text: TextSpan(
+                    text:
+                        questionsController.question8.value.toStringAsFixed(0),
+                    style: GoogleFonts.montserrat(
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
+                        color: kWhite),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ' months',
+                        style:
+                            GoogleFonts.montserrat(fontSize: 17, color: kWhite),
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.navigate_next,
-                        color: kBlack,
-                        size: 25,
-                      )
                     ],
                   ),
                 ),
               ),
-            )
-          ],
+              VerticalWeightSlider(
+                controller: _controller,
+                isVertical: false,
+                height: 150,
+                decoration: const PointerDecoration(
+                  width: 130.0,
+                  height: 3.0,
+                  largeColor: Color(0xFF898989),
+                  mediumColor: Color(0xFF898989),
+                  smallColor: Color(0xFF898989),
+                  gap: 30.0,
+                ),
+                onChanged: (double value) {
+                  questionsController.question8.value = value;
+                },
+              ),
+              SizedBox(
+                height: size.height * 0.15,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const Question9Screen()),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 30, right: 30),
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        color: kWhite, borderRadius: BorderRadius.circular(48)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Next",
+                          style: kButtonText,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.navigate_next,
+                          color: kBlack,
+                          size: 25,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
