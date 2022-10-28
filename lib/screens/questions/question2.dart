@@ -1,4 +1,5 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/questions_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,13 +15,16 @@ class Question2Screen extends StatefulWidget {
 }
 
 class _Question2ScreenState extends State<Question2Screen> {
+  final QuestionsController questionsController =
+      Get.put(QuestionsController());
   late WeightSliderController _controller;
-  var weight = 30.0.obs;
   @override
   void initState() {
     super.initState();
     _controller = WeightSliderController(
-        initialWeight: weight.value, minWeight: 1, interval: 1);
+        initialWeight: questionsController.question2.value,
+        minWeight: 15,
+        interval: 0.5);
   }
 
   @override
@@ -35,89 +39,93 @@ class _Question2ScreenState extends State<Question2Screen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
-        body: Column(
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: SizedBox(
-                  height: 55,
-                  child: Image.asset("assets/images/logo.png"),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Your Age",
-              style:
-                  kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "It will help us create a plan for you",
-              textAlign: TextAlign.center,
-              style: kBodyText.copyWith(fontSize: 10),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Obx(() => Text(
-                  weight.value.toStringAsFixed(0),
-                  style: GoogleFonts.montserrat(
-                      fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
-                )),
-            VerticalWeightSlider(
-              controller: _controller,
-              isVertical: false,
-              height: 150,
-              decoration: const PointerDecoration(
-                width: 130.0,
-                height: 3.0,
-                largeColor: Color(0xFF898989),
-                mediumColor: Color(0xFF898989),
-                smallColor: Color(0xFF898989),
-                gap: 30.0,
-              ),
-              onChanged: (double value) {
-                weight.value = value;
-              },
-            ),
-            const Spacer(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () => Get.to(() => const Question3Screen()),
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 30, right: 30),
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      color: kWhite, borderRadius: BorderRadius.circular(48)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Next",
-                        style: kButtonText,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.navigate_next,
-                        color: kBlack,
-                        size: 25,
-                      )
-                    ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child: SizedBox(
+                    height: 55,
+                    child: Image.asset("assets/images/logo.png"),
                   ),
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              Text(
+                "Your Age",
+                style:
+                    kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "It will help us create a plan for you",
+                textAlign: TextAlign.center,
+                style: kBodyText.copyWith(fontSize: 10),
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              Obx(() => Text(
+                    questionsController.question2.value.toStringAsFixed(0),
+                    style: GoogleFonts.montserrat(
+                        fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
+                  )),
+              VerticalWeightSlider(
+                controller: _controller,
+                isVertical: false,
+                height: 150,
+                decoration: const PointerDecoration(
+                  width: 130.0,
+                  height: 3.0,
+                  largeColor: Color(0xFF898989),
+                  mediumColor: Color(0xFF898989),
+                  smallColor: Color(0xFF898989),
+                  gap: 30.0,
+                ),
+                onChanged: (double value) {
+                  questionsController.question2.value = value;
+                },
+              ),
+              SizedBox(
+                height: size.height * 0.15,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const Question3Screen()),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 30, right: 30),
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        color: kWhite, borderRadius: BorderRadius.circular(48)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Next",
+                          style: kButtonText,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.navigate_next,
+                          color: kBlack,
+                          size: 25,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

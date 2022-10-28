@@ -1,4 +1,5 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/questions_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,13 +15,16 @@ class Question8Screen extends StatefulWidget {
 }
 
 class _Question8ScreenState extends State<Question8Screen> {
+  final QuestionsController questionsController =
+      Get.put(QuestionsController());
   late WeightSliderController _controller;
-  var weight = 6.0.obs;
   @override
   void initState() {
     super.initState();
     _controller = WeightSliderController(
-        initialWeight: weight.value, minWeight: 0, interval: 0.5);
+        initialWeight: questionsController.question8.value,
+        minWeight: 0,
+        interval: 0.5);
   }
 
   @override
@@ -46,8 +50,8 @@ class _Question8ScreenState extends State<Question8Screen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: size.height * 0.03,
             ),
             Text(
               "How long have you\nbeen training?",
@@ -63,13 +67,13 @@ class _Question8ScreenState extends State<Question8Screen> {
               textAlign: TextAlign.center,
               style: kBodyText.copyWith(fontSize: 10),
             ),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: size.height * 0.05,
             ),
             Obx(
               () => RichText(
                 text: TextSpan(
-                  text: weight.value.toStringAsFixed(0),
+                  text: questionsController.question8.value.toStringAsFixed(0),
                   style: GoogleFonts.montserrat(
                       fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
                   children: <TextSpan>[
@@ -95,10 +99,12 @@ class _Question8ScreenState extends State<Question8Screen> {
                 gap: 30.0,
               ),
               onChanged: (double value) {
-                weight.value = value;
+                questionsController.question8.value = value;
               },
             ),
-            const Spacer(),
+            SizedBox(
+              height: size.height * 0.15,
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
