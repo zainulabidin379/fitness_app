@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/auth_controller.dart';
 import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
+import 'package:fitness_app/screens/subscription.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:the_validator/the_validator.dart';
 
@@ -118,45 +122,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomButton(
                   title: "Sign Up",
                   onTap: () async {
-                    // if (_formKey.currentState!.validate()) {
-                    //   Get.dialog(
-                    //     SpinKitSpinningLines(color: kRed),
-                    //     barrierDismissible: false,
-                    //   );
-                    //   dynamic result = await AuthController.authInstance
-                    //       .register(
-                    //           emailController.text, passwordController.text);
+                    if (_formKey.currentState!.validate()) {
+                      Get.dialog(
+                        SpinKitSpinningLines(color: kRed),
+                        barrierDismissible: false,
+                      );
+                      dynamic result = await AuthController.authInstance
+                          .register(
+                              emailController.text, passwordController.text);
 
-                    //   if (result != null) {
-                    //     Get.back();
-                    //     Get.rawSnackbar(
-                    //       messageText: Text(
-                    //         result,
-                    //         style: kBodyText.copyWith(color: kBlack),
-                    //       ),
-                    //       backgroundColor: kLightGrey,
-                    //       snackPosition: SnackPosition.TOP,
-                    //       borderRadius: 10,
-                    //       margin: const EdgeInsets.all(10),
-                    //     );
-                    //   } else {
-                    //    await FirebaseFirestore.instance
-                    //         .collection("users")
-                    //         .doc(AuthController.authInstance.getCurrentUser())
-                    //         .set({
-                    //       "uid": AuthController.authInstance.getCurrentUser(),
-                    //       "name": nameController.text,
-                    //       "email": emailController.text,
-                    //       "subscription": null,
-                    //       "questionsAnswered": false,
-                    //       "image":
-                    //           "https://firebasestorage.googleapis.com/v0/b/survival-ecf70.appspot.com/o/profileImages%2Favatar.png?alt=media&token=feaabc68-4acc-41e7-9cc5-eb19dc155f36",
-                    //       "timestamp": DateTime.now(),
-                    //     }).then((value) {
-                    //       Get.offAll(() => const SubscriptionScreen());
-                    //     });
-                    //   }
-                    // }
+                      if (result != null) {
+                        Get.back();
+                        Get.rawSnackbar(
+                          messageText: Text(
+                            result,
+                            style: kBodyText.copyWith(color: kBlack),
+                          ),
+                          backgroundColor: kLightGrey,
+                          snackPosition: SnackPosition.TOP,
+                          borderRadius: 10,
+                          margin: const EdgeInsets.all(10),
+                        );
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(AuthController.authInstance.getCurrentUser())
+                            .set({
+                          "uid": AuthController.authInstance.getCurrentUser(),
+                          "name": nameController.text,
+                          "email": emailController.text,
+                          "subscription": null,
+                          "questionsAnswered": false,
+                          "image":
+                              "https://firebasestorage.googleapis.com/v0/b/survival-ecf70.appspot.com/o/profileImages%2Fdp.png?alt=media&token=9f63454a-5637-4566-b0d0-d323e1f5435d",
+                          "timestamp": DateTime.now(),
+                        }).then((value) {
+                          Get.offAll(() => const SubscriptionScreen());
+                        });
+                      }
+                    }
                   },
                 ),
               ],

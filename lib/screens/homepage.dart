@@ -1,6 +1,9 @@
+import 'package:fitness_app/constants/firebase_constants.dart';
+import 'package:fitness_app/controllers/auth_controller.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -58,47 +61,35 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Text(
-                    "Hello Your Name",
-                    style: kBodyText.copyWith(
-                        fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
+                  child: StreamBuilder<dynamic>(
+                      stream: firestore
+                          .collection("users")
+                          .doc(AuthController.authInstance.getCurrentUser())
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            "Hello ${snapshot.data["name"]}",
+                            style: kBodyText.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          );
+                        } else {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: SpinKitSpinningCircle(
+                                  color: kRed,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      }),
                 ),
               ),
-              // Align(
-              //   alignment: Alignment.topLeft,
-              //   child: Padding(
-              //     padding:
-              //         const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              //     child: StreamBuilder<dynamic>(
-              //         stream: firestore
-              //             .collection("users")
-              //             .doc(AuthController.authInstance.getCurrentUser())
-              //             .snapshots(),
-              //         builder: (context, snapshot) {
-              //           if (snapshot.hasData) {
-              //             return Text(
-              //               "Hello ${snapshot.data["name"]}",
-              //               style: kBodyText.copyWith(
-              //                   fontWeight: FontWeight.bold, fontSize: 25),
-              //             );
-              //           } else {
-              //             return Row(
-              //               mainAxisAlignment: MainAxisAlignment.start,
-              //               children: [
-              //                 Padding(
-              //                   padding: const EdgeInsets.only(left: 30),
-              //                   child: SpinKitSpinningLines(
-              //                     color: kRed,
-              //                     size: 30,
-              //                   ),
-              //                 ),
-              //               ],
-              //             );
-              //           }
-              //         }),
-              //   ),
-              // ),
               categoryCard(size, "Exercise Videos", "videosImage", 1),
               categoryCard(size, "Set Workout", "setsImage", 2),
               categoryCard(size, "Nutrition", "nutritionImage", 3),

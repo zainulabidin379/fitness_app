@@ -1,7 +1,10 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/controllers/auth_controller.dart';
 import 'package:fitness_app/screens/authentication/forgot_password.dart';
 import 'package:fitness_app/screens/authentication/sign_up_screen.dart';
+import 'package:fitness_app/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:the_validator/the_validator.dart';
 
@@ -117,30 +120,30 @@ class _SignInScreenState extends State<SignInScreen> {
                 CustomButton(
                   title: "Sign In",
                   onTap: () async {
-                    // if (_formKey.currentState!.validate()) {
-                    //   Get.dialog(
-                    //     SpinKitSpinningLines(color: kRed),
-                    //     barrierDismissible: false,
-                    //   );
-                    //   dynamic result = await AuthController.authInstance
-                    //       .login(emailController.text, passwordController.text);
+                    if (_formKey.currentState!.validate()) {
+                      Get.dialog(
+                        SpinKitSpinningLines(color: kRed),
+                        barrierDismissible: false,
+                      );
+                      dynamic result = await AuthController.authInstance
+                          .login(emailController.text, passwordController.text);
 
-                    //   if (result != null) {
-                    //     Get.back();
-                    //     Get.rawSnackbar(
-                    //       messageText: Text(
-                    //         result,
-                    //         style: kBodyText.copyWith(color: kBlack),
-                    //       ),
-                    //       backgroundColor: kLightGrey,
-                    //       snackPosition: SnackPosition.TOP,
-                    //       borderRadius: 10,
-                    //       margin: const EdgeInsets.all(10),
-                    //     );
-                    //   } else {
-                    //     Get.offAll(() => WrapperScreen());
-                    //   }
-                    // }
+                      if (result != null) {
+                        Get.back();
+                        Get.rawSnackbar(
+                          messageText: Text(
+                            result,
+                            style: kBodyText.copyWith(color: kBlack),
+                          ),
+                          backgroundColor: kLightGrey,
+                          snackPosition: SnackPosition.TOP,
+                          borderRadius: 10,
+                          margin: const EdgeInsets.all(10),
+                        );
+                      } else {
+                        Get.offAll(() => WrapperScreen());
+                      }
+                    }
                   },
                 ),
 
