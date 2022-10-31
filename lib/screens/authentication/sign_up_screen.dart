@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SpinKitSpinningLines(color: kRed),
                         barrierDismissible: false,
                       );
-                      dynamic result = await AuthController.authInstance
+                      dynamic result = await AuthController.instance
                           .register(
                               emailController.text, passwordController.text);
 
@@ -146,9 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       } else {
                         await FirebaseFirestore.instance
                             .collection("users")
-                            .doc(AuthController.authInstance.getCurrentUser())
+                            .doc(AuthController.instance.getCurrentUser())
                             .set({
-                          "uid": AuthController.authInstance.getCurrentUser(),
+                          "uid": AuthController.instance.getCurrentUser(),
                           "name": nameController.text,
                           "email": emailController.text,
                           "subscription": null,

@@ -15,14 +15,12 @@ class Question8Screen extends StatefulWidget {
 }
 
 class _Question8ScreenState extends State<Question8Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   late WeightSliderController _controller;
   @override
   void initState() {
     super.initState();
     _controller = WeightSliderController(
-        initialWeight: questionsController.question8.value,
+        initialWeight: QuestionsController.instance.question8.value,
         minWeight: 0,
         interval: 0.5);
   }
@@ -75,7 +73,7 @@ class _Question8ScreenState extends State<Question8Screen> {
                 () => RichText(
                   text: TextSpan(
                     text:
-                        questionsController.question8.value.toStringAsFixed(0),
+                        QuestionsController.instance.question8.value.toStringAsFixed(0),
                     style: GoogleFonts.montserrat(
                         fontSize: 45,
                         fontWeight: FontWeight.bold,
@@ -103,7 +101,7 @@ class _Question8ScreenState extends State<Question8Screen> {
                   gap: 30.0,
                 ),
                 onChanged: (double value) {
-                  questionsController.question8.value = value;
+                  QuestionsController.instance.question8.value = value;
                 },
               ),
               SizedBox(

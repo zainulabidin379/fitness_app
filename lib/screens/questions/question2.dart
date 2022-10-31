@@ -15,14 +15,12 @@ class Question2Screen extends StatefulWidget {
 }
 
 class _Question2ScreenState extends State<Question2Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   late WeightSliderController _controller;
   @override
   void initState() {
     super.initState();
     _controller = WeightSliderController(
-        initialWeight: questionsController.question2.value,
+        initialWeight: QuestionsController.instance.question2.value,
         minWeight: 15,
         interval: 0.5);
   }
@@ -71,7 +69,7 @@ class _Question2ScreenState extends State<Question2Screen> {
                 height: size.height * 0.05,
               ),
               Obx(() => Text(
-                    questionsController.question2.value.toStringAsFixed(0),
+                    QuestionsController.instance.question2.value.toStringAsFixed(0),
                     style: GoogleFonts.montserrat(
                         fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
                   )),
@@ -88,7 +86,7 @@ class _Question2ScreenState extends State<Question2Screen> {
                   gap: 30.0,
                 ),
                 onChanged: (double value) {
-                  questionsController.question2.value = value;
+                  QuestionsController.instance.question2.value = value;
                 },
               ),
               SizedBox(

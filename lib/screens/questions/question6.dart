@@ -13,8 +13,6 @@ class Question6Screen extends StatefulWidget {
 }
 
 class _Question6ScreenState extends State<Question6Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   final List<SimpleModel> _items = <SimpleModel>[
     SimpleModel(
       'Fat Loss',
@@ -83,12 +81,12 @@ class _Question6ScreenState extends State<Question6Screen> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: ListTile(
                             onTap: () {
-                              questionsController.question6.value =
+                              QuestionsController.instance.question6.value =
                                   _items[index].title;
                             },
-                            visualDensity:
-                                const VisualDensity(horizontal: 0, vertical: -2),
-                            leading: (questionsController.question6.value ==
+                            visualDensity: const VisualDensity(
+                                horizontal: 0, vertical: -2),
+                            leading: (QuestionsController.instance.question6.value ==
                                     _items[index].title)
                                 ? Container(
                                     decoration: BoxDecoration(
@@ -119,7 +117,22 @@ class _Question6ScreenState extends State<Question6Screen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () => Get.to(() => const Question7Screen()),
+                  onTap: () {
+                    if (QuestionsController.instance.question6.value != "") {
+                      Get.to(() => const Question7Screen());
+                    } else {
+                      Get.rawSnackbar(
+                        messageText: Text(
+                          "Please choose your goal",
+                          style: kBodyText.copyWith(color: kBlack),
+                        ),
+                        backgroundColor: kWhite,
+                        snackPosition: SnackPosition.TOP,
+                        borderRadius: 10,
+                        margin: const EdgeInsets.all(10),
+                      );
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 30, right: 30),
                     height: 50,

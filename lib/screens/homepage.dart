@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder<dynamic>(
                       stream: firestore
                           .collection("users")
-                          .doc(AuthController.authInstance.getCurrentUser())
+                          .doc(AuthController.instance.getCurrentUser())
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {

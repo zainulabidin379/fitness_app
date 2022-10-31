@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 class QuestionsController extends GetxController {
+  static QuestionsController instance = Get.find();
 
   var question1 = "".obs;
   var question2 = 25.0.obs;
@@ -14,4 +15,5 @@ class QuestionsController extends GetxController {
   var question10 = "".obs;
   var question11 = "".obs;
   var question12 = 3.0.obs;
+  var question12Opt = "".obs;
 }

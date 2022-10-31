@@ -13,8 +13,6 @@ class Question1Screen extends StatefulWidget {
 }
 
 class _Question1ScreenState extends State<Question1Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   @override
   void initState() {
     FlutterNativeSplash.remove();
@@ -62,14 +60,14 @@ class _Question1ScreenState extends State<Question1Screen> {
               Obx(() {
                 return GestureDetector(
                   onTap: () {
-                    questionsController.question1.value = "male";
+                    QuestionsController.instance.question1.value = "male";
                   },
                   child: Container(
                     height: size.width * 0.33,
                     width: size.width * 0.33,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (questionsController.question1.value == "male")
+                      color: (QuestionsController.instance.question1.value == "male")
                           ? kWhite
                           : kLightGrey,
                     ),
@@ -78,7 +76,7 @@ class _Question1ScreenState extends State<Question1Screen> {
                         "Male",
                         style: kBodyText.copyWith(
                             color:
-                                (questionsController.question1.value == "male")
+                                (QuestionsController.instance.question1.value == "male")
                                     ? kBlack
                                     : kWhite,
                             fontWeight: FontWeight.bold,
@@ -94,14 +92,14 @@ class _Question1ScreenState extends State<Question1Screen> {
               Obx(() {
                 return GestureDetector(
                   onTap: () {
-                    questionsController.question1.value = "female";
+                    QuestionsController.instance.question1.value = "female";
                   },
                   child: Container(
                     height: size.width * 0.33,
                     width: size.width * 0.33,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (questionsController.question1.value == "female")
+                      color: (QuestionsController.instance.question1.value == "female")
                           ? kWhite
                           : kLightGrey,
                     ),
@@ -109,7 +107,7 @@ class _Question1ScreenState extends State<Question1Screen> {
                       child: Text(
                         "Female",
                         style: kBodyText.copyWith(
-                            color: (questionsController.question1.value ==
+                            color: (QuestionsController.instance.question1.value ==
                                     "female")
                                 ? kBlack
                                 : kWhite,
@@ -126,7 +124,22 @@ class _Question1ScreenState extends State<Question1Screen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () => Get.to(() => const Question2Screen()),
+                  onTap: () {
+                    if (QuestionsController.instance.question1.value != "") {
+                      Get.to(() => const Question2Screen());
+                    } else {
+                      Get.rawSnackbar(
+                        messageText: Text(
+                          "Please choose your gender",
+                          style: kBodyText.copyWith(color: kBlack),
+                        ),
+                        backgroundColor: kWhite,
+                        snackPosition: SnackPosition.TOP,
+                        borderRadius: 10,
+                        margin: const EdgeInsets.all(10),
+                      );
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 30, right: 30),
                     height: 50,

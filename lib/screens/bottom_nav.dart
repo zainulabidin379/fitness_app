@@ -20,7 +20,6 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final BottomNavController _navController = Get.put(BottomNavController());
 
   bool loading = true;
 
@@ -37,13 +36,13 @@ class _BottomNavState extends State<BottomNav> {
         child: Obx(
       () => Scaffold(
         key: _scaffoldKey,
-        body: _navController.currentTab.value == 0
+        body: BottomNavController.instance.currentTab.value == 0
             ? const HomePage()
-            : _navController.currentTab.value == 1
+            : BottomNavController.instance.currentTab.value == 1
                 ? WorkoutVideos()
-                : _navController.currentTab.value == 2
+                : BottomNavController.instance.currentTab.value == 2
                     ? SetWorkouts()
-                    : _navController.currentTab.value == 3
+                    : BottomNavController.instance.currentTab.value == 3
                         ? MealsNutritionScreen()
                         : ExploreScreen(),
         bottomNavigationBar: BottomAppBar(
@@ -74,7 +73,7 @@ class _BottomNavState extends State<BottomNav> {
       minWidth: 20,
       padding: EdgeInsets.zero,
       onPressed: () {
-        _navController.navigateTo(value);
+        BottomNavController.instance.navigateTo(value);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +81,7 @@ class _BottomNavState extends State<BottomNav> {
           Image.asset(
             icon,
             height: 20,
-            color: _navController.currentTab.value == value ? kRed : kWhite,
+            color: BottomNavController.instance.currentTab.value == value ? kRed : kWhite,
           ),
           const SizedBox(
             height: 5,
@@ -94,7 +93,7 @@ class _BottomNavState extends State<BottomNav> {
             maxFontSize: 9,
             style: kBodyText.copyWith(
               fontSize: 9,
-              color: _navController.currentTab.value == value ? kRed : kWhite,
+              color: BottomNavController.instance.currentTab.value == value ? kRed : kWhite,
             ),
           ),
         ],

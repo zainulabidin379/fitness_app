@@ -214,7 +214,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 height: size.height * 0.07,
               ),
               CustomButton(
-                title: "Confirm",
+                title: (widget.subscription == "trial")
+                    ? "Start 7 Day Trial"
+                    : "Confirm",
                 onTap: () => Get.to(() => const Question1Screen()),
               )
             ],

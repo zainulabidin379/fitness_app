@@ -1,6 +1,12 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/constants/controllers.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/auth_controller.dart';
+import 'package:fitness_app/controllers/bottom_nav.dart';
+import 'package:fitness_app/controllers/nutrition_meal_filter.dart';
+import 'package:fitness_app/controllers/questions_controller.dart';
+import 'package:fitness_app/controllers/set_workout_filter.dart';
+import 'package:fitness_app/controllers/workout_videos_filter.dart';
 import 'package:fitness_app/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -13,6 +19,11 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await firebaseInitialization.then((value) {
     Get.put(AuthController());
+    Get.put(BottomNavController());
+    Get.put(QuestionsController());
+    Get.put(WorkoutVideoFilterController());
+    Get.put(SetWorkoutFilterController());
+    Get.put(NutritionMealFilterController());
   });
   runApp(const MyApp());
 }
@@ -45,7 +56,10 @@ class MyApp extends StatelessWidget {
                   .headline6,
         ),
       ),
-      home: Center(child: SpinKitSpinningLines(color: kRed,)),
+      home: Center(
+          child: SpinKitSpinningLines(
+        color: kRed,
+      )),
     );
   }
 }

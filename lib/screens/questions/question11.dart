@@ -13,8 +13,6 @@ class Question11Screen extends StatefulWidget {
 }
 
 class _Question11ScreenState extends State<Question11Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   late FixedExtentScrollController _controller;
 
   @override
@@ -85,7 +83,7 @@ class _Question11ScreenState extends State<Question11Screen> {
                         perspective: 0.001,
                         diameterRatio: 1.5,
                         onSelectedItemChanged: (value) {
-                          questionsController.question11.value = _items[value];
+                          QuestionsController.instance.question11.value = _items[value];
                         },
                         physics: const FixedExtentScrollPhysics(),
                         children: List.generate(
@@ -93,7 +91,7 @@ class _Question11ScreenState extends State<Question11Screen> {
                           (index) => Text(
                             _items[index],
                             textAlign: TextAlign.center,
-                            style: (questionsController.question11.value ==
+                            style: (QuestionsController.instance.question11.value ==
                                     _items[index])
                                 ? kBodyText.copyWith(
                                     fontWeight: FontWeight.bold, fontSize: 20)

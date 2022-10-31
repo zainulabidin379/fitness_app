@@ -15,14 +15,12 @@ class Question4Screen extends StatefulWidget {
 }
 
 class _Question4ScreenState extends State<Question4Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   late WeightSliderController _controller;
   var weightInFeet = 0.0.obs;
   var weightInInches = 0.0.obs;
 
   void calculateHeight() {
-    weightInFeet.value = questionsController.question4.value / 30.48;
+    weightInFeet.value = QuestionsController.instance.question4.value / 30.48;
     double decimalValue = weightInFeet.value - weightInFeet.value.toInt();
     weightInInches.value = decimalValue * 12;
   }
@@ -32,7 +30,7 @@ class _Question4ScreenState extends State<Question4Screen> {
     super.initState();
     calculateHeight();
     _controller = WeightSliderController(
-        initialWeight: questionsController.question4.value,
+        initialWeight: QuestionsController.instance.question4.value,
         minWeight: 50,
         interval: 0.5);
   }
@@ -84,7 +82,7 @@ class _Question4ScreenState extends State<Question4Screen> {
                 () => RichText(
                   text: TextSpan(
                     text:
-                        questionsController.question4.value.toStringAsFixed(0),
+                        QuestionsController.instance.question4.value.toStringAsFixed(0),
                     style: GoogleFonts.montserrat(
                         fontSize: 45,
                         fontWeight: FontWeight.bold,
@@ -112,7 +110,7 @@ class _Question4ScreenState extends State<Question4Screen> {
                   gap: 30.0,
                 ),
                 onChanged: (double value) {
-                  questionsController.question4.value = value;
+                  QuestionsController.instance.question4.value = value;
                   calculateHeight();
                 },
               ),

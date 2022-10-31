@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         SpinKitSpinningLines(color: kRed),
                         barrierDismissible: false,
                       );
-                      dynamic result = await AuthController.authInstance
+                      dynamic result = await AuthController.instance
                           .login(emailController.text, passwordController.text);
 
                       if (result != null) {

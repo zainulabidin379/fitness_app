@@ -70,7 +70,7 @@ class _NavDrawerState extends State<NavDrawer> {
                         StreamBuilder<dynamic>(
                             stream: firestore
                                 .collection("users")
-                                .doc(AuthController.authInstance
+                                .doc(AuthController.instance
                                     .getCurrentUser())
                                 .snapshots(),
                             builder: (context, snapshot) {
@@ -126,7 +126,7 @@ class _NavDrawerState extends State<NavDrawer> {
                             StreamBuilder<dynamic>(
                                 stream: firestore
                                     .collection("users")
-                                    .doc(AuthController.authInstance
+                                    .doc(AuthController.instance
                                         .getCurrentUser())
                                     .snapshots(),
                                 builder: (context, snapshot) {
@@ -155,7 +155,7 @@ class _NavDrawerState extends State<NavDrawer> {
                       child: StreamBuilder<dynamic>(
                           stream: firestore
                               .collection("users")
-                              .doc(AuthController.authInstance.getCurrentUser())
+                              .doc(AuthController.instance.getCurrentUser())
                               .snapshots(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
@@ -205,7 +205,7 @@ class _NavDrawerState extends State<NavDrawer> {
                   profileItem(() => Get.to(() => const SavedItemsScreen()),
                       "Saved Items"),
                   profileItem(
-                      () => AuthController.authInstance.signOut(), "Logout"),
+                      () => AuthController.instance.signOut(), "Logout"),
                   const SizedBox(
                     height: 10,
                   )

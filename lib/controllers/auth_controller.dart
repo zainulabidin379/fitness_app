@@ -4,7 +4,7 @@ import 'package:fitness_app/widgets/wrapper.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  static AuthController authInstance = Get.find();
+  static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
 
   var isLoggedIn = false.obs;

@@ -1,3 +1,4 @@
+import 'package:fitness_app/controllers/set_workout_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -207,17 +208,39 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 55,
-        decoration: BoxDecoration(
-            color: kLightGrey, borderRadius: BorderRadius.circular(12)),
-        child: Center(
-            child: Text(
-          filterTitle,
-          style: kButtonText,
-        )),
-      ),
+      child: Obx(() {
+        return GestureDetector(
+          onTap: () {
+            if (SetWorkoutFilterController.instance.workoutType.value ==
+                filterTitle) {
+              SetWorkoutFilterController.instance.workoutType.value = "";
+            } else {
+              SetWorkoutFilterController.instance.workoutType.value =
+                  filterTitle;
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            height: 55,
+            decoration: BoxDecoration(
+                color: (SetWorkoutFilterController.instance.workoutType.value ==
+                        filterTitle)
+                    ? kWhite
+                    : kLightGrey,
+                borderRadius: BorderRadius.circular(12)),
+            child: Center(
+                child: Text(
+              filterTitle,
+              style: kButtonText.copyWith(
+                  color:
+                      (SetWorkoutFilterController.instance.workoutType.value ==
+                              filterTitle)
+                          ? kBlack
+                          : kWhite),
+            )),
+          ),
+        );
+      }),
     );
   }
 }

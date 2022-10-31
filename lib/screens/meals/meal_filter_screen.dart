@@ -1,3 +1,4 @@
+import 'package:fitness_app/controllers/nutrition_meal_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -155,23 +156,43 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-          right: 20.0,
-        ),
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          height: 55,
-          decoration: BoxDecoration(
-              color: kLightGrey, borderRadius: BorderRadius.circular(12)),
-          child: Center(
-              child: Text(
-            filterTitle,
-            style: kButtonText,
-          )),
-        ),
-      ),
+      child: Obx(() {
+        return GestureDetector(
+          onTap: () {
+            if (NutritionMealFilterController.instance.mealcategory.value ==
+                filterTitle) {
+              NutritionMealFilterController.instance.mealcategory.value = "";
+            } else {
+              NutritionMealFilterController.instance.mealcategory.value = filterTitle;
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+            ),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              height: 55,
+              decoration: BoxDecoration(
+                  color: (NutritionMealFilterController.instance.mealcategory.value ==
+                          filterTitle)
+                      ? kWhite
+                      : kLightGrey,
+                  borderRadius: BorderRadius.circular(12)),
+              child: Center(
+                  child: Text(
+                filterTitle,
+                style: kButtonText.copyWith(
+                    color: (NutritionMealFilterController.instance.mealcategory.value ==
+                            filterTitle)
+                        ? kBlack
+                        : kWhite),
+              )),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

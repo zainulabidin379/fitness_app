@@ -15,15 +15,13 @@ class Question12Screen extends StatefulWidget {
 }
 
 class _Question12ScreenState extends State<Question12Screen> {
-  final QuestionsController questionsController =
-      Get.put(QuestionsController());
   late WeightSliderController _controller;
   var weight = 3.0.obs;
   @override
   void initState() {
     super.initState();
     _controller = WeightSliderController(
-        initialWeight: questionsController.question12.value,
+        initialWeight: QuestionsController.instance.question12.value,
         minWeight: 1,
         interval: 0.5);
   }
@@ -52,9 +50,9 @@ class _Question12ScreenState extends State<Question12Screen> {
                   ),
                 ),
               ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -72,14 +70,14 @@ class _Question12ScreenState extends State<Question12Screen> {
                 textAlign: TextAlign.center,
                 style: kBodyText.copyWith(fontSize: 10),
               ),
-            SizedBox(
-              height: size.height * 0.05,
-            ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
               Obx(
                 () => RichText(
                   text: TextSpan(
                     text:
-                        questionsController.question12.value.toStringAsFixed(0),
+                        QuestionsController.instance.question12.value.toStringAsFixed(0),
                     style: GoogleFonts.montserrat(
                         fontSize: 45,
                         fontWeight: FontWeight.bold,
@@ -101,17 +99,49 @@ class _Question12ScreenState extends State<Question12Screen> {
                   gap: 30.0,
                 ),
                 onChanged: (double value) {
-                  questionsController.question12.value = value;
+                  QuestionsController.instance.question12.value = value;
                 },
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  "I'm not sure and would love your guidance",
-                  textAlign: TextAlign.center,
-                  style: kBodyText.copyWith(
-                      fontWeight: FontWeight.bold, fontSize: 13),
+              Obx(
+                () => Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: ListTile(
+                    onTap: () {
+                      if (QuestionsController.instance.question12Opt.value ==
+                          "I'm not sure") {
+                        QuestionsController.instance.question12Opt.value = "";
+                      } else {
+                        QuestionsController.instance.question12Opt.value =
+                            "I'm not sure";
+                      }
+                    },
+                    visualDensity:
+                        const VisualDensity(horizontal: 0, vertical: -2),
+                    leading: (QuestionsController.instance.question12Opt.value ==
+                            "I'm not sure")
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: kRed,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            constraints: const BoxConstraints(
+                                maxHeight: 18, maxWidth: 18),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              color: kWhite,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            constraints: const BoxConstraints(
+                                maxHeight: 18, maxWidth: 18)),
+                    title: Text(
+                      "I'm not sure and would love your guidance",
+                      textAlign: TextAlign.left,
+                      style: kBodyText.copyWith(
+                          fontWeight: FontWeight.bold, fontSize: 13),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
