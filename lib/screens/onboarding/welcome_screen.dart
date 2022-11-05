@@ -1,6 +1,6 @@
 import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
-import 'package:fitness_app/screens/onboarding.dart';
-import 'package:fitness_app/screens/subscription.dart';
+import 'package:fitness_app/screens/onboarding/onboarding.dart';
+import 'package:fitness_app/screens/payment/subscription.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';

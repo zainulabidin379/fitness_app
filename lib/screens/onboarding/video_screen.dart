@@ -1,10 +1,10 @@
-import 'package:fitness_app/screens/welcome_screen.dart';
+import 'package:fitness_app/screens/onboarding/welcome_screen.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
-import '../widgets/custom_button.dart';
+import '../../widgets/custom_button.dart';
 
 class VideoScreen extends StatefulWidget {
   const VideoScreen({super.key});

@@ -174,11 +174,14 @@ class CustomContainer extends StatelessWidget {
       child: Obx(() {
         return GestureDetector(
           onTap: () {
-            if (NutritionMealFilterController.instance.nutritioncategory.value ==
+            if (NutritionMealFilterController
+                    .instance.nutritioncategory.value ==
                 filterTitle) {
-              NutritionMealFilterController.instance.nutritioncategory.value = "";
+              NutritionMealFilterController.instance.nutritioncategory.value =
+                  "";
             } else {
-              NutritionMealFilterController.instance.nutritioncategory.value = filterTitle;
+              NutritionMealFilterController.instance.nutritioncategory.value =
+                  filterTitle;
             }
           },
           child: Padding(
@@ -190,7 +193,8 @@ class CustomContainer extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 10),
               height: 55,
               decoration: BoxDecoration(
-                  color: (NutritionMealFilterController.instance.nutritioncategory.value ==
+                  color: (NutritionMealFilterController
+                              .instance.nutritioncategory.value ==
                           filterTitle)
                       ? kWhite
                       : kLightGrey,
@@ -199,7 +203,8 @@ class CustomContainer extends StatelessWidget {
                   child: Text(
                 filterTitle,
                 style: kButtonText.copyWith(
-                    color: (NutritionMealFilterController.instance.nutritioncategory.value ==
+                    color: (NutritionMealFilterController
+                                .instance.nutritioncategory.value ==
                             filterTitle)
                         ? kBlack
                         : kWhite),

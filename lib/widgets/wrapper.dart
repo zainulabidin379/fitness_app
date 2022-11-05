@@ -1,10 +1,10 @@
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/auth_controller.dart';
-import 'package:fitness_app/screens/bottom_nav.dart';
+import 'package:fitness_app/screens/bottomNav/bottom_nav.dart';
 import 'package:fitness_app/screens/questions/question1.dart';
-import 'package:fitness_app/screens/subscription.dart';
-import 'package:fitness_app/screens/video_screen.dart';
+import 'package:fitness_app/screens/payment/subscription.dart';
+import 'package:fitness_app/screens/onboarding/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';

@@ -1,7 +1,9 @@
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/screens/meals/meal_detail_screen.dart';
 import 'package:fitness_app/screens/meals/meal_filter_screen.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../nutrition/personalised_nutrition_confirmation_screen.dart';
@@ -95,28 +97,58 @@ class MealsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ...List.generate(
-                6,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
-                  child: GestureDetector(
-                    onTap: () => Get.to(() => const MealDetailScreen()),
-                    child: Row(
-                      children: [
-                        const CustomContainer(
-                          imageString: "assets/images/ingredientsBG1.png",
+              StreamBuilder<dynamic>(
+                  stream: firestore.collection("meals").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: List.generate(
+                            snapshot.data.docs.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  child: GestureDetector(
+                                    onTap: () => Get.to(() => MealDetailScreen(
+                                          name: snapshot.data.docs[index]
+                                              ['name'],
+                                          image: snapshot.data.docs[index]
+                                              ['image'],
+                                          description: snapshot.data.docs[index]
+                                              ['description'],
+                                          categories: snapshot.data.docs[index]
+                                              ['category'],
+                                        )),
+                                    child: Row(
+                                      children: [
+                                        CustomContainer(
+                                          imageString: snapshot.data.docs[index]
+                                              ['image'],
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Flexible(
+                                          child: Text(
+                                            snapshot.data.docs[index]['name'],
+                                            style: kBodyText.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Center(
+                          child: SpinKitSpinningLines(
+                            color: kRed,
+                          ),
                         ),
-                        SizedBox(width: size.width * 0.01),
-                        Text(
-                          'Name of Meal',
-                          style: kBodyText.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                      );
+                    }
+                  }),
               const SizedBox(
                 height: 15,
               ),
@@ -159,15 +191,32 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: 15, right: 15),
-      padding: const EdgeInsets.all(15),
-      width: 158,
-      height: 114,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(imageString), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(24)),
+      height: size.width * 0.22,
+      width: size.width * 0.3,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Image.network(
+            imageString,
+            fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  color: kRed,
+                  strokeWidth: 3,
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+          )),
     );
   }
 }

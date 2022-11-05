@@ -1,11 +1,12 @@
-import 'package:fitness_app/screens/coupon_code_screen.dart';
-import 'package:fitness_app/screens/payment.dart';
+import 'package:fitness_app/screens/bottomNav/bottom_nav.dart';
+import 'package:fitness_app/screens/coupon/coupon_code_screen.dart';
+import 'package:fitness_app/screens/payment/payment.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
-import '../widgets/custom_button.dart';
+import '../../widgets/custom_button.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   final bool? loggedIn;
@@ -234,23 +235,24 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                          if (selectedSubscription.value != '') {
-                            Get.to(() => PaymentScreen(
-                                  subscription: selectedSubscription.value,
-                                  amount: subscriptionAmount.value,
-                                ));
-                          } else {
-                            Get.rawSnackbar(
-                              messageText: Text(
-                                "Plese choose a subscription to continue",
-                                style: kBodyText.copyWith(color: kBlack),
-                              ),
-                              backgroundColor: kWhite,
-                              snackPosition: SnackPosition.TOP,
-                              borderRadius: 10,
-                              margin: const EdgeInsets.all(10),
-                            );
-                          }
+                          Get.to(() => const BottomNav());
+                          // if (selectedSubscription.value != '') {
+                          //   Get.to(() => PaymentScreen(
+                          //         subscription: selectedSubscription.value,
+                          //         amount: subscriptionAmount.value,
+                          //       ));
+                          // } else {
+                          //   Get.rawSnackbar(
+                          //     messageText: Text(
+                          //       "Plese choose a subscription to continue",
+                          //       style: kBodyText.copyWith(color: kBlack),
+                          //     ),
+                          //     backgroundColor: kWhite,
+                          //     snackPosition: SnackPosition.TOP,
+                          //     borderRadius: 10,
+                          //     margin: const EdgeInsets.all(10),
+                          //   );
+                          // }
                         },
                         child: Container(
                           margin: const EdgeInsets.only(

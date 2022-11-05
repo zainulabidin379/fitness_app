@@ -2,8 +2,8 @@ import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:the_validator/the_validator.dart';
 
-import '../../widgets/custom_button.dart';
-import '../../widgets/custom_text_field.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/custom_text_field.dart';
 
 class CouponCodeScreen extends StatefulWidget {
   const CouponCodeScreen({super.key});

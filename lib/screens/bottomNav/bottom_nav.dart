@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';
-import 'package:fitness_app/screens/explore.dart';
+import 'package:fitness_app/screens/explore/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
 import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/setWorkouts/set_workouts.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
-import '../constants/constants.dart';
+import '../../constants/constants.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);

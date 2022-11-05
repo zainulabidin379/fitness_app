@@ -1,4 +1,4 @@
-import 'package:fitness_app/screens/bottom_nav.dart';
+import 'package:fitness_app/screens/bottomNav/bottom_nav.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

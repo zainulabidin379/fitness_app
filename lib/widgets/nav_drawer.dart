@@ -7,7 +7,7 @@ import 'package:fitness_app/screens/diary/food_diary_screen.dart';
 import 'package:fitness_app/screens/diary/life_style_diary_screen.dart';
 import 'package:fitness_app/screens/diary/picture_diary_screen.dart';
 import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmation_screen.dart';
-import 'package:fitness_app/screens/saved_items.dart';
+import 'package:fitness_app/screens/savedItems/saved_items.dart';
 import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart';
 import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:flutter/material.dart';

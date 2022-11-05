@@ -1,7 +1,7 @@
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/onboarding_screen.dart';
+import '../../widgets/onboarding_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

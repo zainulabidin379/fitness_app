@@ -3,7 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({super.key});
+  const MealDetailScreen(
+      {super.key,
+      required this.name,
+      required this.image,
+      required this.description,
+      required this.categories});
+  final String name;
+  final String image;
+  final String description;
+  final List<dynamic> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -50,36 +59,39 @@ class MealDetailScreen extends StatelessWidget {
                 width: size.width,
                 height: 190,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage('assets/images/ingredientsBG2.png'),
-                        fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: NetworkImage(image), fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(24)),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 5),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Name of Meal',
-                    style: kBodyText.copyWith(
-                        fontWeight: FontWeight.bold, fontSize: 18),
+                  Flexible(
+                    child: Text(
+                      name,
+                      style: kBodyText.copyWith(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                   ),
-                  SizedBox(
-                    width: size.width * 0.3,
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            color: kWhite,
+                          )),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.bookmark_add,
+                            color: kWhite,
+                          )),
+                    ],
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: kWhite,
-                      )),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.bookmark_add,
-                        color: kWhite,
-                      )),
                 ],
               ),
             ),
@@ -93,42 +105,28 @@ class MealDetailScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 20, right: 20),
-              child: Container(
-                child: Text(
-                  'Some text here which will describe the video contextSome text here which will describe the video contextSome text here which will describe the video contextSome text here which will describe the video context',
-                  style: kBodyText.copyWith(
-                      fontWeight: FontWeight.bold, fontSize: 12),
+              child: Text(
+                description,
+                style: kBodyText.copyWith(
+                    fontWeight: FontWeight.bold, fontSize: 12),
+              ),
+            ),
+            ...List.generate(
+              categories.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  height: 40,
+                  width: size.width * 0.4,
+                  decoration: BoxDecoration(
+                      color: kWhite, borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                      child: Text(
+                    categories[index].toUpperCase(),
+                    style: kButtonText,
+                  )),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20),
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                height: 40,
-                width: size.width * 0.4,
-                decoration: BoxDecoration(
-                    color: kWhite, borderRadius: BorderRadius.circular(12)),
-                child: Center(
-                    child: Text(
-                  'Category Name',
-                  style: kButtonText,
-                )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20),
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                height: 40,
-                width: size.width * 0.4,
-                decoration: BoxDecoration(
-                    color: kWhite, borderRadius: BorderRadius.circular(12)),
-                child: Center(
-                    child: Text(
-                  'Category Name',
-                  style: kButtonText,
-                )),
               ),
             ),
           ],

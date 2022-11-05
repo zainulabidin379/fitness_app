@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 30),
-                                child: SpinKitSpinningCircle(
+                                child: SpinKitSpinningLines(
                                   color: kRed,
                                   size: 30,
                                 ),

@@ -45,10 +45,11 @@ class MealsNutritionScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 55,
+                  height: 50,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: GestureDetector(
                     onTap: () => Get.to(() => const NutritionScreen()),
                     child: Row(
@@ -69,7 +70,8 @@ class MealsNutritionScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: GestureDetector(
                     onTap: () => Get.to(() => const MealsScreen()),
                     child: Row(
@@ -88,9 +90,6 @@ class MealsNutritionScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
                 ),
               ],
             ),
