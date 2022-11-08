@@ -1,12 +1,11 @@
-import 'package:fitness_app/screens/bottomNav/bottom_nav.dart';
 import 'package:fitness_app/screens/coupon/coupon_code_screen.dart';
-import 'package:fitness_app/screens/payment/payment.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/custom_button.dart';
+import '../bottomNav/bottom_nav.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   final bool? loggedIn;

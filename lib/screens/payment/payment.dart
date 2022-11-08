@@ -87,16 +87,38 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       return Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(left: 20, right: 10),
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
+                              margin:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              height: 40,
+                              width: 40,
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        snapshot.data.docs[0]["image"]),
-                                    fit: BoxFit.cover)),
-                          ),
+                              ),
+                              child: Image.network(
+                                snapshot.data.docs[0]["image"],
+                                fit: BoxFit.cover,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: kRed,
+                                      strokeWidth: 3,
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -70,23 +70,43 @@ class _NavDrawerState extends State<NavDrawer> {
                         StreamBuilder<dynamic>(
                             stream: firestore
                                 .collection("users")
-                                .doc(AuthController.instance
-                                    .getCurrentUser())
+                                .doc(AuthController.instance.getCurrentUser())
                                 .snapshots(),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return Container(
-                                  height: 90,
-                                  width: 90,
-                                  decoration: BoxDecoration(
+                                    height: 90,
+                                    width: 90,
+                                    decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border:
                                           Border.all(color: kDark, width: 3),
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              snapshot.data["image"]),
-                                          fit: BoxFit.cover)),
-                                );
+                                    ),
+                                    child: Image.network(
+                                      snapshot.data["image"],
+                                      fit: BoxFit.cover,
+                                      loadingBuilder: (BuildContext context,
+                                          Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            color: kRed,
+                                            strokeWidth: 3,
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    loadingProgress
+                                                        .expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
+                                    ));
                               } else {
                                 return Container(
                                   height: 90,
@@ -102,7 +122,6 @@ class _NavDrawerState extends State<NavDrawer> {
                                 );
                               }
                             }),
-
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           height: 90,
@@ -122,7 +141,6 @@ class _NavDrawerState extends State<NavDrawer> {
                             const SizedBox(
                               height: 5,
                             ),
-                            
                             StreamBuilder<dynamic>(
                                 stream: firestore
                                     .collection("users")
