@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/auth_controller.dart';
@@ -82,30 +83,22 @@ class _NavDrawerState extends State<NavDrawer> {
                                       border:
                                           Border.all(color: kDark, width: 3),
                                     ),
-                                    child: Image.network(
-                                      snapshot.data["image"],
-                                      fit: BoxFit.cover,
-                                      loadingBuilder: (BuildContext context,
-                                          Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            color: kRed,
-                                            strokeWidth: 3,
-                                            value: loadingProgress
-                                                        .expectedTotalBytes !=
-                                                    null
-                                                ? loadingProgress
-                                                        .cumulativeBytesLoaded /
-                                                    loadingProgress
-                                                        .expectedTotalBytes!
-                                                : null,
+                                    child: CachedNetworkImage(
+                                      imageUrl: snapshot.data["image"],
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
                                           ),
-                                        );
-                                      },
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                           Icon(Icons.error, color: kWhite,),
+                                      placeholder: (context, url) =>
+                                          SpinKitSpinningLines(color: kRed),
+                                      fit: BoxFit.cover,
                                     ));
                               } else {
                                 return Container(

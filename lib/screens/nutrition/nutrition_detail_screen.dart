@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class NutritionDetailScreen extends StatelessWidget {
@@ -55,10 +57,29 @@ class NutritionDetailScreen extends StatelessWidget {
                 //padding: const EdgeInsets.all(15),
                 width: size.width,
                 height: 190,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(image), fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(24)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(24)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Icon(
+                      Icons.error,
+                      color: kWhite,
+                    ),
+                    placeholder: (context, url) =>
+                        SpinKitSpinningLines(color: kRed),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             Padding(

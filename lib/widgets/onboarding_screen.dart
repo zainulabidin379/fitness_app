@@ -1,4 +1,6 @@
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
 import 'package:fitness_app/screens/payment/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -84,8 +86,24 @@ class OnboardingPageWidget extends StatelessWidget {
                             ? Align(
                                 alignment: Alignment.centerRight,
                                 child: GestureDetector(
-                                  onTap: () =>
-                                      Get.to(() => const SubscriptionScreen()),
+                                  onTap: () {
+                                    if (authController.isLoggedIn.value) {
+                                      Get.to(() => const SubscriptionScreen());
+                                    } else {
+                                      Get.to(() => const SignInScreen());
+                                      Get.rawSnackbar(
+                                        messageText: Text(
+                                          "Please Login to view subscriptions!",
+                                          style:
+                                              kBodyText.copyWith(color: kBlack),
+                                        ),
+                                        backgroundColor: kWhite,
+                                        snackPosition: SnackPosition.TOP,
+                                        borderRadius: 10,
+                                        margin: const EdgeInsets.all(10),
+                                      );
+                                    }
+                                  },
                                   child: Container(
                                     margin: EdgeInsets.only(
                                         bottom: size.height * 0.01, right: 20),

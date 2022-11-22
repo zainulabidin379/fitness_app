@@ -1,3 +1,4 @@
+import 'package:fitness_app/constants/controllers.dart';
 import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
 import 'package:fitness_app/screens/onboarding/onboarding.dart';
 import 'package:fitness_app/screens/payment/subscription.dart';
@@ -35,18 +36,34 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onTap: () => Get.to(() => const OnboardingScreen())),
               CustomButton(
                 title: "Subscriptions",
-                onTap: () => Get.to(() => const SubscriptionScreen()),
+                onTap: () {
+                  if (authController.isLoggedIn.value) {
+                    Get.to(() => const SubscriptionScreen());
+                  } else{
+                     Get.to(() => const SignInScreen());
+                     Get.rawSnackbar(
+                          messageText: Text(
+                            "Please Login to view subscriptions!",
+                            style: kBodyText.copyWith(color: kBlack),
+                          ),
+                          backgroundColor: kWhite,
+                          snackPosition: SnackPosition.TOP,
+                          borderRadius: 10,
+                          margin: const EdgeInsets.all(10),
+                        );
+                  }
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  "-------------or--------------",
+                  "------------- or --------------",
                   style: kButtonText.copyWith(color: kGrey),
                 ),
               ),
               CustomButton(
                   title: "Login",
-                  onTap: () => Get.to(() => SignInScreen())),
+                  onTap: () => Get.to(() => const SignInScreen())),
             ],
           ),
         ),

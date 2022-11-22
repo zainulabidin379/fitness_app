@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auto_size_text: ^3.0.0
+  cached_network_image: ^3.2.2
   cloud_firestore: ^4.0.2
   cupertino_icons: ^1.0.2
   date_time_format: ^2.0.1
@@ -41,8 +42,8 @@ dependencies:
   flutter_spinkit: ^5.1.0
   get: ^4.6.5
   google_fonts: ^3.0.1
-  the_validator: ^2.0.0
   table_calendar: ^3.0.7
+  the_validator: ^2.0.0
   vertical_weight_slider: ^2.4.0
   wheel_chooser: ^1.0.0
 

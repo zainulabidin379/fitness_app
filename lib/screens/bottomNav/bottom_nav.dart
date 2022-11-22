@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/explore/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
+import 'package:fitness_app/screens/live/live.dart';
 import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/setWorkouts/set_workouts.dart';
 import 'package:fitness_app/screens/workoutVideos/workout_videos.dart';
@@ -37,14 +38,16 @@ class _BottomNavState extends State<BottomNav> {
       () => Scaffold(
         key: _scaffoldKey,
         body: BottomNavController.instance.currentTab.value == 0
-            ? const HomePage()
+            ? const LiveScreen()
             : BottomNavController.instance.currentTab.value == 1
-                ? WorkoutVideos()
+                ? const HomePage()
                 : BottomNavController.instance.currentTab.value == 2
-                    ? SetWorkouts()
+                    ? WorkoutVideos()
                     : BottomNavController.instance.currentTab.value == 3
-                        ? MealsNutritionScreen()
-                        : ExploreScreen(),
+                        ? SetWorkouts()
+                        : BottomNavController.instance.currentTab.value == 4
+                            ? MealsNutritionScreen()
+                            : ExploreScreen(),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
           color: kBlack,
@@ -53,11 +56,12 @@ class _BottomNavState extends State<BottomNav> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                menuItem('Home', "assets/images/home.png", 0),
-                menuItem('Exercise Videos', "assets/images/videos.png", 1),
-                menuItem('Set Workouts', "assets/images/sets.png", 2),
-                menuItem('Meals Nutrition', "assets/images/meals.png", 3),
-                menuItem('Explore/Feed', "assets/images/search.png", 4),
+                liveMenuItem("assets/images/live.png", 0),
+                menuItem('Home', "assets/images/home.png", 1),
+                menuItem('Exercise Videos', "assets/images/videos.png", 2),
+                menuItem('Set Workouts', "assets/images/sets.png", 3),
+                menuItem('Meals Nutrition', "assets/images/meals.png", 4),
+                menuItem('Explore/Feed', "assets/images/search.png", 5),
               ],
             ),
           ),
@@ -81,21 +85,63 @@ class _BottomNavState extends State<BottomNav> {
           Image.asset(
             icon,
             height: 20,
-            color: BottomNavController.instance.currentTab.value == value ? kRed : kWhite,
+            color: BottomNavController.instance.currentTab.value == value
+                ? kRed
+                : kWhite,
           ),
           const SizedBox(
             height: 5,
           ),
-          AutoSizeText(
-            name,
-            maxLines: 1,
-            minFontSize: 5,
-            maxFontSize: 9,
-            style: kBodyText.copyWith(
-              fontSize: 9,
-              color: BottomNavController.instance.currentTab.value == value ? kRed : kWhite,
-            ),
-          ),
+          BottomNavController.instance.currentTab.value == value
+              ? AutoSizeText(
+                  name,
+                  maxLines: 1,
+                  minFontSize: 5,
+                  maxFontSize: 9,
+                  style: kBodyText.copyWith(
+                    color:
+                        BottomNavController.instance.currentTab.value == value
+                            ? kRed
+                            : kWhite,
+                  ),
+                )
+              : const SizedBox(),
+        ],
+      ),
+    );
+  }
+
+  Widget liveMenuItem(String icon, int value) {
+    return MaterialButton(
+      splashColor: kTrans,
+      highlightColor: kTrans,
+      minWidth: 20,
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        BottomNavController.instance.navigateTo(value);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                  color: kRed, borderRadius: BorderRadius.circular(5)),
+              child: Text(
+                "Live",
+                style: kBodyText.copyWith(
+                    fontSize: 11, fontWeight: FontWeight.bold),
+              ))
+          // Image.asset(
+          //   icon,
+          //   height: 25,
+          //   color: BottomNavController.instance.currentTab.value == value
+          //       ? kRed
+          //       : kWhite,
+          // ),
+          // const SizedBox(
+          //   height: 5,
+          // ),
         ],
       ),
     );

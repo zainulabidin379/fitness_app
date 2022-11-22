@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/screens/questions/question1.dart';
 import 'package:fitness_app/constants/constants.dart';
@@ -94,30 +95,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: Image.network(
-                                snapshot.data.docs[0]["image"],
-                                fit: BoxFit.cover,
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      color: kRed,
-                                      strokeWidth: 3,
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
+                              child: CachedNetworkImage(
+                                imageUrl: snapshot.data.docs[0]["image"],
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
                                     ),
-                                  );
-                                },
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                  color: kWhite,
+                                ),
+                                placeholder: (context, url) =>
+                                    SpinKitSpinningLines(color: kRed),
+                                fit: BoxFit.cover,
                               )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

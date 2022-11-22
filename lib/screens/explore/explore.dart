@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:fitness_app/constants/constants.dart';
@@ -101,23 +102,23 @@ class ExploreScreen extends StatelessWidget {
             ),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(24),
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: kRed,
-                        strokeWidth: 3,
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
+                child: CachedNetworkImage(
+                  imageUrl: image,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
                       ),
-                    );
-                  },
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.error,
+                    color: kWhite,
+                  ),
+                  placeholder: (context, url) =>
+                      SpinKitSpinningLines(color: kRed),
+                  fit: BoxFit.cover,
                 )),
           ),
           Padding(
