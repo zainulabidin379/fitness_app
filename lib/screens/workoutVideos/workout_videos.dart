@@ -1,8 +1,10 @@
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/workoutVideos/filters.dart';
 import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:fitness_app/screens/workoutVideos/video_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../constants/constants.dart';
@@ -91,36 +93,74 @@ class WorkoutVideos extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    ...List.generate(
-                        6,
-                        (index) => GestureDetector(
-                              onTap: () =>
-                                  Get.to(() => const WorkoutVideoDetail()),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 5),
-                                child: GestureDetector(
-                                  // onTap: () =>
-                                  //     Get.to(() => const NutritionDetailScreen()),
-                                  child: Row(
-                                    children: [
-                                      const CustomContainer(
-                                        imageString:
-                                            "assets/images/setsImage.jpg",
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        'Name of video',
-                                        style: kBodyText.copyWith(
-                                            color: kLightGrey,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      )
-                                    ],
-                                  ),
+                    StreamBuilder<dynamic>(
+                        stream:
+                            firestore.collection("workoutVideos").snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Column(
+                              children: List.generate(
+                                  snapshot.data.docs.length,
+                                  (index) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => WorkoutVideoDetail(description: snapshot.data
+                                                      .docs[index]["description"],
+                                                      title: snapshot.data
+                                                      .docs[index]["title"],
+                                                      videoURL: snapshot.data
+                                                      .docs[index]["video"],
+                                                      difficultyLevel: snapshot.data
+                                                      .docs[index]["difficultyLevel"],
+                                                      muscleGroup: snapshot.data
+                                                      .docs[index]["muscleGroup"],
+                                                      equipment: snapshot.data
+                                                      .docs[index]["equipment"],
+                                                      location: snapshot.data
+                                                      .docs[index]["location"],
+                                                      thumbnail: snapshot.data
+                                                      .docs[index]["thumbnail"],
+                                                      )),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 5),
+                                          child: GestureDetector(
+                                            // onTap: () =>
+                                            //     Get.to(() => const NutritionDetailScreen()),
+                                            child: Row(
+                                              children: [
+                                                CustomContainer(
+                                                  imageString: snapshot.data
+                                                      .docs[index]["thumbnail"],
+                                                  duration: snapshot.data
+                                                      .docs[index]["duration"],
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Text(
+                                                  snapshot.data.docs[index]
+                                                      ["title"],
+                                                  style: kBodyText.copyWith(
+                                                      color: kLightGrey,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )),
+                            );
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Center(
+                                child: SpinKitSpinningLines(
+                                  color: kRed,
                                 ),
                               ),
-                            )),
+                            );
+                          }
+                        }),
                     const SizedBox(
                       height: 15,
                     ),
@@ -157,9 +197,11 @@ class WorkoutVideos extends StatelessWidget {
 
 class CustomContainer extends StatelessWidget {
   final String imageString;
+  final String duration;
   const CustomContainer({
     Key? key,
     required this.imageString,
+    required this.duration,
   }) : super(key: key);
 
   @override
@@ -172,7 +214,7 @@ class CustomContainer extends StatelessWidget {
       width: size.width * 0.3,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(imageString), fit: BoxFit.cover),
+              image: NetworkImage(imageString), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(24)),
       child: Align(
         alignment: Alignment.bottomRight,
@@ -183,7 +225,7 @@ class CustomContainer extends StatelessWidget {
                 color: kLightGrey, borderRadius: BorderRadius.circular(4)),
             child: Center(
               child: Text(
-                "10:00",
+                duration,
                 style: kBodyText.copyWith(
                     color: kBlack, fontSize: 11, fontWeight: FontWeight.bold),
               ),

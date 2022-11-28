@@ -1,9 +1,72 @@
+import 'package:chewie/chewie.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 
-class WorkoutVideoDetail extends StatelessWidget {
-  const WorkoutVideoDetail({super.key});
+class WorkoutVideoDetail extends StatefulWidget {
+  final String title;
+  final String description;
+  final String difficultyLevel;
+  final String muscleGroup;
+  final String equipment;
+  final String location;
+  final String videoURL;
+  final String thumbnail;
+
+  const WorkoutVideoDetail({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.difficultyLevel,
+    required this.muscleGroup,
+    required this.equipment,
+    required this.location,
+    required this.videoURL,
+    required this.thumbnail,
+  });
+
+  @override
+  State<WorkoutVideoDetail> createState() => _WorkoutVideoDetailState();
+}
+
+class _WorkoutVideoDetailState extends State<WorkoutVideoDetail> {
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoPlayerController = VideoPlayerController.network(widget.videoURL)
+      ..initialize().then((_) {
+        _chewieController = ChewieController(
+          videoPlayerController: _videoPlayerController,
+          materialProgressColors: ChewieProgressColors(
+              backgroundColor: kRed.withOpacity(0.1),
+              bufferedColor: kRed.withOpacity(0.4),
+              playedColor: kRed.withOpacity(0.8),
+              handleColor: kRed),
+          autoInitialize: true,
+          errorBuilder: (context, errorMessage) {
+            return Center(
+              child: Text(
+                errorMessage,
+                style: const TextStyle(color: Colors.white),
+              ),
+            );
+          },
+        );
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,61 +109,61 @@ class WorkoutVideoDetail extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    //margin: const EdgeInsets.only(bottom: 15, right: 15),
-                    padding: const EdgeInsets.all(15),
-                    width: size.width,
-                    height: 190,
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                            image: AssetImage('assets/images/workout.jpg'),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(24)),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                          height: 20,
-                          width: 40,
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: _videoPlayerController.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: _videoPlayerController.value.aspectRatio,
+                          child: Chewie(
+                            controller: _chewieController,
+                          ),
+                        )
+                      : Container(
+                          //margin: const EdgeInsets.only(bottom: 15, right: 15),
+                          padding: const EdgeInsets.all(15),
+                          width: size.width,
+                          height: 190,
                           decoration: BoxDecoration(
-                              color: kLightGrey,
-                              borderRadius: BorderRadius.circular(4)),
+                              borderRadius: BorderRadius.circular(24)),
                           child: Center(
-                            child: Text(
-                              "10:00",
-                              style: kBodyText.copyWith(
-                                  color: kBlack,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold),
+                            child: SpinKitSpinningLines(
+                              color: kRed,
                             ),
-                          )),
-                    ),
-                  ),
+                          ),
+                        ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(right: 4),
-                  margin: const EdgeInsets.only(left: 10),
-                  height: 32,
-                  width: 32,
-                  decoration:
-                      BoxDecoration(color: kWhite, shape: BoxShape.circle),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: kBlack,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     setState(() {
+                //       _videoController.value.isPlaying
+                //           ? _videoController.pause()
+                //           : _videoController.play();
+                //     });
+                //   },
+                //   child: Container(
+                //     padding: const EdgeInsets.only(right: 4),
+                //     margin: const EdgeInsets.only(left: 10),
+                //     height: 32,
+                //     width: 32,
+                //     decoration:
+                //         BoxDecoration(color: kWhite, shape: BoxShape.circle),
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.only(left: 5),
+                //         child: Icon(
+                //           Icons.arrow_forward_ios_outlined,
+                //           color: kBlack,
+                //           size: 18,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
               child: Text(
-                'Full body goal crusher',
+                widget.title,
                 style: kBodyText.copyWith(
                     fontWeight: FontWeight.bold, fontSize: 16),
               ),
@@ -117,7 +180,7 @@ class WorkoutVideoDetail extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 20, right: 20, top: 5, bottom: 20),
               child: Text(
-                'This is a dummy description. ' * 4,
+                widget.description,
                 style: kBodyText.copyWith(fontSize: 13),
               ),
             ),
@@ -141,7 +204,7 @@ class WorkoutVideoDetail extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(
-                            'Intermediate',
+                            widget.difficultyLevel,
                             style: kButtonText,
                           )),
                         ),
@@ -167,7 +230,7 @@ class WorkoutVideoDetail extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(
-                            'Chest',
+                            widget.muscleGroup,
                             style: kButtonText,
                           )),
                         ),
@@ -197,7 +260,7 @@ class WorkoutVideoDetail extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(
-                            'Equipment',
+                            widget.equipment,
                             style: kButtonText,
                           )),
                         ),
@@ -223,7 +286,7 @@ class WorkoutVideoDetail extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(
-                            'Gym',
+                            widget.location,
                             style: kButtonText,
                           )),
                         ),
