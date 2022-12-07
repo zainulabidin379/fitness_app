@@ -7,7 +7,6 @@ import 'package:fitness_app/controllers/nutrition_meal_filter.dart';
 import 'package:fitness_app/controllers/questions_controller.dart';
 import 'package:fitness_app/controllers/set_workout_filter.dart';
 import 'package:fitness_app/controllers/workout_videos_filter.dart';
-import 'package:fitness_app/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
