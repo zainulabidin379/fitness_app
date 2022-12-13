@@ -22,6 +22,7 @@ class _Question11ScreenState extends State<Question11Screen> {
     _controller = FixedExtentScrollController();
   }
 
+  var isSelected = false.obs;
   final List<String> _items = [
     "Vegan",
     "Vegetarian",
@@ -83,7 +84,9 @@ class _Question11ScreenState extends State<Question11Screen> {
                         perspective: 0.001,
                         diameterRatio: 1.5,
                         onSelectedItemChanged: (value) {
-                          QuestionsController.instance.question11.value = _items[value];
+                          QuestionsController.instance.question11.value =
+                              _items[value];
+                          isSelected.value = true;
                         },
                         physics: const FixedExtentScrollPhysics(),
                         children: List.generate(
@@ -91,7 +94,8 @@ class _Question11ScreenState extends State<Question11Screen> {
                           (index) => Text(
                             _items[index],
                             textAlign: TextAlign.center,
-                            style: (QuestionsController.instance.question11.value ==
+                            style: (QuestionsController
+                                        .instance.question11.value ==
                                     _items[index])
                                 ? kBodyText.copyWith(
                                     fontWeight: FontWeight.bold, fontSize: 20)
@@ -108,7 +112,22 @@ class _Question11ScreenState extends State<Question11Screen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () => Get.to(() => const Question12Screen()),
+                  onTap: () {
+                    if (isSelected.value) {
+                      Get.to(() => const Question12Screen());
+                    } else {
+                      Get.rawSnackbar(
+                        messageText: Text(
+                          "Please choose your meal plan.",
+                          style: kBodyText.copyWith(color: kBlack),
+                        ),
+                        backgroundColor: kWhite,
+                        snackPosition: SnackPosition.TOP,
+                        borderRadius: 10,
+                        margin: const EdgeInsets.all(10),
+                      );
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 30, right: 30),
                     height: 50,

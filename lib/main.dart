@@ -1,5 +1,4 @@
 import 'package:fitness_app/constants/constants.dart';
-import 'package:fitness_app/constants/controllers.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/auth_controller.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';

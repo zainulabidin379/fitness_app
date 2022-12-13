@@ -21,51 +21,58 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.asset(
+        body: Column(
+          children: [
+            Flexible(
+              child: Image.asset(
                 "assets/images/img1.jpg",
                 fit: BoxFit.cover,
                 width: size.width,
-                height: size.height * 0.55,
               ),
-              const SizedBox(height: 30),
-              CustomButton(
-                  title: "Take A Tour",
-                  onTap: () => Get.to(() => const OnboardingScreen())),
-              CustomButton(
-                title: "Subscriptions",
-                onTap: () {
-                  if (authController.isLoggedIn.value) {
-                    Get.to(() => const SubscriptionScreen());
-                  } else{
-                     Get.to(() => const SignInScreen());
-                     Get.rawSnackbar(
-                          messageText: Text(
-                            "Please Login to view subscriptions!",
-                            style: kBodyText.copyWith(color: kBlack),
-                          ),
-                          backgroundColor: kWhite,
-                          snackPosition: SnackPosition.TOP,
-                          borderRadius: 10,
-                          margin: const EdgeInsets.all(10),
-                        );
-                  }
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  "------------- or --------------",
-                  style: kButtonText.copyWith(color: kGrey),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 15),
+                CustomButton(
+                    title: "Take A Tour",
+                    color: kGreyishWhite,
+                    onTap: () => Get.to(() => const OnboardingScreen())),
+                CustomButton(
+                  title: "Subscriptions",
+                  color: kGreyishWhite,
+                  onTap: () {
+                    if (authController.isLoggedIn.value) {
+                      Get.to(() => const SubscriptionScreen());
+                    } else {
+                      Get.to(() => const SignInScreen());
+                      Get.rawSnackbar(
+                        messageText: Text(
+                          "Please Login to view subscriptions!",
+                          style: kBodyText.copyWith(color: kBlack),
+                        ),
+                        backgroundColor: kWhite,
+                        snackPosition: SnackPosition.TOP,
+                        borderRadius: 10,
+                        margin: const EdgeInsets.all(10),
+                      );
+                    }
+                  },
                 ),
-              ),
-              CustomButton(
-                  title: "Login",
-                  onTap: () => Get.to(() => const SignInScreen())),
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Text(
+                    "------------- or --------------",
+                    style: kButtonText.copyWith(color: kGrey),
+                  ),
+                ),
+                CustomButton(
+                    title: "Login",
+                    onTap: () => Get.to(() => const SignInScreen())),
+                const SizedBox(height: 15),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitness_app/controllers/workout_videos_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +41,19 @@ class WorkoutVideosFilter extends StatelessWidget {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => WorkoutVideoFilterController.instance.clearFilters(),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.filter_alt_off,
+                  color: kWhite,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Obx(() {
@@ -64,25 +79,32 @@ class WorkoutVideosFilter extends StatelessWidget {
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
+                            log(WorkoutVideoFilterController
+                                .instance.difficultyLevel
+                                .toString());
                             if (WorkoutVideoFilterController
-                                    .instance.difficultyLevel.value ==
-                                "Any Level") {
+                                .instance.difficultyLevel
+                                .contains("Any Level")) {
+                              log("Containsssss");
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "";
+                                  .instance.difficultyLevel
+                                  .remove("Any Level");
                             } else {
+                              log("Yesss");
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "Any Level";
+                                  .instance.difficultyLevel
+                                  .add("Any Level");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Any Level")
+                                    .instance.difficultyLevel
+                                    .contains("Any Level"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Any Level")
+                                    .instance.difficultyLevel
+                                    .contains("Any Level"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -97,24 +119,26 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.difficultyLevel.value ==
-                                "Beginner") {
+                                .instance.difficultyLevel
+                                .contains("Beginner")) {
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "";
+                                  .instance.difficultyLevel
+                                  .remove("Beginner");
                             } else {
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "Beginner";
+                                  .instance.difficultyLevel
+                                  .add("Beginner");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Beginner")
+                                    .instance.difficultyLevel
+                                    .contains("Beginner"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Beginner")
+                                    .instance.difficultyLevel
+                                    .contains("Beginner"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -133,24 +157,26 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.difficultyLevel.value ==
-                                "Intermediate") {
+                                .instance.difficultyLevel
+                                .contains("Intermediate")) {
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "";
+                                  .instance.difficultyLevel
+                                  .remove("Intermediate");
                             } else {
-                              WorkoutVideoFilterController.instance
-                                  .difficultyLevel.value = "Intermediate";
+                              WorkoutVideoFilterController
+                                  .instance.difficultyLevel
+                                  .add("Intermediate");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Intermediate")
+                                    .instance.difficultyLevel
+                                    .contains("Intermediate"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Intermediate")
+                                    .instance.difficultyLevel
+                                    .contains("Intermediate"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -165,24 +191,26 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.difficultyLevel.value ==
-                                "Advanced") {
+                                .instance.difficultyLevel
+                                .contains("Advanced")) {
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "";
+                                  .instance.difficultyLevel
+                                  .remove("Advanced");
                             } else {
                               WorkoutVideoFilterController
-                                  .instance.difficultyLevel.value = "Advanced";
+                                  .instance.difficultyLevel
+                                  .add("Advanced");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Advanced")
+                                    .instance.difficultyLevel
+                                    .contains("Advanced"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.difficultyLevel.value ==
-                                    "Advanced")
+                                    .instance.difficultyLevel
+                                    .contains("Advanced"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -214,24 +242,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.muscleGroup.value ==
-                                "Full Body") {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "";
+                                .instance.muscleGroup
+                                .contains("Full Body")) {
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .remove("Full Body");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "Full Body";
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .add("Full Body");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Full Body")
+                                    .instance.muscleGroup
+                                    .contains("Full Body"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Full Body")
+                                    .instance.muscleGroup
+                                    .contains("Full Body"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -246,24 +274,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.muscleGroup.value ==
-                                "Lower Body") {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "";
+                                .instance.muscleGroup
+                                .contains("Lower Body")) {
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .remove("Lower Body");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "Lower Body";
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .add("Lower Body");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Lower Body")
+                                    .instance.muscleGroup
+                                    .contains("Lower Body"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Lower Body")
+                                    .instance.muscleGroup
+                                    .contains("Lower Body"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -282,24 +310,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.muscleGroup.value ==
-                                "Upper Body") {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "";
+                                .instance.muscleGroup
+                                .contains("Upper Body")) {
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .remove("Upper Body");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "Upper Body";
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .add("Upper Body");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Upper Body")
+                                    .instance.muscleGroup
+                                    .contains("Upper Body"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Upper Body")
+                                    .instance.muscleGroup
+                                    .contains("Upper Body"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -314,24 +342,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (WorkoutVideoFilterController
-                                    .instance.muscleGroup.value ==
-                                "Core") {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "";
+                                .instance.muscleGroup
+                                .contains("Core")) {
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .remove("Core");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.muscleGroup.value = "Core";
+                              WorkoutVideoFilterController.instance.muscleGroup
+                                  .add("Core");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Core")
+                                    .instance.muscleGroup
+                                    .contains("Core"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.muscleGroup.value ==
-                                    "Core")
+                                    .instance.muscleGroup
+                                    .contains("Core"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -362,25 +390,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
-                            if (WorkoutVideoFilterController
-                                    .instance.equipment.value ==
-                                "Equipment") {
-                              WorkoutVideoFilterController
-                                  .instance.equipment.value = "";
+                            if (WorkoutVideoFilterController.instance.equipment
+                                .contains("Equipment")) {
+                              WorkoutVideoFilterController.instance.equipment
+                                  .remove("Equipment");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.equipment.value = "Equipment";
+                              WorkoutVideoFilterController.instance.equipment
+                                  .add("Equipment");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.equipment.value ==
-                                    "Equipment")
+                                    .instance.equipment
+                                    .contains("Equipment"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.equipment.value ==
-                                    "Equipment")
+                                    .instance.equipment
+                                    .contains("Equipment"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -394,25 +421,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
-                            if (WorkoutVideoFilterController
-                                    .instance.equipment.value ==
-                                "No Equipment") {
-                              WorkoutVideoFilterController
-                                  .instance.equipment.value = "";
+                            if (WorkoutVideoFilterController.instance.equipment
+                                .contains("No Equipment")) {
+                              WorkoutVideoFilterController.instance.equipment
+                                  .remove("No Equipment");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.equipment.value = "No Equipment";
+                              WorkoutVideoFilterController.instance.equipment
+                                  .add("No Equipment");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.equipment.value ==
-                                    "No Equipment")
+                                    .instance.equipment
+                                    .contains("No Equipment"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.equipment.value ==
-                                    "No Equipment")
+                                    .instance.equipment
+                                    .contains("No Equipment"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -443,25 +469,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
-                            if (WorkoutVideoFilterController
-                                    .instance.location.value ==
-                                "Gym") {
-                              WorkoutVideoFilterController
-                                  .instance.location.value = "";
+                            if (WorkoutVideoFilterController.instance.location
+                                .contains("Gym")) {
+                              WorkoutVideoFilterController.instance.location
+                                  .remove("Gym");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.location.value = "Gym";
+                              WorkoutVideoFilterController.instance.location
+                                  .add("Gym");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.location.value ==
-                                    "Gym")
+                                    .instance.location
+                                    .contains("Gym"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.location.value ==
-                                    "Gym")
+                                    .instance.location
+                                    .contains("Gym"))
                                 ? kBlack
                                 : kWhite,
                             size: size,
@@ -475,25 +500,24 @@ class WorkoutVideosFilter extends StatelessWidget {
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
-                            if (WorkoutVideoFilterController
-                                    .instance.location.value ==
-                                "Home") {
-                              WorkoutVideoFilterController
-                                  .instance.location.value = "";
+                            if (WorkoutVideoFilterController.instance.location
+                                .contains("Home")) {
+                              WorkoutVideoFilterController.instance.location
+                                  .remove("Home");
                             } else {
-                              WorkoutVideoFilterController
-                                  .instance.location.value = "Home";
+                              WorkoutVideoFilterController.instance.location
+                                  .add("Home");
                             }
                           },
                           child: CustomContainer(
                             color: (WorkoutVideoFilterController
-                                        .instance.location.value ==
-                                    "Home")
+                                    .instance.location
+                                    .contains("Home"))
                                 ? kWhite
                                 : kLightGrey,
                             textColor: (WorkoutVideoFilterController
-                                        .instance.location.value ==
-                                    "Home")
+                                    .instance.location
+                                    .contains("Home"))
                                 ? kBlack
                                 : kWhite,
                             size: size,

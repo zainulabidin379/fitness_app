@@ -39,6 +39,19 @@ class MealFilterScreen extends StatelessWidget {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => NutritionMealFilterController.instance.clearFilters(),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.filter_alt_off,
+                  color: kWhite,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -159,11 +172,10 @@ class CustomContainer extends StatelessWidget {
       child: Obx(() {
         return GestureDetector(
           onTap: () {
-            if (NutritionMealFilterController.instance.mealcategory.value ==
-                filterTitle) {
-              NutritionMealFilterController.instance.mealcategory.value = "";
+            if (NutritionMealFilterController.instance.mealCategory.contains(filterTitle)) {
+              NutritionMealFilterController.instance.mealCategory.remove(filterTitle);
             } else {
-              NutritionMealFilterController.instance.mealcategory.value = filterTitle;
+              NutritionMealFilterController.instance.mealCategory.add(filterTitle);
             }
           },
           child: Padding(
@@ -175,8 +187,7 @@ class CustomContainer extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 10),
               height: 55,
               decoration: BoxDecoration(
-                  color: (NutritionMealFilterController.instance.mealcategory.value ==
-                          filterTitle)
+                  color: (NutritionMealFilterController.instance.mealCategory.contains(filterTitle))
                       ? kWhite
                       : kLightGrey,
                   borderRadius: BorderRadius.circular(12)),
@@ -184,8 +195,7 @@ class CustomContainer extends StatelessWidget {
                   child: Text(
                 filterTitle,
                 style: kButtonText.copyWith(
-                    color: (NutritionMealFilterController.instance.mealcategory.value ==
-                            filterTitle)
+                    color: (NutritionMealFilterController.instance.mealCategory.contains(filterTitle))
                         ? kBlack
                         : kWhite),
               )),

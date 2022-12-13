@@ -46,7 +46,7 @@ class _CouponCodeScreenState extends State<CouponCodeScreen> {
                 inputAction: TextInputAction.done,
                 inputType: TextInputType.emailAddress,
                 controller: couponController,
-                nHintText: 'Email*',
+                nHintText: 'Code',
                 validator: FieldValidator.required(),
               ),
 
@@ -54,7 +54,7 @@ class _CouponCodeScreenState extends State<CouponCodeScreen> {
                 height: 30,
               ),
               CustomButton(
-                title: "Send",
+                title: "Redeem",
                 onTap: () {},
               ),
 

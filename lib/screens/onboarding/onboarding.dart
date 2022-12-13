@@ -24,31 +24,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           children: const [
             OnboardingPageWidget(
                 image: "img2",
-                title: "PERSONAL APP FOR\nYOUR BODY AND MIND",
+                title: "PERSONAL APP FOR YOUR BODY AND MIND",
                 description:
                     "Personal and instant access to all our exercises, workouts, and nutritional tips.",
                 pageNo: 1),
             OnboardingPageWidget(
                 image: "img3",
-                title: "VARIETY OF EXERCISES,\nMOVEMENTS AND WORKOUTS",
+                title: "VARIETY OF EXERCISES, MOVEMENTS AND WORKOUTS",
                 description:
                     "Access to all videos from Calisthenics, Gym Machinery, Bodyweight, Weights, Yoga, Barbell, Stretches, Resistant Bands and much more.",
                 pageNo: 2),
             OnboardingPageWidget(
                 image: "img4",
-                title: "LIVE TRAINING WITH\nDINA",
+                title: "LIVE TRAINING WITH DINA",
                 description:
                     "Option to join in live with Dina wherever you are via the app. All moves and exercise are pre filmed inside the app.",
                 pageNo: 3),
             OnboardingPageWidget(
                 image: "img5",
-                title: "PERSONALIZED\nNUTRITION PLANS",
+                title: "PERSONALISED NUTRITION PLANS",
                 description:
-                    "Personal and instant access to all nutritional liquids, foods, vitamins, and minerals. Personalized macros and shopping list.",
+                    "Personal and instant access to all nutritional liquids, foods, vitamins, and minerals. Personalised macros and shopping list.",
                 pageNo: 4),
             OnboardingPageWidget(
                 image: "img6",
-                title: "SUITABLE FOR\nCHILDREN",
+                title: "SUITABLE FOR CHILDREN",
                 description:
                     "All unweighted movements can be copied and performed by children in the comfort of their own home.",
                 pageNo: 5)

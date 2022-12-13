@@ -22,6 +22,7 @@ class _Question10ScreenState extends State<Question10Screen> {
   }
 
   final List<String> _items = [
+    "None",
     "I am expecting a baby",
     "I have recently had a baby",
     "I am breast feeding",
@@ -81,7 +82,8 @@ class _Question10ScreenState extends State<Question10Screen> {
                         perspective: 0.001,
                         diameterRatio: 1.5,
                         onSelectedItemChanged: (value) {
-                          QuestionsController.instance.question10.value = _items[value];
+                          QuestionsController.instance.question10.value =
+                              _items[value];
                         },
                         physics: const FixedExtentScrollPhysics(),
                         children: List.generate(
@@ -89,13 +91,13 @@ class _Question10ScreenState extends State<Question10Screen> {
                           (index) => Text(
                             _items[index],
                             textAlign: TextAlign.center,
-                            style: (QuestionsController.instance.question10.value ==
+                            style: (QuestionsController
+                                        .instance.question10.value ==
                                     _items[index])
                                 ? kBodyText.copyWith(
                                     fontWeight: FontWeight.bold, fontSize: 20)
                                 : kBodyText.copyWith(
-                                    color: kLightGrey,
-                                    fontSize: 20),
+                                    color: kLightGrey, fontSize: 20),
                           ),
                         ),
                       ),

@@ -130,11 +130,12 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: 15, right: 15),
       padding: const EdgeInsets.all(15),
-      width: 158,
-      height: 114,
+      width: size.width * 0.35,
+      height: size.width * 0.3,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(imageString), fit: BoxFit.cover),

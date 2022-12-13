@@ -46,7 +46,7 @@ class OnboardingPageWidget extends StatelessWidget {
                             title,
                             textAlign: TextAlign.center,
                             style: kButtonText.copyWith(
-                                fontSize: 22, color: kWhite),
+                                fontSize: 18, color: kWhite),
                           ),
                         ),
                         Padding(
@@ -55,7 +55,7 @@ class OnboardingPageWidget extends StatelessWidget {
                           child: Text(
                             description,
                             textAlign: TextAlign.center,
-                            style: kBodyText.copyWith(fontSize: 16),
+                            style: kBodyText.copyWith(fontSize: 15),
                           ),
                         ),
                       ],
@@ -106,9 +106,11 @@ class OnboardingPageWidget extends StatelessWidget {
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
-                                        bottom: size.height * 0.01, right: 20),
+                                        bottom: size.height * 0.015,
+                                        right: 20,
+                                        top: 5),
                                     height: 50,
-                                    width: 192,
+                                    width: 190,
                                     decoration: BoxDecoration(
                                         color: kWhite,
                                         borderRadius:

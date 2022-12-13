@@ -12,8 +12,8 @@ class QuestionsController extends GetxController {
   var question7 = "".obs;
   var question8 = 6.0.obs;
   var question9 = 3.0.obs;
-  var question10 = "".obs;
-  var question11 = "".obs;
+  var question10 = "None".obs;
+  var question11 = "Vegan".obs;
   var question12 = 3.0.obs;
   var question12Opt = "".obs;
 }

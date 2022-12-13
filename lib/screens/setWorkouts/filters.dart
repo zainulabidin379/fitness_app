@@ -39,156 +39,172 @@ class SetWorkoutsFilter extends StatelessWidget {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => SetWorkoutFilterController.instance.clearFilters(),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.filter_alt_off,
+                  color: kWhite,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Text(
-                    "Workout Type",
-                    style: kBodyText.copyWith(
-                        fontWeight: FontWeight.bold, fontSize: 22),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Barbell',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Bodyweight',
-                      ),
-                    ],
+                  Center(
+                    child: Text(
+                      "Workout Type",
+                      style: kBodyText.copyWith(
+                          fontWeight: FontWeight.bold, fontSize: 22),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Bootcamp',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Calisthenics',
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Foam Roller',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Gym Machinery',
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Barbell',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Bodyweight',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Live',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Resistence Bands',
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Bootcamp',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Calisthenics',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Stretches',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'Weights',
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Foam Roller',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Gym Machinery',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomContainer(
-                        size: size,
-                        filterTitle: 'YOGA',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const Flexible(child: SizedBox())
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Live',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Resistance Bands',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: Center(
-                child: GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    height: 55,
-                    width: size.width * 1,
-                    decoration: BoxDecoration(
-                        color: kWhite, borderRadius: BorderRadius.circular(5)),
-                    child: Center(
-                        child: Text(
-                      'Apply filters',
-                      style: kButtonText,
-                    )),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Stretches',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Weights',
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        CustomContainer(
+                          size: size,
+                          filterTitle: 'Yoga',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Flexible(child: SizedBox())
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      height: 55,
+                      width: size.width * 1,
+                      decoration: BoxDecoration(
+                          color: kWhite,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                          child: Text(
+                        'Apply filters',
+                        style: kButtonText,
+                      )),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -211,20 +227,20 @@ class CustomContainer extends StatelessWidget {
       child: Obx(() {
         return GestureDetector(
           onTap: () {
-            if (SetWorkoutFilterController.instance.workoutType.value ==
-                filterTitle) {
-              SetWorkoutFilterController.instance.workoutType.value = "";
+            if (SetWorkoutFilterController.instance.workoutType
+                .contains(filterTitle)) {
+              SetWorkoutFilterController.instance.workoutType
+                  .remove(filterTitle);
             } else {
-              SetWorkoutFilterController.instance.workoutType.value =
-                  filterTitle;
+              SetWorkoutFilterController.instance.workoutType.add(filterTitle);
             }
           },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             height: 55,
             decoration: BoxDecoration(
-                color: (SetWorkoutFilterController.instance.workoutType.value ==
-                        filterTitle)
+                color: (SetWorkoutFilterController.instance.workoutType
+                        .contains(filterTitle))
                     ? kWhite
                     : kLightGrey,
                 borderRadius: BorderRadius.circular(12)),
@@ -232,11 +248,10 @@ class CustomContainer extends StatelessWidget {
                 child: Text(
               filterTitle,
               style: kButtonText.copyWith(
-                  color:
-                      (SetWorkoutFilterController.instance.workoutType.value ==
-                              filterTitle)
-                          ? kBlack
-                          : kWhite),
+                  color: (SetWorkoutFilterController.instance.workoutType
+                          .contains(filterTitle))
+                      ? kBlack
+                      : kWhite),
             )),
           ),
         );

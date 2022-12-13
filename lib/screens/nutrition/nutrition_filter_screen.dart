@@ -39,6 +39,19 @@ class NutritionFilterScreen extends StatelessWidget {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => NutritionMealFilterController.instance.clearFilters(),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.filter_alt_off,
+                  color: kWhite,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -174,14 +187,10 @@ class CustomContainer extends StatelessWidget {
       child: Obx(() {
         return GestureDetector(
           onTap: () {
-            if (NutritionMealFilterController
-                    .instance.nutritioncategory.value ==
-                filterTitle) {
-              NutritionMealFilterController.instance.nutritioncategory.value =
-                  "";
+            if (NutritionMealFilterController.instance.nutritionCategory.contains(filterTitle)) {
+              NutritionMealFilterController.instance.nutritionCategory.remove(filterTitle);
             } else {
-              NutritionMealFilterController.instance.nutritioncategory.value =
-                  filterTitle;
+              NutritionMealFilterController.instance.nutritionCategory.add(filterTitle);
             }
           },
           child: Padding(
@@ -193,9 +202,7 @@ class CustomContainer extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 10),
               height: 55,
               decoration: BoxDecoration(
-                  color: (NutritionMealFilterController
-                              .instance.nutritioncategory.value ==
-                          filterTitle)
+                  color: (NutritionMealFilterController.instance.nutritionCategory.contains(filterTitle))
                       ? kWhite
                       : kLightGrey,
                   borderRadius: BorderRadius.circular(12)),
@@ -203,9 +210,7 @@ class CustomContainer extends StatelessWidget {
                   child: Text(
                 filterTitle,
                 style: kButtonText.copyWith(
-                    color: (NutritionMealFilterController
-                                .instance.nutritioncategory.value ==
-                            filterTitle)
+                    color: (NutritionMealFilterController.instance.nutritionCategory.contains(filterTitle))
                         ? kBlack
                         : kWhite),
               )),

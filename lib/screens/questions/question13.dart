@@ -1,5 +1,6 @@
 import 'package:fitness_app/screens/questions/question14.dart';
 import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -97,7 +98,7 @@ class _Question13ScreenState extends State<Question13Screen> {
                   bottom: 30,
                 ),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => Get.offAll(() => WrapperScreen()),
                     child: Text(
                       'Cancel',
                       style: kBodyText.copyWith(

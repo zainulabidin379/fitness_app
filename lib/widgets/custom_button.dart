@@ -7,10 +7,13 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.title,
     required this.onTap,
+    this.color,
+
   }) : super(key: key);
 
   final String title;
   final Function() onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +23,10 @@ class CustomButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
-          height: 55,
+          height: 50,
           width: size.width * 0.6,
           decoration: BoxDecoration(
-              color: kWhite, borderRadius: BorderRadius.circular(5)),
+              color: color?? kWhite, borderRadius: BorderRadius.circular(5)),
           child: Center(
               child: Text(
             title,
