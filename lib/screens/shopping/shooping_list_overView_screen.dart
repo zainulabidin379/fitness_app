@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/shopping/full_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,28 +7,14 @@ import 'shopping_list_detail_screen.dart';
 
 class ShopingListOverViewScreen extends StatelessWidget {
   ShopingListOverViewScreen({super.key});
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel(
-      'View Full List',
-    ),
-    SimpleModel(
-      'Carbs',
-    ),
-    SimpleModel(
-      'Fats',
-    ),
-    SimpleModel(
-      'Proteins',
-    ),
-    SimpleModel(
-      'Fruits',
-    ),
-    SimpleModel(
-      'Vegetables',
-    ),
-    SimpleModel(
-      'Liquids',
-    ),
+  final List _items = [
+    'Full List',
+    'Carbs',
+    'Fats',
+    'Proteins',
+    'Fruits',
+    'Vegetables',
+    'Liquids',
   ];
 
   @override
@@ -64,55 +51,61 @@ class ShopingListOverViewScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 25),
-              child: SizedBox(
-                height: 700,
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: _items
-                      .map(
-                        (SimpleModel item) => InkWell(
-                          onTap: () => Get.to(() => ShoppingListDetailScreen(
-                                nSelectedListTitle: item.title,
-                              )),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            height: 70,
-                            width: size.width,
-                            decoration: BoxDecoration(
-                                color: kWhite,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 26,
-                                top: 23,
-                              ),
-                              child: Text(
-                                item.title,
-                                style: kButtonText.copyWith(fontSize: 20),
-                              ),
-                            ),
-                          ),
+        child: Column(children: [
+          const SizedBox(
+            height: 20,
+          ),
+          ...List.generate(
+            _items.length,
+            (index) => Padding(
+              padding: const EdgeInsets.only(
+                left: 20.0,
+                right: 20,
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  if (index == 0) {
+                    Get.to(() => const FullShoppingListScreen());
+                  } else {
+                    Get.to(() => ShoppingListDetailScreen(
+                          nSelectedListTitle: _items[index],
+                        ));
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  height: 70,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: kWhite, borderRadius: BorderRadius.circular(15)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        index == 0 ? "View ${_items[index]}" : _items[index],
+                        style: kButtonText.copyWith(fontSize: 20),
+                      ),
+                      Visibility(
+                        visible: index == 0,
+                        child: Icon(
+                          Icons.segment,
+                          color: kBlack,
+                          size: 30,
                         ),
                       )
-                      .toList(),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ]),
       ),
     ));
   }
-}
-
-class SimpleModel {
-  String title;
-
-  SimpleModel(
-    this.title,
-  );
 }

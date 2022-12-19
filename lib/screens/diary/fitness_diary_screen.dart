@@ -1,18 +1,94 @@
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../constants/constants.dart';
-import '../shopping/shopping_list_detail_screen.dart';
 
-class FitnessDiaryScreen extends StatelessWidget {
-  FitnessDiaryScreen({super.key});
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel('Breakfast', 'Oats, Banana, berries,almond milk'),
-    SimpleModel('Lunch', 'mixed salad, sweet potatoes,plant-based meatballs'),
-    SimpleModel('Dinner', 'Pasta, mixed beans,aspatagus'),
-    SimpleModel('In-between meals', 'nothing'),
-    SimpleModel('Liquids', '4 litres water,2 litres herbal'),
-  ];
+class FitnessDiaryScreen extends StatefulWidget {
+  const FitnessDiaryScreen({super.key});
+
+  @override
+  State<FitnessDiaryScreen> createState() => _FitnessDiaryScreenState();
+}
+
+class DatesModel {
+  final GlobalKey key;
+  final DateTime date;
+
+  const DatesModel(this.key, this.date);
+}
+
+class _FitnessDiaryScreenState extends State<FitnessDiaryScreen> {
+  TextEditingController fitnessController = TextEditingController();
+  List<DatesModel> dates = List.generate(
+      DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day,
+      (i) => DatesModel(
+          GlobalKey(),
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+          ).add(Duration(days: i))));
+
+  var selectedDay =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)
+          .obs;
+  var isEditing = false.obs;
+
+  void scrollToSelectedDay() {
+    final targetContext = dates[selectedDay.value.day - 1].key.currentContext;
+    if (targetContext != null) {
+      Scrollable.ensureVisible(
+        targetContext,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => scrollToSelectedDay());
+  }
+
+  String weekDay(int day) {
+    switch (day) {
+      case 1:
+        {
+          return "Monday";
+        }
+      case 2:
+        {
+          return "Tuesday";
+        }
+      case 3:
+        {
+          return "Wednesday";
+        }
+      case 4:
+        {
+          return "Thursday";
+        }
+      case 5:
+        {
+          return "Friday";
+        }
+      case 6:
+        {
+          return "Saturday";
+        }
+      case 7:
+        {
+          return "Sunday";
+        }
+      default:
+        {
+          return "";
+        }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +98,9 @@ class FitnessDiaryScreen extends StatelessWidget {
       backgroundColor: kBlack,
       appBar: AppBar(
         backgroundColor: kBlack,
-        title: SizedBox(
-          height: 55,
-          child: Image.asset("assets/images/logo.png"),
+        title: Text(
+          "Fitness Diary",
+          style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: Center(
@@ -47,203 +123,196 @@ class FitnessDiaryScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: Obx(() {
+        return isEditing.value
+            ? ElevatedButton(
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  Get.dialog(
+                    SpinKitSpinningLines(color: kRed),
+                    barrierDismissible: false,
+                  );
+                  firestore
+                      .collection("fitnessDiary")
+                      .doc(authController.getCurrentUser())
+                      .collection("dates")
+                      .doc(selectedDay.value.toString())
+                      .set({
+                    "id": selectedDay.value,
+                    "activity": fitnessController.text,
+                    "timestamp": DateTime.now(),
+                  }).then((value) {
+                    Get.back();
+                    isEditing.value = false;
+                    Get.rawSnackbar(
+                      messageText: Text(
+                        "Your fitness diary is updated successfully",
+                        style: kBodyText.copyWith(color: kBlack),
+                      ),
+                      backgroundColor: kWhite,
+                      snackPosition: SnackPosition.TOP,
+                      borderRadius: 10,
+                      margin: const EdgeInsets.all(10),
+                    );
+                  });
+                },
+                style: ButtonStyle(
+                    fixedSize:
+                        MaterialStateProperty.all<Size?>(const Size(150, 55)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    backgroundColor: MaterialStateProperty.all<Color>(kRed),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.done,
+                      color: kWhite,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text("Update".toUpperCase(), style: kBodyText),
+                  ],
+                ))
+            : FloatingActionButton(
+                onPressed: () {
+                  isEditing.value = true;
+                },
+                backgroundColor: kRed,
+                isExtended: true,
+                child: Icon(isEditing.value ? Icons.done : Icons.edit),
+              );
+      }),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                "Fitness Diary\n2022",
-                style: kBodyText.copyWith(
-                  fontSize: 32,
-                  // fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-              child: SizedBox(
-                // color: Colors.red,
-                height: size.height * 0.1,
-                width: size.width * 1,
-                child: ListView.builder(
-                  //itemExtent: 100,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Container(
-                      height: size.height * 0.1,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                          color: kGrey, borderRadius: BorderRadius.circular(8)),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Monday",
-                            style: kBodyText.copyWith(
-                              fontSize: 15,
-                              // fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          Text(
-                            "7",
-                            style: kBodyText.copyWith(
-                              fontSize: 32,
-                              // fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 15,
                   ),
-                ),
+                  ...List.generate(
+                      dates.length,
+                      (index) => dayCard(
+                          size,
+                          dates[index].key,
+                          weekDay(dates[index].date.weekday),
+                          dates[index].date.day.toString(),
+                          dates[index].date)),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: size.height * 0.6,
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, bottom: 20, top: 10),
-                      child: Text(
-                        "Today",
-                        style: kBodyText.copyWith(
-                          fontSize: 24,
-                          // fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 20, top: 10, bottom: 10),
-                      child: Container(
-                        // margin: const EdgeInsets.symmetric(vertical: 5),
-                        height: size.height * 0.35,
-                        width: size.width,
-                        decoration: BoxDecoration(
-                            color: kWhite,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 26,
-                            top: 23,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '1. 5 km Run\n2. Own WOD at Everlast:\n.   6 rounds for time of 40m.\n.    KB walking lunges (12kg).\n.    40m handstand walking.',
-                                //textAlign: TextAlign.start,
-                                style: kButtonText.copyWith(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: kLightGrey,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              height: 600,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: _items
-                    .map(
-                      (SimpleModel item) => InkWell(
-                        onTap: () => Get.to(
-                          () => ShoppingListDetailScreen(
-                            nSelectedListTitle: item.title,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            height: 85,
-                            width: size.width,
-                            decoration: BoxDecoration(
-                                color: kBlack,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.end,
-                              // crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: size.width * 0.05,
-                                ),
-                                SizedBox(
-                                  width: 100,
-                                  child: Text(
-                                    item.title,
-                                    style: kBodyText.copyWith(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: size.width * 0.05,
-                                ),
-                                Flexible(
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 50),
-                                      child: Text(
-                                        //textAlign: TextAlign.right,
-                                        item.itemNames,
-                                        style: kBodyText.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
+            Obx(() {
+              return StreamBuilder<dynamic>(
+                  stream: firestore
+                      .collection("fitnessDiary")
+                      .doc(authController.getCurrentUser())
+                      .collection("dates")
+                      .doc(selectedDay.value.toString())
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    return snapshot.hasData
+                        ? activityWidget(
+                            size,
+                            snapshot.data.exists
+                                ? snapshot.data['activity']
+                                : null)
+                        : Center(child: SpinKitSpinningLines(color: kRed));
+                  });
+            }),
           ],
         ),
       ),
     ));
   }
-}
 
-class SimpleModel {
-  String title;
-  String itemNames;
+  Widget activityWidget(Size size, String? value) {
+    if (!isEditing.value) {
+      fitnessController.text = value ?? '';
+    }
+    return Padding(
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20, top: 10, bottom: 10),
+      child: Container(
+        width: size.width,
+        decoration: BoxDecoration(
+            color: kWhite, borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 26,
+            top: 23,
+          ),
+          child: TextField(
+            onTap: () => scrollToSelectedDay(),
+            controller: fitnessController,
+            enabled: isEditing.value,
+            cursorColor: kBlack,
+            maxLines: 15,
+            style: kBodyText.copyWith(color: kBlack, fontSize: 18),
+            textInputAction: TextInputAction.newline,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                filled: false,
+                hintText: "Add Your Activity",
+                hintStyle: kBodyText.copyWith(
+                    color: kBlack.withOpacity(0.5), fontSize: 16),
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none),
+          ),
+        ),
+      ),
+    );
+  }
 
-  SimpleModel(
-    this.title,
-    this.itemNames,
-  );
+  Widget dayCard(
+      Size size, GlobalKey key, String day, String date, DateTime dateTime) {
+    return Obx(() {
+      return GestureDetector(
+        onTap: () {
+          selectedDay.value = dateTime;
+        },
+        child: Container(
+          key: key,
+          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+          height: size.width * 0.22,
+          width: size.width * 0.22,
+          decoration: BoxDecoration(
+              border: Border.all(color: kWhite, width: 3),
+              color: selectedDay.value == dateTime ? kDark : kWhite,
+              borderRadius: BorderRadius.circular(15)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                day,
+                textAlign: TextAlign.center,
+                style: kBodyText.copyWith(
+                    fontSize: size.width * 0.03,
+                    fontWeight: FontWeight.bold,
+                    color: selectedDay.value == dateTime ? kWhite : kBlack),
+              ),
+              Text(
+                date,
+                style: kBodyText.copyWith(
+                    fontSize: 32,
+                    color: selectedDay.value == dateTime ? kWhite : kBlack),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
 }

@@ -13,25 +13,13 @@ class Question6Screen extends StatefulWidget {
 }
 
 class _Question6ScreenState extends State<Question6Screen> {
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel(
-      'Fat Loss',
-    ),
-    SimpleModel(
-      'Fitter',
-    ),
-    SimpleModel(
-      'Maintain',
-    ),
-    SimpleModel(
-      'New Skills',
-    ),
-    SimpleModel(
-      'Nutrition Help',
-    ),
-    SimpleModel(
-      'Stronger',
-    ),
+  final List<String> _items = [
+    'Fat Loss',
+    'Fitter',
+    'Maintain',
+    'New Skills',
+    'Nutrition Help',
+    'Stronger',
   ];
   @override
   Widget build(BuildContext context) {
@@ -81,13 +69,19 @@ class _Question6ScreenState extends State<Question6Screen> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: ListTile(
                             onTap: () {
-                              QuestionsController.instance.question6.value =
-                                  _items[index].title;
+                              if (QuestionsController.instance.question6
+                                  .contains(_items[index])) {
+                                QuestionsController.instance.question6
+                                    .remove(_items[index]);
+                              } else {
+                                QuestionsController.instance.question6
+                                    .add(_items[index]);
+                              }
                             },
                             visualDensity: const VisualDensity(
                                 horizontal: 0, vertical: -2),
-                            leading: (QuestionsController.instance.question6.value ==
-                                    _items[index].title)
+                            leading: (QuestionsController.instance.question6
+                                    .contains(_items[index]))
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: kRed,
@@ -104,7 +98,7 @@ class _Question6ScreenState extends State<Question6Screen> {
                                     constraints: const BoxConstraints(
                                         maxHeight: 18, maxWidth: 18)),
                             title: Text(
-                              _items[index].title,
+                              _items[index],
                               style: kBodyText.copyWith(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -118,7 +112,7 @@ class _Question6ScreenState extends State<Question6Screen> {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
-                    if (QuestionsController.instance.question6.value != "") {
+                    if (QuestionsController.instance.question6.isNotEmpty) {
                       Get.to(() => const Question7Screen());
                     } else {
                       Get.rawSnackbar(
@@ -165,12 +159,4 @@ class _Question6ScreenState extends State<Question6Screen> {
       ),
     );
   }
-}
-
-class SimpleModel {
-  String title;
-
-  SimpleModel(
-    this.title,
-  );
 }

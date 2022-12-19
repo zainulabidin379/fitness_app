@@ -7,8 +7,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/nav_drawer.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -24,37 +22,15 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
-        drawer: const NavDrawer(),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Builder(builder: (context) {
-                    return GestureDetector(
-                      onTap: () => Scaffold.of(context).openDrawer(),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Image.asset(
-                          "assets/images/menu.png",
-                          height: 40,
-                          color: kWhite,
-                        ),
-                      ),
-                    );
-                  }),
-                  SizedBox(
-                    height: 55,
-                    child: Image.asset("assets/images/logo.png"),
-                  ),
-                  const SizedBox(
-                    width: 55,
-                  ),
-                ],
+              SizedBox(
+                height: 55,
+                child: Image.asset("assets/images/logo.png"),
               ),
               Align(
                 alignment: Alignment.topLeft,

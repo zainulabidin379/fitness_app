@@ -1,12 +1,23 @@
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../constants/constants.dart';
 
-class ShoppingListDetailScreen extends StatelessWidget {
+class ShoppingListDetailScreen extends StatefulWidget {
   final String nSelectedListTitle;
   const ShoppingListDetailScreen({super.key, required this.nSelectedListTitle});
+
+  @override
+  State<ShoppingListDetailScreen> createState() =>
+      _ShoppingListDetailScreenState();
+}
+
+class _ShoppingListDetailScreenState extends State<ShoppingListDetailScreen> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +28,7 @@ class ShoppingListDetailScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kBlack,
         title: Text(
-          nSelectedListTitle,
+          widget.nSelectedListTitle,
           style: kBodyText.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -41,45 +52,119 @@ class ShoppingListDetailScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 25),
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                height: 500,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: kWhite, borderRadius: BorderRadius.circular(15)),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 26,
-                    top: 23,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tortilla x 1\nBread x 2\nSalmon x 1\nChicken x 500g\nOranges x 10\nBroccoli x 50g\nCarrots x 50g\nMineral Water x 12bottles',
-                        //textAlign: TextAlign.start,
-                        style: kButtonText.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.normal),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            nSelectedListTitle == 'View Full List'
-                ? CustomButton(
-                    title: 'Clear List',
-                    onTap: () {},
-                  )
-                : CustomButton(
+            Expanded(
+                child: Container(
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              width: size.width,
+              decoration: BoxDecoration(
+                  color: kWhite, borderRadius: BorderRadius.circular(15)),
+              child: StreamBuilder<dynamic>(
+                  stream: firestore
+                      .collection("shoppingList")
+                      .doc(authController.getCurrentUser())
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data.exists) {
+                        controller.text =
+                            snapshot.data[widget.nSelectedListTitle].join('\n');
+                      }
+                      return TextField(
+                        controller: controller,
+                        cursorColor: kBlack,
+                        style: kBodyText.copyWith(color: kBlack, fontSize: 16),
+                        textInputAction: TextInputAction.newline,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            filled: false,
+                            hintText: "Add items",
+                            hintStyle: kBodyText.copyWith(
+                                color: kBlack.withOpacity(0.5), fontSize: 16),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none),
+                      );
+                    } else {
+                      return Center(child: SpinKitSpinningLines(color: kRed));
+                    }
+                  }),
+            )),
+            CustomButton(
                     title: 'Submit',
-                    onTap: () {},
+                    onTap: () async {
+                      FocusScope.of(context).unfocus();
+                      Get.dialog(
+                        SpinKitSpinningLines(color: kRed),
+                        barrierDismissible: false,
+                      );
+                      firestore
+                          .collection("shoppingList")
+                          .doc(authController.getCurrentUser())
+                          .get()
+                          .then((value) {
+                        if (value.exists) {
+                          firestore
+                              .collection("shoppingList")
+                              .doc(authController.getCurrentUser())
+                              .update({
+                            widget.nSelectedListTitle:
+                                controller.text.split('\n'),
+                          }).then((value) {
+                            Get.back();
+                            Get.rawSnackbar(
+                              messageText: Text(
+                                "Your shopping list is updated successfully",
+                                style: kBodyText.copyWith(color: kBlack),
+                              ),
+                              backgroundColor: kWhite,
+                              snackPosition: SnackPosition.TOP,
+                              borderRadius: 10,
+                              margin: const EdgeInsets.all(10),
+                            );
+                          });
+                        } else {
+                          firestore
+                              .collection("shoppingList")
+                              .doc(authController.getCurrentUser())
+                              .set({
+                            "id": authController.getCurrentUser(),
+                            'Carbs': [],
+                            'Fats': [],
+                            'Proteins': [],
+                            'Fruits': [],
+                            'Vegetables': [],
+                            'Liquids': [],
+                            "timestamp": DateTime.now(),
+                          }).then((value) {
+                            firestore
+                                .collection("shoppingList")
+                                .doc(authController.getCurrentUser())
+                                .update({
+                              widget.nSelectedListTitle:
+                                  controller.text.split('\n'),
+                            }).then((value) {
+                              Get.back();
+                              Get.rawSnackbar(
+                                messageText: Text(
+                                  "Your shopping list is updated successfully",
+                                  style: kBodyText.copyWith(color: kBlack),
+                                ),
+                                backgroundColor: kWhite,
+                                snackPosition: SnackPosition.TOP,
+                                borderRadius: 10,
+                                margin: const EdgeInsets.all(10),
+                              );
+                            });
+                          });
+                        }
+                      });
+                    },
                   ),
           ],
         ),

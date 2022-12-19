@@ -1,4 +1,5 @@
-import 'package:fitness_app/screens/bottomNav/bottom_nav.dart';
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
 import 'package:fitness_app/screens/coupon/coupon_code_screen.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/screens/payment/payment.dart';
@@ -218,7 +219,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                        "By clicking 'next step' I confirm I have read and accept and agree to the terms and conditions and privacy policy.",
+                        "By clicking 'Next' I confirm I have read and accept and agree to the terms and conditions and privacy policy.",
                         textAlign: TextAlign.start,
                         style: kBodyText.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 15),
@@ -235,16 +236,30 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                        //  Get.to(() => const BottomNav());
+                          //  Get.to(() => const BottomNav());
                           if (selectedSubscription.value != '') {
-                            Get.to(() => PaymentScreen(
-                                  subscription: selectedSubscription.value,
-                                  amount: subscriptionAmount.value,
-                                ));
+                            if (authController.isLoggedIn.value) {
+                              Get.to(() => PaymentScreen(
+                                    subscription: selectedSubscription.value,
+                                    amount: subscriptionAmount.value,
+                                  ));
+                            } else {
+                              Get.to(() => const SignInScreen());
+                              Get.rawSnackbar(
+                                messageText: Text(
+                                  "Please Login to continue!",
+                                  style: kBodyText.copyWith(color: kBlack),
+                                ),
+                                backgroundColor: kWhite,
+                                snackPosition: SnackPosition.TOP,
+                                borderRadius: 10,
+                                margin: const EdgeInsets.all(10),
+                              );
+                            }
                           } else {
                             Get.rawSnackbar(
                               messageText: Text(
-                                "Plese choose a subscription to continue",
+                                "Please choose a subscription to continue",
                                 style: kBodyText.copyWith(color: kBlack),
                               ),
                               backgroundColor: kWhite,

@@ -10,7 +10,6 @@ Color kGreen = const Color(0xFFD0FD3E);
 Color kRed = const Color(0xFFFF2424);
 Color kTrans = Colors.transparent;
 Color kGrey = const Color(0xFFD2D6DB);
-Color kGreyishWhite = const Color(0xFFD2D6DB);
 Color kLightGrey = kWhite.withOpacity(0.5);
 Color kDark = const Color(0xFF2C2C2E);
 Color kBlue = const Color(0xFF1294F2);

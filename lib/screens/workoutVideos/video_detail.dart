@@ -1,9 +1,7 @@
-import 'package:chewie/chewie.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WorkoutVideoDetail extends StatefulWidget {
   final String title;
@@ -32,39 +30,26 @@ class WorkoutVideoDetail extends StatefulWidget {
 }
 
 class _WorkoutVideoDetailState extends State<WorkoutVideoDetail> {
-  late VideoPlayerController _videoPlayerController;
-  late ChewieController _chewieController;
+  final videoUrl = "https://www.youtube.com/watch?v=X_9VoqR5ojM";
+
+  late YoutubePlayerController _playerController;
 
   @override
   void initState() {
+    final videoId = YoutubePlayer.convertUrlToId(videoUrl);
+
+    _playerController = YoutubePlayerController(
+        initialVideoId: videoId!,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+        ));
+
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget.videoURL)
-      ..initialize().then((_) {
-        _chewieController = ChewieController(
-          videoPlayerController: _videoPlayerController,
-          materialProgressColors: ChewieProgressColors(
-              backgroundColor: kRed.withOpacity(0.1),
-              bufferedColor: kRed.withOpacity(0.4),
-              playedColor: kRed.withOpacity(0.8),
-              handleColor: kRed),
-          autoInitialize: true,
-          errorBuilder: (context, errorMessage) {
-            return Center(
-              child: Text(
-                errorMessage,
-                style: const TextStyle(color: Colors.white),
-              ),
-            );
-          },
-        );
-        setState(() {});
-      });
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController.dispose();
+    _playerController.dispose();
     super.dispose();
   }
 
@@ -110,53 +95,34 @@ class _WorkoutVideoDetailState extends State<WorkoutVideoDetail> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: _videoPlayerController.value.isInitialized
-                      ? AspectRatio(
-                          aspectRatio: _videoPlayerController.value.aspectRatio,
-                          child: Chewie(
-                            controller: _chewieController,
-                          ),
-                        )
-                      : Container(
-                          //margin: const EdgeInsets.only(bottom: 15, right: 15),
-                          padding: const EdgeInsets.all(15),
-                          width: size.width,
-                          height: 190,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24)),
-                          child: Center(
-                            child: SpinKitSpinningLines(
-                              color: kRed,
-                            ),
-                          ),
-                        ),
+                  child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: YoutubePlayer(
+                        controller: _playerController,
+                        showVideoProgressIndicator: true,
+                      )),
                 ),
-                // InkWell(
-                //   onTap: () {
-                //     setState(() {
-                //       _videoController.value.isPlaying
-                //           ? _videoController.pause()
-                //           : _videoController.play();
-                //     });
-                //   },
-                //   child: Container(
-                //     padding: const EdgeInsets.only(right: 4),
-                //     margin: const EdgeInsets.only(left: 10),
-                //     height: 32,
-                //     width: 32,
-                //     decoration:
-                //         BoxDecoration(color: kWhite, shape: BoxShape.circle),
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.only(left: 5),
-                //         child: Icon(
-                //           Icons.arrow_forward_ios_outlined,
-                //           color: kBlack,
-                //           size: 18,
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20.0),
+                //   child:
+                //   _videoPlayerController.value.isInitialized
+                //       ? AspectRatio(
+                //           aspectRatio: _videoPlayerController.value.aspectRatio,
+                //           child:
+                //         )
+                //       : Container(
+                //           //margin: const EdgeInsets.only(bottom: 15, right: 15),
+                //           padding: const EdgeInsets.all(15),
+                //           width: size.width,
+                //           height: 190,
+                //           decoration: BoxDecoration(
+                //               borderRadius: BorderRadius.circular(24)),
+                //           child: Center(
+                //             child: SpinKitSpinningLines(
+                //               color: kRed,
+                //             ),
+                //           ),
                 //         ),
-                //       ),
-                //     ),
-                //   ),
                 // ),
               ],
             ),

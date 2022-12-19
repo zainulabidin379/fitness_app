@@ -8,8 +8,8 @@ class QuestionsController extends GetxController {
   var question3 = 40.0.obs;
   var question4 = 175.0.obs;
   var question5 = "".obs;
-  var question6 = "".obs;
-  var question7 = "".obs;
+  var question6 = [].obs;
+  var question7 = [].obs;
   var question8 = 6.0.obs;
   var question9 = 3.0.obs;
   var question10 = "None".obs;

@@ -7,13 +7,16 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputAction inputAction;
   final TextInputType inputType;
+  final double? verticalPadding;
+  final Color? fillColor;
   const CustomTextField(
       {Key? key,
       required this.controller,
       required this.nHintText,
       required this.inputAction,
       required this.inputType,
-      required this.validator})
+      required this.validator,
+      this.verticalPadding, this.fillColor})
       : super(key: key);
 
   @override
@@ -28,13 +31,20 @@ class CustomTextField extends StatelessWidget {
             textInputAction: inputAction,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              fillColor: kLightGrey,
+              fillColor: fillColor?? kLightGrey,
               filled: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: verticalPadding ?? 18, horizontal: 20),
               hintText: nHintText,
               hintStyle: kBodyText.copyWith(color: kBlack),
               border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(
+                  color: kLightGrey,
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide(
                   color: kLightGrey,

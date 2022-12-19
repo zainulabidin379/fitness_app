@@ -21,7 +21,7 @@ class _Question2ScreenState extends State<Question2Screen> {
     super.initState();
     _controller = WeightSliderController(
         initialWeight: QuestionsController.instance.question2.value,
-        minWeight: 15,
+        minWeight: 0,
         interval: 0.5);
   }
 
@@ -54,8 +54,8 @@ class _Question2ScreenState extends State<Question2Screen> {
               ),
               Text(
                 "Your Age",
-                style:
-                    kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+                style: kBodyText.copyWith(
+                    fontWeight: FontWeight.bold, fontSize: 24),
               ),
               const SizedBox(
                 height: 10,
@@ -69,14 +69,18 @@ class _Question2ScreenState extends State<Question2Screen> {
                 height: size.height * 0.05,
               ),
               Obx(() => Text(
-                    QuestionsController.instance.question2.value.toStringAsFixed(0),
+                    QuestionsController.instance.question2.value
+                        .toStringAsFixed(0),
                     style: GoogleFonts.montserrat(
-                        fontSize: 45, fontWeight: FontWeight.bold, color: kWhite),
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
+                        color: kWhite),
                   )),
               VerticalWeightSlider(
                 controller: _controller,
                 isVertical: false,
                 height: 150,
+                maxWeight: 100,
                 decoration: const PointerDecoration(
                   width: 130.0,
                   height: 3.0,

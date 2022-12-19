@@ -36,11 +36,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const SizedBox(height: 15),
                 CustomButton(
                     title: "Take A Tour",
-                    color: kGreyishWhite,
+                    color: kGrey,
                     onTap: () => Get.to(() => const OnboardingScreen())),
                 CustomButton(
                   title: "Subscriptions",
-                  color: kGreyishWhite,
+                  color: kGrey,
                   onTap: () {
                     if (authController.isLoggedIn.value) {
                       Get.to(() => const SubscriptionScreen());

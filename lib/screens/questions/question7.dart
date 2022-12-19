@@ -12,10 +12,10 @@ class Question7Screen extends StatefulWidget {
 }
 
 class _Question7ScreenState extends State<Question7Screen> {
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel('Home', false),
-    SimpleModel('Park', false),
-    SimpleModel('Gym', false),
+  final List<String> _items = [
+    'Home',
+    'Park',
+    'Gym',
   ];
   @override
   Widget build(BuildContext context) {
@@ -67,13 +67,19 @@ class _Question7ScreenState extends State<Question7Screen> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: ListTile(
                             onTap: () {
-                              QuestionsController.instance.question7.value =
-                                  _items[index].title;
+                              if (QuestionsController.instance.question7
+                                  .contains(_items[index])) {
+                                QuestionsController.instance.question7
+                                    .remove(_items[index]);
+                              } else {
+                                QuestionsController.instance.question7
+                                    .add(_items[index]);
+                              }
                             },
                             visualDensity: const VisualDensity(
                                 horizontal: 0, vertical: -2),
-                            leading: (QuestionsController.instance.question7.value ==
-                                    _items[index].title)
+                            leading: (QuestionsController.instance.question7
+                                  .contains(_items[index]))
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: kRed,
@@ -90,7 +96,7 @@ class _Question7ScreenState extends State<Question7Screen> {
                                     constraints: const BoxConstraints(
                                         maxHeight: 18, maxWidth: 18)),
                             title: Text(
-                              _items[index].title,
+                              _items[index],
                               style: kBodyText.copyWith(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -104,7 +110,7 @@ class _Question7ScreenState extends State<Question7Screen> {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
-                    if (QuestionsController.instance.question7.value != "") {
+                    if (QuestionsController.instance.question7.isNotEmpty) {
                       Get.to(() => const Question8Screen());
                     } else {
                       Get.rawSnackbar(

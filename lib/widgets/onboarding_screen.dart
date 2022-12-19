@@ -87,22 +87,7 @@ class OnboardingPageWidget extends StatelessWidget {
                                 alignment: Alignment.centerRight,
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (authController.isLoggedIn.value) {
-                                      Get.to(() => const SubscriptionScreen());
-                                    } else {
-                                      Get.to(() => const SignInScreen());
-                                      Get.rawSnackbar(
-                                        messageText: Text(
-                                          "Please Login to view subscriptions!",
-                                          style:
-                                              kBodyText.copyWith(color: kBlack),
-                                        ),
-                                        backgroundColor: kWhite,
-                                        snackPosition: SnackPosition.TOP,
-                                        borderRadius: 10,
-                                        margin: const EdgeInsets.all(10),
-                                      );
-                                    }
+                                    Get.to(() => const SubscriptionScreen());
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(

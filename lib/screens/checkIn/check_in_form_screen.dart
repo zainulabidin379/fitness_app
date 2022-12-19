@@ -1,8 +1,14 @@
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/screens/checkIn/check_in_confirmation_screen.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
+import 'package:fitness_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:the_validator/the_validator.dart';
+import 'package:uuid/uuid.dart';
 
 class CheckInFormScreen extends StatefulWidget {
   const CheckInFormScreen({super.key});
@@ -12,65 +18,56 @@ class CheckInFormScreen extends StatefulWidget {
 }
 
 class _CheckInFormScreenState extends State<CheckInFormScreen> {
-  final ScrollController scrollController = ScrollController();
-  final List<SimpleModel> _items = <SimpleModel>[
-    SimpleModel('1.   Completed on?', '30.06.1992'),
-    SimpleModel('2.   Weeks into check-ins?', '4'),
-    SimpleModel('3.   Weight at last check-in?', '63kg'),
-    SimpleModel('4.   Current weight?', '59kg'),
-    SimpleModel(
-        '5.   Achieved cardio for the whole week? Explain why if something you set out to do wasn\'t achieved. ',
-        'All targets achieved, refer to training diary.'),
-    SimpleModel(
-        '6.   Achieved workouts for the whole week? Explain why if something you set out to do wasn\'t achieved.',
-        '2 workouts were missed, mixture of tired and laziness, refer to training diary to see which days were missed.'),
-    SimpleModel(
-        '7.   Achieved stretches for the whole week? Explain why if something you set out to do wasn\'t achieved.',
-        'All stretches achieved and logged into fitness diary.'),
-    SimpleModel(
-        '8.   How have your energy levels been inside and outside of the gym?',
-        'My energy has been good even when | missed the two days, | was still fine just tired from working hard.'),
-    SimpleModel(
-        '9.   How is your strength and performance throughout your workouts and cardio sessions?',
-        'So good, happy with my scores and results.'),
-    SimpleModel(
-        '10.   Did you hit your water intake for each day? Explain why if not.',
-        'Yes,every day.'),
-    SimpleModel(
-        '11.   Did you hit your sleep target for each day? Explain why if not.',
-        'No, refer to sleep diary. Up late working and not prioritizing good enough.'),
-    SimpleModel(
-        '12.   Did you hit your step target for each day? Explain why if not.',
-        'Yes, every day.'),
-    SimpleModel(
-        '13.   Did you stick to your diet plan this week? Explain why if not.',
-        'No, the two days | didn\'t train | also didn\'t eat much. | didn\'t feel hungry, and | know my body didn\'t need as much food as usual as | hadn\'t worked out as much, however | will try harder next week.'),
-    SimpleModel(
-        '14.   How do you feel mentally and physically after all exercise?',
-        'Felt so good, energized, and positive.'),
-    SimpleModel('15.   How has your mood and stress levels been overall?',
-        'I\'ve felt fine and chilled all week, just tired due to lack of sleep.'),
-    SimpleModel(
-        '16.   Do you ever feel hungry, if so when and what did you do?',
-        'No, even when | did skip one meal on my none training day, | didn\'t feel hungry.'),
-    SimpleModel(
-        '17.   How many cheat meals did you have? Did you deserve or want them?',
-        '| had 6 cheat meals. 2 per day over 3 days. My set cheat day and the two days | missed training. | deserved 2 out of 6.'),
-    SimpleModel('18.   How would you rate the quality of your sleep?',
-        'Good quality but not enough.'),
-    SimpleModel('19.   How has your menstrual cycle been?',
-        'Due on next week, don’t feel anything yet.'),
-    SimpleModel(
-        '20.   Any other information regards to how your week has been and anything you feel you need to mention?',
-        'No, had a good week.'),
-    SimpleModel('21.   Have you taken new photos?',
-        'yes, added 3 new progress pictures, refer to picture diary.'),
-    SimpleModel('22.   Videos?', 'No, haven\'t taken any. | will this week.'),
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final List<String> questions = [
+    "Completed on?",
+    "Weeks into check-ins?",
+    "Weight at last check-in?",
+    "Current weight?",
+    "Achieved cardio for the whole week? Explain why if something you set out to do wasn't achieved.",
+    "Achieved workouts for the whole week? Explain why if something you set out to do wasn't achieved.",
+    "Achieved stretches for the whole week? Explain why if something you set out to do wasn't achieved.",
+    "How have your energy levels been inside and outside of the gym?",
+    "How is your strength and performance throughout your workouts and cardio sessions?",
+    "Did you hit your water intake for each day? Explain why if not.",
+    "Did you hit your sleep target for each day? Explain why if not.",
+    "Did you hit your step target for each day? Explain why if not.",
+    "Did you stick to your diet plan this week? Explain why if not.",
+    "How do you feel mentally and physically after all exercise?",
+    "How has your mood and stress levels been overall?",
+    "Do you ever feel hungry, if so when and what did you do?",
+    "How many cheat meals did you have? Did you deserve or want them?",
+    "How would you rate the quality of your sleep?",
+    "How has your menstrual cycle been?",
+    "Any other information regards to how your week has been and anything you feel you need to mention?",
+    "Have you taken new photos?",
+    "Have you taken new videos?",
   ];
 
+  final TextEditingController question0 = TextEditingController();
+  final TextEditingController question1 = TextEditingController();
+  final TextEditingController question2 = TextEditingController();
+  final TextEditingController question3 = TextEditingController();
+  final TextEditingController question4 = TextEditingController();
+  final TextEditingController question5 = TextEditingController();
+  final TextEditingController question6 = TextEditingController();
+  final TextEditingController question7 = TextEditingController();
+  final TextEditingController question8 = TextEditingController();
+  final TextEditingController question9 = TextEditingController();
+  final TextEditingController question10 = TextEditingController();
+  final TextEditingController question11 = TextEditingController();
+  final TextEditingController question12 = TextEditingController();
+  final TextEditingController question13 = TextEditingController();
+  final TextEditingController question14 = TextEditingController();
+  final TextEditingController question15 = TextEditingController();
+  final TextEditingController question16 = TextEditingController();
+  final TextEditingController question17 = TextEditingController();
+  final TextEditingController question18 = TextEditingController();
+  final TextEditingController question19 = TextEditingController();
+  final TextEditingController question20 = TextEditingController();
+  final TextEditingController question21 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
       backgroundColor: kBlack,
@@ -101,98 +98,145 @@ class _CheckInFormScreenState extends State<CheckInFormScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: Text(
-                "Check In Form",
-                style: kBodyText.copyWith(
-                    fontWeight: FontWeight.bold, fontSize: 24),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              height: 400,
-              child: Scrollbar(
-                controller: scrollController,
-                thumbVisibility: true,
-                trackVisibility: true,
-                child: ListView(
-                  controller: scrollController,
-                  children: _items
-                      .map(
-                        (SimpleModel item) => Padding(
-                          padding: const EdgeInsets.only(left: 22.0, right: 22),
-                          child: Container(
-                            // color: Colors.yellow,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: kBodyText.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      //ckgroundColor: Colors.white,
-                                      color: kWhite,
-                                      borderRadius: BorderRadius.circular(15)),
-
-                                  //margin: const EdgeInsets.symmetric(vertical: 10),
-                                  height: 40,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: item.hintText,
-                                      ),
-                                      cursorColor: kBlack,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                )
-                              ],
-                            ),
-                          ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: Text(
+                          "Check In Form",
+                          style: kBodyText.copyWith(
+                              fontWeight: FontWeight.bold, fontSize: 24),
                         ),
-                      )
-                      .toList(),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      questionWidget(1, questions[0], question0),
+                      questionWidget(2, questions[1], question1),
+                      questionWidget(3, questions[2], question2),
+                      questionWidget(4, questions[3], question3),
+                      questionWidget(5, questions[4], question4),
+                      questionWidget(6, questions[5], question5),
+                      questionWidget(7, questions[6], question6),
+                      questionWidget(8, questions[7], question7),
+                      questionWidget(9, questions[8], question8),
+                      questionWidget(10, questions[9], question9),
+                      questionWidget(11, questions[10], question10),
+                      questionWidget(12, questions[11], question11),
+                      questionWidget(13, questions[12], question12),
+                      questionWidget(14, questions[13], question13),
+                      questionWidget(15, questions[14], question14),
+                      questionWidget(16, questions[15], question15),
+                      questionWidget(17, questions[16], question16),
+                      questionWidget(18, questions[17], question17),
+                      questionWidget(19, questions[18], question18),
+                      questionWidget(20, questions[19], question19),
+                      questionWidget(21, questions[20], question20),
+                      questionWidget(22, questions[21], question21),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             CustomButton(
               title: 'Check In',
-              onTap: () => Get.to(() => const CheckInConfirmation()),
+              onTap: () async {
+                if (_formKey.currentState!.validate()) {
+                  Get.dialog(
+                    SpinKitSpinningLines(color: kRed),
+                    barrierDismissible: false,
+                  );
+                  List answers = [];
+                  answers.add(question0.text);
+                  answers.add(question1.text);
+                  answers.add(question2.text);
+                  answers.add(question3.text);
+                  answers.add(question4.text);
+                  answers.add(question5.text);
+                  answers.add(question6.text);
+                  answers.add(question7.text);
+                  answers.add(question8.text);
+                  answers.add(question9.text);
+                  answers.add(question10.text);
+                  answers.add(question11.text);
+                  answers.add(question12.text);
+                  answers.add(question13.text);
+                  answers.add(question14.text);
+                  answers.add(question15.text);
+                  answers.add(question16.text);
+                  answers.add(question17.text);
+                  answers.add(question18.text);
+                  answers.add(question19.text);
+                  answers.add(question20.text);
+                  answers.add(question21.text);
+                  String id = const Uuid().v4();
+                  await firestore
+                      .collection("checkIns")
+                      .get()
+                      .then((value) async {
+                    await firestore.collection("checkIns").doc(id).set({
+                      "uid": authController.getCurrentUser(),
+                      "id": id,
+                      "answers": answers,
+                      "checkIn": value.docs.length + 1,
+                      "timestamp": DateTime.now(),
+                    }).then((value) {
+                      Get.off(() => const CheckInConfirmation());
+                    });
+                  });
+                }
+              },
             ),
           ],
         ),
       ),
     ));
   }
-}
 
-class SimpleModel {
-  String title;
-  String hintText;
-
-  SimpleModel(this.title, this.hintText);
+  Widget questionWidget(
+    int number,
+    String question,
+    TextEditingController controller,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: Text(
+            "$number.  $question",
+            style:
+                kBodyText.copyWith(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+        ),
+        CustomTextField(
+          verticalPadding: 10,
+          fillColor: kWhite,
+          inputAction:
+              number == 22 ? TextInputAction.done : TextInputAction.next,
+          inputType: TextInputType.text,
+          controller: controller,
+          nHintText: "Your answer",
+          validator: FieldValidator.required(),
+        ),
+        const SizedBox(
+          height: 15,
+        )
+      ],
+    );
+  }
 }

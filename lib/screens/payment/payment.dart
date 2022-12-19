@@ -120,15 +120,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               Text(
                                 snapshot.data.docs[0]["name"],
                                 style: kBodyText.copyWith(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                                    fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                               const SizedBox(
                                 height: 2,
-                              ),
-                              Text(
-                                snapshot.data.docs[0]["tagline"],
-                                style: kBodyText.copyWith(
-                                    fontSize: 11, color: kGreen),
                               ),
                             ],
                           )

@@ -20,78 +20,95 @@ class MealsNutritionScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        _navController.navigateTo(0);
-                      },
-                      child: SizedBox(
-                        height: 55,
-                        child: Image.asset("assets/images/logo.png"),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: GestureDetector(
+                          onTap: () {
+                            _navController.navigateTo(0);
+                          },
+                          child: SizedBox(
+                            height: 55,
+                            child: Image.asset("assets/images/logo.png"),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    "Meals / Nutrition",
-                    style: kBodyText.copyWith(
-                        fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: GestureDetector(
-                    onTap: () => Get.to(() => const NutritionScreen()),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const CustomContainer(
-                          imageString: "assets/images/ingredientsBG1.png",
-                        ),
-                        SizedBox(width: size.width * 0.1),
-                        Text(
-                          'Nutrition',
-                          style: kBodyText.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        )
-                      ],
+                    Center(
+                      child: Text(
+                        "Meals / Nutrition",
+                        style: kBodyText.copyWith(
+                            fontWeight: FontWeight.bold, fontSize: 24),
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: GestureDetector(
-                    onTap: () => Get.to(() => const MealsScreen()),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const CustomContainer(
-                          imageString: "assets/images/ingredientsBG2.png",
-                        ),
-                        SizedBox(width: size.width * 0.1),
-                        Text(
-                          'Meals',
-                          style: kBodyText.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        )
-                      ],
+                    const SizedBox(
+                      height: 50,
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: GestureDetector(
+                        onTap: () => Get.to(() => const NutritionScreen()),
+                        child: Container(
+                          color: kTrans,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const CustomContainer(
+                                imageString: "assets/images/ingredientsBG1.png",
+                              ),
+                              SizedBox(
+                                width: size.width * 0.1,
+                              ),
+                              Text(
+                                'Nutrition',
+                                style: kBodyText.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: size.width * 0.055),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: GestureDetector(
+                        onTap: () => Get.to(() => const MealsScreen()),
+                        child: Container(
+                          color: kTrans,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const CustomContainer(
+                                imageString: "assets/images/ingredientsBG2.png",
+                              ),
+                              SizedBox(
+                                width: size.width * 0.1,
+                              ),
+                              Text(
+                                'Meals',
+                                style: kBodyText.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: size.width * 0.055),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -132,8 +149,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.only(bottom: 15, right: 15),
-      padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 15),
       width: size.width * 0.35,
       height: size.width * 0.3,
       decoration: BoxDecoration(
