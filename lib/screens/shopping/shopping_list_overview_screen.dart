@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import '../../constants/constants.dart';
 import 'shopping_list_detail_screen.dart';
 
-class ShopingListOverViewScreen extends StatelessWidget {
-  ShopingListOverViewScreen({super.key});
+class ShoppingListOverViewScreen extends StatelessWidget {
+  ShoppingListOverViewScreen({super.key});
   final List _items = [
     'Full List',
     'Carbs',

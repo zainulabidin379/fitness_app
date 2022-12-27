@@ -5,7 +5,7 @@ TextStyle kButtonText = const TextStyle(
     fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold);
 
 Color kWhite = Colors.white;
-Color kBlack = Colors.black;
+Color kBlack = const Color(0xFF060807);
 Color kGreen = const Color(0xFFD0FD3E);
 Color kRed = const Color(0xFFFF2424);
 Color kTrans = Colors.transparent;

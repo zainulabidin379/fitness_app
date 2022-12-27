@@ -38,28 +38,24 @@ class PersonalizedNutritionConfirmationScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Container(
-          // height: 200,
-          //color: Colors.red,
+        body: Center(
+            child: Container(
+          padding: const EdgeInsets.all(10),
+          height: 250,
+          width: 250,
+          decoration: BoxDecoration(
+              color: kWhite, borderRadius: BorderRadius.circular(125)),
           child: Center(
-              child: Container(
-            padding: const EdgeInsets.all(10),
-            height: 250,
-            width: 250,
-            decoration: BoxDecoration(
-                color: kWhite, borderRadius: BorderRadius.circular(125)),
-            child: Center(
-              child: Text(
-                textAlign: TextAlign.center,
-                'An email has been sent to the Survival Team who will be in touch about your personalised nutrition plan within 48 hours!',
-                style: kBodyText.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
+            child: Text(
+              textAlign: TextAlign.center,
+              'An email has been sent to the Survival Team who will be in touch about your personalised nutrition plan within 48 hours!',
+              style: kBodyText.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
             ),
-          )),
-        ),
+          ),
+        )),
       ),
     );
   }

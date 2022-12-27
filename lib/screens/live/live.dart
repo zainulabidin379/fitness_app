@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
-class LiveScreen extends StatefulWidget {
-  const LiveScreen({super.key});
+import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
-  @override
-  State<LiveScreen> createState() => _LiveScreenState();
-}
+class LiveScreen extends StatelessWidget {
+  const LiveScreen({
+    super.key,
+  });
 
-class _LiveScreenState extends State<LiveScreen> {
+  final int appID = 513137546;
+  final String appSign =
+      '9bde21c054c12de69abf76b46ed27cc357d214cafa0e317801efbb74dd9fe565';
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Live")),
+    return SafeArea(
+      child: ZegoUIKitPrebuiltLiveStreaming(
+        appID: appID,
+        appSign: appSign,
+        userID: "1234567",
+        userName: 'Test User',
+        liveID: "12345",
+        config: ZegoUIKitPrebuiltLiveStreamingConfig.host()
+          ..audioVideoViewConfig.showAvatarInAudioMode = true
+          ..audioVideoViewConfig.showSoundWavesInAudioMode = true,
+      ),
     );
   }
 }

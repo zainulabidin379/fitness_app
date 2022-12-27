@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:http/http.dart' as http;
 import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/screens/questions/question1.dart';
 import 'package:fitness_app/constants/constants.dart';
 import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
@@ -20,6 +25,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  Map<String, dynamic>? paymentIntentData;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -229,12 +235,96 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 title: (widget.subscription == "trial")
                     ? "Start 7 Day Trial"
                     : "Confirm",
-                onTap: () => Get.to(() => const Question1Screen()),
+                onTap: () {
+                  if (widget.subscription != "trial") {
+                    makePayment(widget.amount.toString());
+                  }
+                },
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> makePayment(String amount) async {
+    try {
+      paymentIntentData = await createPaymentIntent(amount, 'GBP');
+      await Stripe.instance
+          .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                  paymentIntentClientSecret:
+                      paymentIntentData!['client_secret'],
+                  googlePay: const PaymentSheetGooglePay(
+                      merchantCountryCode: "UK", testEnv: true),
+                  style: ThemeMode.dark,
+                  customerId: paymentIntentData!["customer"],
+                  merchantDisplayName: 'Survival'))
+          .then((value) {});
+
+      displayPaymentSheet();
+    } catch (e, s) {
+      print('exception:$e$s');
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((newValue) async {
+        Get.dialog(
+          SpinKitSpinningLines(color: kRed),
+          barrierDismissible: false,
+        );
+        await firestore
+            .collection("users")
+            .doc(authController.getCurrentUser())
+            .update({
+          "subscription": widget.subscription,
+        }).then((value) {
+          Get.to(() => const Question1Screen());
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Subscribed Successfully")));
+      }).onError((error, stackTrace) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Payment Failed")));
+        print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
+      });
+    } on StripeException catch (e) {
+      print('Exception/DISPLAYPAYMENTSHEET==> $e');
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Payment Failed")));
+    } catch (e) {
+      print('$e');
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': calculateAmount(amount),
+        'currency': currency,
+        'payment_method_types[]': 'card'
+      };
+      var response = await http.post(
+          Uri.parse('https://api.stripe.com/v1/payment_intents'),
+          body: body,
+          headers: {
+            'Authorization':
+                'Bearer sk_test_51K6zopGzO3hgvNqilLvm5M0aFVzRfNc9mXamoIZoDX6MXMzuz1GMo2QgRW7XTf7Zf2Pdhoo1c6HWP2pcsEefVeEJ00x5RKPuem',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          });
+
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('err charging user: ${err.toString()}');
+    }
+  }
+
+  calculateAmount(String amount) {
+    final a = ((double.parse(amount)) * 100).toInt();
+
+    return a.toString();
   }
 }

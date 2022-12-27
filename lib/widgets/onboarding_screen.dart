@@ -1,6 +1,4 @@
 import 'package:fitness_app/constants/constants.dart';
-import 'package:fitness_app/constants/controllers.dart';
-import 'package:fitness_app/screens/authentication/sign_in_screen.dart';
 import 'package:fitness_app/screens/payment/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,11 +23,14 @@ class OnboardingPageWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              Image.asset(
-                "assets/images/$image.jpg",
-                fit: BoxFit.cover,
-                width: size.width,
-                height: size.height * 0.55,
+              Container(
+                color: kWhite,
+                child: Image.asset(
+                  "assets/images/$image.png",
+                  fit: BoxFit.fitHeight,
+                  width: size.width,
+                  height: size.height * 0.55,
+                ),
               ),
               SizedBox(
                 height: size.height * 0.4,

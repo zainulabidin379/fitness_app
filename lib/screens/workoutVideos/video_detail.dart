@@ -100,6 +100,12 @@ class _WorkoutVideoDetailState extends State<WorkoutVideoDetail> {
                       child: YoutubePlayer(
                         controller: _playerController,
                         showVideoProgressIndicator: true,
+                        progressIndicatorColor: kRed,
+                        progressColors: ProgressBarColors(
+                            backgroundColor: kRed.withOpacity(0.2),
+                            bufferedColor: kRed.withOpacity(0.4),
+                            playedColor: kRed.withOpacity(0.7),
+                            handleColor: kRed),
                       )),
                 ),
                 // Padding(

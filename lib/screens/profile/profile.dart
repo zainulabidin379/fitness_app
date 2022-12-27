@@ -11,7 +11,7 @@ import 'package:fitness_app/screens/diary/life_style_diary_screen.dart';
 import 'package:fitness_app/screens/diary/picture_diary_screen.dart';
 import 'package:fitness_app/screens/nutrition/personalised_nutrition_confirmation_screen.dart';
 import 'package:fitness_app/screens/savedItems/saved_items.dart';
-import 'package:fitness_app/screens/shopping/shooping_list_overView_screen.dart';
+import 'package:fitness_app/screens/shopping/shopping_list_overview_screen.dart';
 import 'package:fitness_app/screens/workoutVideos/personalized_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -205,7 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       () => Get.to(() =>
                           const PersonalizedNutritionConfirmationScreen()),
                       "Personalized Nutrition Plans"),
-                  profileItem(() => Get.to(() => ShopingListOverViewScreen()),
+                  profileItem(() => Get.to(() => ShoppingListOverViewScreen()),
                       "Shopping List"),
                   profileItem(() => Get.to(() => const FoodDiaryScreen()),
                       "Food Diary"),
@@ -213,7 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       "Fitness Diary"),
                   profileItem(() => Get.to(() => const LifeStyleDiaryScreen()),
                       "Lifestyle Diary"),
-                  profileItem(() => Get.to(() => PictureDiaryScreen()),
+                  profileItem(() => Get.to(() => const PictureDiaryScreen()),
                       "Picture Diary"),
                   profileItem(() => Get.to(() => const SavedItemsScreen()),
                       "Saved Items"),
