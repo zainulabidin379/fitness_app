@@ -39,13 +39,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
+        appBar: AppBar(
+          backgroundColor: kBlack,
+          leading: Center(
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(left: 10),
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kWhite,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Center(
                   child: SizedBox(
@@ -127,9 +149,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SpinKitSpinningLines(color: kRed),
                         barrierDismissible: false,
                       );
-                      dynamic result = await AuthController.instance
-                          .register(
-                              emailController.text, passwordController.text);
+                      dynamic result = await AuthController.instance.register(
+                          emailController.text, passwordController.text);
 
                       if (result != null) {
                         Get.back();

@@ -26,7 +26,6 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   bool loading = true;
 
   @override
@@ -40,36 +39,47 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Obx(
-      () => Scaffold(
-        key: _scaffoldKey,
-        body: BottomNavController.instance.currentTab.value == 0
-            ? const HomePage()
-            : BottomNavController.instance.currentTab.value == 1
-                ? const LiveScreen()
-                : BottomNavController.instance.currentTab.value == 2
-                    ? WorkoutVideos()
-                    : BottomNavController.instance.currentTab.value == 3
-                        ? SetWorkouts()
-                        : BottomNavController.instance.currentTab.value == 4
-                            ? MealsNutritionScreen()
-                            : BottomNavController.instance.currentTab.value == 5
-                                ? const ProfileScreen()
-                                : const ExploreScreen(),
-        bottomNavigationBar: BottomAppBar(
-          elevation: 10,
-          color: kBlack,
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                liveMenuItem("assets/images/live.png", 1),
-                menuItem('Exercise Videos', "assets/images/videos.png", 2),
-                menuItem('Set Workouts', "assets/images/sets.png", 3),
-                menuItem('Meals Nutrition', "assets/images/meals.png", 4),
-                profileMenuItem("Profile", 5),
-                menuItem('Explore/Feed', "assets/images/search.png", 6),
-              ],
+      () => WillPopScope(
+        onWillPop: () async {
+          if (BottomNavController.instance.currentTab.value == 0) {
+            return true;
+          } else {
+            BottomNavController.instance.currentTab.value = 0;
+            return false;
+          }
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          body: BottomNavController.instance.currentTab.value == 0
+              ? const HomePage()
+              : BottomNavController.instance.currentTab.value == 1
+                  ? LiveScreen()
+                  : BottomNavController.instance.currentTab.value == 2
+                      ? WorkoutVideos()
+                      : BottomNavController.instance.currentTab.value == 3
+                          ? SetWorkouts()
+                          : BottomNavController.instance.currentTab.value == 4
+                              ? MealsNutritionScreen()
+                              : BottomNavController.instance.currentTab.value ==
+                                      5
+                                  ? const ProfileScreen()
+                                  : const ExploreScreen(),
+          bottomNavigationBar: BottomAppBar(
+            elevation: 10,
+            color: kBlack,
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  liveMenuItem("assets/images/live.png", 1),
+                  menuItem('Exercise Videos', "assets/images/videos.png", 2),
+                  menuItem('Set Workouts', "assets/images/sets.png", 3),
+                  menuItem('Meals Nutrition', "assets/images/meals.png", 4),
+                  profileMenuItem("Profile", 5),
+                  menuItem('Explore/Feed', "assets/images/search.png", 6),
+                ],
+              ),
             ),
           ),
         ),

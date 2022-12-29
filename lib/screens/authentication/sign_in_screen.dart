@@ -36,13 +36,35 @@ class _SignInScreenState extends State<SignInScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBlack,
+        appBar: AppBar(
+          backgroundColor: kBlack,
+          leading: Center(
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(left: 10),
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(color: kDark, shape: BoxShape.circle),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kWhite,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Center(
                   child: SizedBox(

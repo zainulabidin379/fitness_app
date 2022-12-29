@@ -7,8 +7,10 @@ import 'package:fitness_app/controllers/questions_controller.dart';
 import 'package:fitness_app/controllers/set_workout_filter.dart';
 import 'package:fitness_app/controllers/workout_videos_filter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,6 +24,7 @@ void main() async {
     Get.put(WorkoutVideoFilterController());
     Get.put(SetWorkoutFilterController());
     Get.put(NutritionMealFilterController());
+    Stripe.publishableKey ="pk_test_51K6zopGzO3hgvNqiBpdObqiUXUvwOePcYDZ6I6kZvsgIHXKHT3EtsUoN4Ab4vmFNPHHhFh8bHvb1IZvAS7SxPyOj00LOd6ChOV";
   });
   runApp(const MyApp());
 }
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Survival',

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:fitness_app/constants/controllers.dart';
 import 'package:fitness_app/constants/firebase_constants.dart';
