@@ -5,7 +5,10 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   permission_handler_windows
   zego_express_engine
+<<<<<<< HEAD
   zego_zim
+=======
+>>>>>>> 2448694f18ef4d2da93157d866f03c6ca7da306f
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

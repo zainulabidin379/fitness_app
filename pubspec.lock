@@ -887,6 +887,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.2"
+<<<<<<< HEAD
   zego_uikit_signaling_plugin:
     dependency: "direct main"
     description:
@@ -901,6 +902,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0+1"
+=======
+>>>>>>> 2448694f18ef4d2da93157d866f03c6ca7da306f
 sdks:
   dart: ">=2.18.2 <3.0.0"
   flutter: ">=3.3.0"
