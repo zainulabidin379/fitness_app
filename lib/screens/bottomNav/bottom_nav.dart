@@ -5,6 +5,7 @@ import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:fitness_app/controllers/bottom_nav.dart';
 import 'package:fitness_app/screens/explore/explore.dart';
 import 'package:fitness_app/screens/homepage.dart';
+import 'package:fitness_app/screens/live/go_live.dart';
 import 'package:fitness_app/screens/live/live.dart';
 import 'package:fitness_app/screens/meals_nutrition_screen.dart';
 import 'package:fitness_app/screens/profile/profile.dart';
@@ -53,7 +54,8 @@ class _BottomNavState extends State<BottomNav> {
           body: BottomNavController.instance.currentTab.value == 0
               ? const HomePage()
               : BottomNavController.instance.currentTab.value == 1
-                  ? LiveScreen()
+                  ? const GoLive(
+                    )
                   : BottomNavController.instance.currentTab.value == 2
                       ? WorkoutVideos()
                       : BottomNavController.instance.currentTab.value == 3

@@ -1,12 +1,17 @@
+import 'package:fitness_app/constants/constants.dart';
+import 'package:fitness_app/constants/controllers.dart';
+import 'package:fitness_app/constants/firebase_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:math';
 
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
 class LiveScreen extends StatelessWidget {
   const LiveScreen({
-    super.key,
+    super.key
   });
+
 
   final int appID = 513137546;
   final String appSign =
@@ -15,15 +20,24 @@ class LiveScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ZegoUIKitPrebuiltLiveStreaming(
-        appID: appID,
-        appSign: appSign,
-        userID: "1234567",
-        userName: 'Test User',
-        liveID: "12345",
-        config: ZegoUIKitPrebuiltLiveStreamingConfig.host()
-          ..audioVideoViewConfig.showAvatarInAudioMode = true
-          ..audioVideoViewConfig.showSoundWavesInAudioMode = true,
+      child: StreamBuilder<dynamic>(
+        stream: firestore.collection("users").doc(authController.getCurrentUser()).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ZegoUIKitPrebuiltLiveStreaming(
+            appID: appID,
+            appSign: appSign,
+            userID: authController.getCurrentUser(),
+            userName: snapshot.data["name"],
+            liveID: "789654123",
+            config: ZegoUIKitPrebuiltLiveStreamingConfig.audience()
+              ..audioVideoViewConfig.showAvatarInAudioMode = true
+              ..audioVideoViewConfig.showSoundWavesInAudioMode = true,
+          );
+          } else {
+            return Center(child: SpinKitSpinningLines(color: kRed));
+          }
+        }
       ),
     );
   }
